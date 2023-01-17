@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import Cloud from "./Cloud";
 import Comparison from "./Comparison";
 import ExpandArrowsAlt from "./ExpandArrowsAlt";
-import Lock from "./lock";
+import Lock from "./Lock";
 import Multiply from "./Multiply";
 import QuestionCircle from "./QuestionCircle";
 import Search from "./Search";
