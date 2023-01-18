@@ -69,7 +69,7 @@ const Sidenav = () => {
                             <div>
                                 <ItemButton
                                     onClick={() => setSelected(selected === 1 ? 0 : 1)}
-                                    open={open}
+                                    open={selected === 1 ? true : false}
                                 >
                                     <Calculator />
                                     <Text>
@@ -110,7 +110,7 @@ const Sidenav = () => {
                             <div>
                                 <ItemButton
                                     onClick={() => setSelected(selected === 2 ? 0 : 2)}
-                                    open={open}
+                                    open={selected === 2 ? true : false}
                                 >
                                     <UsersAlt />
                                     <Text>
