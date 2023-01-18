@@ -10,13 +10,13 @@ export const AuthProvider = ({ children }) => {
 
     const login = () => {
         setAuth(true);
-        localStorage.setItem("auth", auth);
+        localStorage.setItem("auth", true);
         navigate("/");
     };
 
     const logout = () => {
         setAuth(false);
-        localStorage.removeItem("auth");
+        localStorage.setItem("auth", false);
         navigate("/login");
     };
 

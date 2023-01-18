@@ -68,5 +68,13 @@ export const options = {
                 },
             },
         },
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    fontSize: "14px",
+                    fontWeight: "400",
+                },
+            },
+        },
     },
 };

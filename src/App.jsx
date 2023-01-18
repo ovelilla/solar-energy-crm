@@ -8,7 +8,18 @@ import { AuthProvider } from "@features/auth/context/AuthProvider";
 import { AuthLayout } from "@features/auth/layout";
 import { DashboardLayout } from "@features/dashboard/layout";
 
-import { Account, Calendar, Customers, Dashboard, Help, Login, Management, Settings, Users } from "@pages";
+import {
+    Account,
+    Calendar,
+    Customers,
+    Dashboard,
+    Help,
+    Login,
+    Logout,
+    Management,
+    Settings,
+    Users,
+} from "@pages";
 
 function App() {
     return (
@@ -35,6 +46,8 @@ function App() {
                                 <Route path="/ajustes" element={<Settings />} />
                                 <Route path="/usuarios" element={<Users />} />
                             </Route>
+
+                            <Route path="/logout" element={<Logout />} />
                         </Route>
                     </Routes>
                 </AuthProvider>

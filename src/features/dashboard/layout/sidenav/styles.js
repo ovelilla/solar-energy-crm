@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import { breakpoints, media } from "@styles/sizes";
@@ -73,7 +73,7 @@ export const Subbody = styled.div`
     gap: 4px;
 `;
 
-export const ItemLink = styled(Link)`
+export const ItemLink = styled(NavLink)`
     display: flex;
     align-items: center;
     gap: 16px;
@@ -97,7 +97,17 @@ export const ItemLink = styled(Link)`
         background-color: ${slate[700]};
     }
 
+    &.active {
+        background-color: ${slate[700]};
+        color: ${white};
+        svg {
+            color: ${white};
+        }
+    }
+
     svg {
+        width: 24px;
+        height: 24px;
         color: ${slate[400]};
 
         &:last-child {
@@ -138,6 +148,8 @@ export const ItemButton = styled.button`
     }
 
     svg {
+        width: 24px;
+        height: 24px;
         color: ${slate[400]};
 
         &:last-child {

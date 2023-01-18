@@ -1,3 +1,3 @@
 import Sidenav from "./Sidenav";
 
-export { Sidenav };
+export default Sidenav;

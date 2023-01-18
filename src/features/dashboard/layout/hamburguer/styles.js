@@ -30,7 +30,7 @@ export const Span = styled.div`
     }
 
     ${(p) => {
-        if (p.open) {
+        if (!p.open) {
             return `
                 &:nth-of-type(1) {
                     transform-origin: bottom;
@@ -51,15 +51,3 @@ export const Span = styled.div`
         }
     }}
 `;
-
-const Hamburguer = () => {
-    return (
-        <Container>
-            <Span></Span>
-            <Span></Span>
-            <Span></Span>
-        </Container>
-    );
-};
-
-export default Hamburguer;

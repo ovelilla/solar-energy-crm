@@ -23,6 +23,7 @@ import Collapse from "@mui/material/Collapse";
 
 import {
     AngleRight,
+    Calculator,
     Calendar,
     Cloud,
     Comparison,
@@ -34,7 +35,7 @@ import {
 } from "@icons";
 
 const Sidenav = () => {
-    const [open, setOpen] = useState(true);
+    const [selected, setSelected] = useState(0);
 
     const handleClick = () => {
         setOpen(!open);
@@ -65,6 +66,39 @@ const Sidenav = () => {
                                 </Text>
                             </ItemLink>
 
+                            <div>
+                                <ItemButton
+                                    onClick={() => setSelected(selected === 1 ? 0 : 1)}
+                                    open={open}
+                                >
+                                    <Calculator />
+                                    <Text>
+                                        <Primary>Propuesta</Primary>
+                                    </Text>
+                                    <AngleRight />
+                                </ItemButton>
+
+                                <Collapse
+                                    in={selected === 1 ? true : false}
+                                    timeout="auto"
+                                    unmountOnExit
+                                >
+                                    <Submenu>
+                                        <ItemLink to="/parametros-predefinidos">
+                                            <Text>Parámetros predefinidos</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="propuestas">
+                                            <Text>Propuestas</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="propuestas-firmadas">
+                                            <Text>Propuestas firmadas</Text>
+                                        </ItemLink>
+                                    </Submenu>
+                                </Collapse>
+                            </div>
+
                             <ItemLink to="/calendario">
                                 <Calendar />
                                 <Text>
@@ -74,7 +108,10 @@ const Sidenav = () => {
                             </ItemLink>
 
                             <div>
-                                <ItemButton onClick={handleClick} open={open}>
+                                <ItemButton
+                                    onClick={() => setSelected(selected === 2 ? 0 : 2)}
+                                    open={open}
+                                >
                                     <UsersAlt />
                                     <Text>
                                         <Primary>Registro</Primary>
@@ -82,7 +119,11 @@ const Sidenav = () => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse in={open} timeout="auto" unmountOnExit>
+                                <Collapse
+                                    in={selected === 2 ? true : false}
+                                    timeout="auto"
+                                    unmountOnExit
+                                >
                                     <Submenu>
                                         <ItemLink to="/clientes">
                                             <Text>Clientes</Text>

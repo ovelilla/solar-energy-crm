@@ -1,4 +1,4 @@
-import { Login as LoginComponent } from "@features/auth/login";
+import LoginComponent from "@features/auth/login";
 
 const Login = () => {
     return <LoginComponent />;

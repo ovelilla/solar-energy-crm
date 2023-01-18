@@ -7,7 +7,7 @@ const PrivateRoute = () => {
     const { auth, setAuth } = useAuth();
 
     useEffect(() => {
-        const isAuth = localStorage.getItem("auth");
+        const isAuth = localStorage.getItem("auth") === "true";
 
         setAuth(isAuth);
     }, []);

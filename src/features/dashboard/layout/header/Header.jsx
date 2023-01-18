@@ -1,17 +1,27 @@
 import { useState } from "react";
-
 import { Container, Nav, Items } from "./styles";
-
 import IconButton from "@mui/material/IconButton";
-import Hamburguer from "./Hamburguer";
+import Tooltip from "@mui/material/Tooltip";
+import Hamburguer from "@features/dashboard/layout/hamburguer";
+import Profile from "@features/dashboard/layout/profile";
+import Search from "@features/dashboard/layout/search";
+import { breakpoints } from "@styles/sizes";
+import { ExpandArrowsAlt, Search as SearchIcon, UserCircle } from "@icons";
 
-import { ExpandArrowsAlt, Search, UserCircle } from "@icons";
+const Sidenav = ({
+    width,
+    openHamburguer,
+    setOpenHamburguer,
+    openDrawer,
+    setOpenDrawer,
+    openSwipeableDrawer,
+    setOpenSwipeableDrawer,
+}) => {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [openSearch, setOpenSearch] = useState(false);
 
-const Sidenav = ({ openDrawer, setOpenDrawer, openSwipeableDrawer, setOpenSwipeableDrawer }) => {
-    const [open, setOpen] = useState(true);
-
-    const handleClick = () => {
-        setOpen(!open);
+    const handleToggleDrawer = () => {
+        setOpenHamburguer(!openHamburguer);
         setOpenDrawer(!openDrawer);
         setOpenSwipeableDrawer(!openSwipeableDrawer);
     };
@@ -24,25 +34,59 @@ const Sidenav = ({ openDrawer, setOpenDrawer, openSwipeableDrawer, setOpenSwipea
         }
     };
 
+    const handleOpenProfile = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    const handleCloseProfile = () => {
+        setAnchorEl(null);
+    };
+
     return (
         <Container>
-            <Nav>
-                <IconButton size="large" onClick={handleClick}>
-                    <Hamburguer open={open} />
-                </IconButton>
+            {openSearch ? (
+                <Search setOpenSearch={setOpenSearch} />
+            ) : (
+                <Nav>
+                    <IconButton size="large" onClick={handleToggleDrawer}>
+                        <Hamburguer
+                            open={width < breakpoints.xl ? !openHamburguer : openHamburguer}
+                        />
+                    </IconButton>
 
-                <Items>
-                    <IconButton size="large" onClick={handleFullScreen}>
-                        <ExpandArrowsAlt />
-                    </IconButton>
-                    <IconButton size="large">
-                        <Search />
-                    </IconButton>
-                    <IconButton size="large">
-                        <UserCircle />
-                    </IconButton>
-                </Items>
-            </Nav>
+                    <Items>
+                        <Tooltip title="Pantalla completa">
+                            <IconButton size="large" onClick={handleFullScreen}>
+                                <ExpandArrowsAlt />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Buscar">
+                            <IconButton size="large" onClick={() => setOpenSearch(true)}>
+                                <SearchIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Ajustes de cuenta">
+                            <IconButton
+                                size="large"
+                                aria-controls={open ? "profile-menu" : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? "true" : undefined}
+                                onClick={handleOpenProfile}
+                            >
+                                <UserCircle />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Profile
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleCloseProfile}
+                        />
+                    </Items>
+                </Nav>
+            )}
         </Container>
     );
 };

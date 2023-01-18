@@ -1,6 +1,8 @@
 import AngleRight from "./AngleRight";
 import AuthCircles from "./AuthCircles";
+import Calculator from "./Calculator";
 import Calendar from "./Calendar";
+import Close from "./Close";
 import Cloud from "./Cloud";
 import Comparison from "./Comparison";
 import ExpandArrowsAlt from "./ExpandArrowsAlt";
@@ -11,13 +13,16 @@ import Search from "./Search";
 import Setting from "./Setting";
 import Signout from "./Signout";
 import Sliders from "./Sliders";
+import User from "./User";
 import UserCircle from "./UserCircle";
 import UsersAlt from "./UsersAlt";
 
 export {
     AngleRight,
     AuthCircles,
+    Calculator,
     Calendar,
+    Close,
     Cloud,
     Comparison,
     ExpandArrowsAlt,
@@ -28,6 +33,7 @@ export {
     Setting,
     Signout,
     Sliders,
+    User,
     UserCircle,
     UsersAlt,
 };

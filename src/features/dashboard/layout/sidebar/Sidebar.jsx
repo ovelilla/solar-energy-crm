@@ -1,12 +1,26 @@
 import Drawer from "@mui/material/Drawer";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
-import useWindowSize from "@hooks/useWindowSize";
 import { breakpoints } from "@styles/sizes";
-import { Sidenav } from "@features/dashboard/layout/sidenav";
+import Sidenav from "@features/dashboard/layout/sidenav";
 
-const Sidebar = ({ openDrawer, openSwipeableDrawer, setOpenSwipeableDrawer }) => {
-    const { width } = useWindowSize();
+const Sidebar = ({
+    width,
+    openHamburguer,
+    setOpenHamburguer,
+    openDrawer,
+    openSwipeableDrawer,
+    setOpenSwipeableDrawer,
+}) => {
+    const handleClose = () => {
+        setOpenHamburguer(false);
+        setOpenSwipeableDrawer(false);
+    };
+
+    const handleOpen = () => {
+        setOpenHamburguer(true);
+        setOpenSwipeableDrawer(true);
+    };
 
     return (
         <>
@@ -14,8 +28,8 @@ const Sidebar = ({ openDrawer, openSwipeableDrawer, setOpenSwipeableDrawer }) =>
                 <SwipeableDrawer
                     anchor="left"
                     open={openSwipeableDrawer}
-                    onClose={() => setOpenSwipeableDrawer(false)}
-                    onOpen={() => setOpenSwipeableDrawer(true)}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
                     sx={{
                         zIndex: 100,
                         flexShrink: 0,
