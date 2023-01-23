@@ -4,15 +4,17 @@ import { useAuth } from "@features/auth/hooks";
 import { Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
-    const { auth, setAuth } = useAuth();
+    // const { auth, setAuth } = useAuth();
 
-    useEffect(() => {
-        const isAuth = localStorage.getItem("auth") === "true";
+    // useEffect(() => {
+    //     const isAuth = localStorage.getItem("auth") === "true";
 
-        setAuth(isAuth);
-    }, []);
+    //     setAuth(isAuth);
+    // }, []);
 
-    return !auth ? <Navigate to="/login" /> : <Outlet />;
+    // return !auth ? <Navigate to="/login" /> : <Outlet />;
+
+    return <Outlet />;
 };
 
 export default PrivateRoute;

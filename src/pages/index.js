@@ -3,6 +3,7 @@ import Calendar from "./Calendar";
 import Customers from "./Customers";
 import Dashboard from "./Dashboard";
 import Help from "./Help";
+import Inquiries from "./Inquiries";
 import Login from "./Login";
 import Logout from "./Logout";
 import Management from "./Management";
@@ -15,6 +16,7 @@ export {
     Customers,
     Dashboard,
     Help,
+    Inquiries,
     Login,
     Logout,
     Management,

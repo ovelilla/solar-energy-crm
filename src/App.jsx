@@ -7,6 +7,7 @@ import { AuthProvider } from "@features/auth/context/AuthProvider";
 
 import { AuthLayout } from "@features/auth/layout";
 import { DashboardLayout } from "@features/dashboard/layout";
+import { ProposalProvider } from "@features/dashboard/proposal/context/ProposalProvider";
 
 import {
     Account,
@@ -14,6 +15,7 @@ import {
     Customers,
     Dashboard,
     Help,
+    Inquiries,
     Login,
     Logout,
     Management,
@@ -38,6 +40,14 @@ function App() {
                             <Route element={<DashboardLayout />}>
                                 <Route path="/" element={<Dashboard />} />
                                 <Route path="/dashboard" element={<Dashboard />} />
+                                <Route
+                                    path="/consultas"
+                                    element={
+                                        <ProposalProvider>
+                                            <Inquiries />
+                                        </ProposalProvider>
+                                    }
+                                />
                                 <Route path="/cuenta" element={<Account />} />
                                 <Route path="/calendario" element={<Calendar />} />
                                 <Route path="/clientes" element={<Customers />} />

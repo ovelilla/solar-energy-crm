@@ -84,16 +84,24 @@ const Sidenav = () => {
                                     unmountOnExit
                                 >
                                     <Submenu>
-                                        <ItemLink to="/parametros-predefinidos">
-                                            <Text>Parámetros predefinidos</Text>
+                                        <ItemLink to="/parametros">
+                                            <Text>Parámetros</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="propuestas">
-                                            <Text>Propuestas</Text>
+                                        <ItemLink to="/consultas">
+                                            <Text>Consultas web</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="propuestas-firmadas">
-                                            <Text>Propuestas firmadas</Text>
+                                        <ItemLink to="/leads">
+                                            <Text>Leads</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/solicitud-diseño">
+                                            <Text>Solicitud diseño</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/aceptadas">
+                                            <Text>Aceptadas</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>

@@ -9,6 +9,7 @@ export default defineConfig({
         alias: {
             "@": path.resolve(root, "src"),
             "@assets": path.resolve(root, "src/assets"),
+            "@config": path.resolve(root, "src/config"),
             "@context": path.resolve(root, "src/context"),
             "@features": path.resolve(root, "src/features"),
             "@hooks": path.resolve(root, "src/hooks"),

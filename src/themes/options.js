@@ -1,3 +1,5 @@
+import { slate } from "@styles/colors";
+
 export const options = {
     typography: {
         fontFamily: "Poppins, sans-serif",
@@ -73,6 +75,75 @@ export const options = {
                 tooltip: {
                     fontSize: "14px",
                     fontWeight: "400",
+                },
+            },
+        },
+        MuiDataGrid: {
+            styleOverrides: {
+                columnHeaders: {
+                    borderColor: slate[200],
+                    minHeight: "64px",
+                },
+                columnHeaderCheckbox: {
+                    ".MuiSvgIcon-root": {
+                        width: "24px",
+                        height: "24px",
+                    },
+                },
+                columnHeader: {
+                    fontSize: "16px",
+                    "&:focus": {
+                        outline: "none",
+                    },
+                    "&:focus-within": {
+                        outline: "none",
+                    },
+                },
+                columnHeaderTitle: {
+                    fontWeight: "500",
+                },
+                iconButtonContainer: {
+                    button: {
+                        width: "40px",
+                        height: "40px",
+                    }
+                },
+                iconSeparator: {
+                    color: slate[300],
+                },
+                cell: {
+                    borderColor: slate[200],
+                    "&:focus": {
+                        outline: "none",
+                    },
+                    "&:focus-within": {
+                        outline: "none",
+                    },
+                },
+                cellContent: {
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    color: slate[900],
+                },
+                row: {
+                    "&:hover": {
+                        backgroundColor: slate[50],
+                    },
+                    "&.Mui-selected": {
+                        backgroundColor: slate[100],
+                        "&:hover": {
+                            backgroundColor: slate[200],
+                        },
+                    },
+                },
+            },
+        },
+
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                    width: "24px",
+                    height: "24px",
                 },
             },
         },
