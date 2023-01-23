@@ -6,7 +6,6 @@ import Sidenav from "@features/dashboard/layout/sidenav";
 
 const Sidebar = ({
     width,
-    openHamburguer,
     setOpenHamburguer,
     openDrawer,
     openSwipeableDrawer,
@@ -45,7 +44,7 @@ const Sidebar = ({
                         },
                     }}
                 >
-                    <Sidenav setOpenSwipeableDrawer={setOpenSwipeableDrawer} />
+                    <Sidenav onClick={handleClose} />
                 </SwipeableDrawer>
             ) : (
                 <Drawer
@@ -63,7 +62,7 @@ const Sidebar = ({
                         },
                     }}
                 >
-                    <Sidenav setOpenSwipeableDrawer={setOpenSwipeableDrawer} />
+                    <Sidenav />
                 </Drawer>
             )}
         </>

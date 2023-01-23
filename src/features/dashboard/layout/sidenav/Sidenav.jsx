@@ -34,7 +34,7 @@ import {
     UsersAlt,
 } from "@icons";
 
-const Sidenav = ({ setOpenSwipeableDrawer }) => {
+const Sidenav = ({ onClick }) => {
     const [selected, setSelected] = useState(0);
 
     const handleClick = () => {
@@ -59,7 +59,7 @@ const Sidenav = ({ setOpenSwipeableDrawer }) => {
                         </Subheader>
 
                         <Subbody>
-                            <ItemLink to="/" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/" onClick={onClick}>
                                 <Sliders />
                                 <Text>
                                     <Primary>Dashboard</Primary>
@@ -84,30 +84,30 @@ const Sidenav = ({ setOpenSwipeableDrawer }) => {
                                     unmountOnExit
                                 >
                                     <Submenu>
-                                        <ItemLink to="/parametros" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/parametros" onClick={onClick}>
                                             <Text>Parámetros</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/consultas" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/consultas" onClick={onClick}>
                                             <Text>Consultas web</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/leads" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/leads" onClick={onClick}>
                                             <Text>Leads</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/solicitud-diseño" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/solicitud-diseño" onClick={onClick}>
                                             <Text>Solicitud diseño</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/aceptadas" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/aceptadas" onClick={onClick}>
                                             <Text>Aceptadas</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>
                             </div>
 
-                            <ItemLink to="/calendario" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/calendario" onClick={onClick}>
                                 <Calendar />
                                 <Text>
                                     <Primary>Calendario</Primary>
@@ -133,18 +133,18 @@ const Sidenav = ({ setOpenSwipeableDrawer }) => {
                                     unmountOnExit
                                 >
                                     <Submenu>
-                                        <ItemLink to="/clientes" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/clientes" onClick={onClick}>
                                             <Text>Clientes</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/usuarios" onClick={() => setOpenSwipeableDrawer(false)}>
+                                        <ItemLink to="/usuarios" onClick={onClick}>
                                             <Text>Usuarios</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>
                             </div>
 
-                            <ItemLink to="/administracion" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/administracion" onClick={onClick}>
                                 <Comparison />
                                 <Text>
                                     <Primary>Administración</Primary>
@@ -160,21 +160,21 @@ const Sidenav = ({ setOpenSwipeableDrawer }) => {
                         </Subheader>
 
                         <Subbody>
-                            <ItemLink to="/cuenta" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/cuenta" onClick={onClick}>
                                 <UserCircle />
                                 <Text>
                                     <Primary>Cuenta</Primary>
                                 </Text>
                             </ItemLink>
 
-                            <ItemLink to="/ajustes" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/ajustes" onClick={onClick}>
                                 <Setting />
                                 <Text>
                                     <Primary>Ajustes</Primary>
                                 </Text>
                             </ItemLink>
 
-                            <ItemLink to="/ayuda" onClick={() => setOpenSwipeableDrawer(false)}>
+                            <ItemLink to="/ayuda" onClick={onClick}>
                                 <QuestionCircle />
                                 <Text>
                                     <Primary>Ayuda</Primary>

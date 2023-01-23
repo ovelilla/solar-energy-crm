@@ -171,12 +171,29 @@ export const options = {
                 },
             },
         },
-
         MuiSvgIcon: {
             styleOverrides: {
                 root: {
                     width: "24px",
                     height: "24px",
+                },
+            },
+        },
+        MuiTabs: {
+            styleOverrides: {
+                root: {
+                    minHeight: "64px",
+                },
+                flexContainer: {
+                    minHeight: "64px",
+                },
+            },
+        },
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    fontSize: "16px",
+                    textTransform: "none",
                 },
             },
         },

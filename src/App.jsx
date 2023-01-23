@@ -18,6 +18,7 @@ import Inquiries from "@pages/Inquiries"
 import Login from "@pages/Login"
 import Logout from "@pages/Logout"
 import Management from "@pages/Management"
+import Parameters from "@pages/Parameters"
 import Settings from "@pages/Settings"
 import Users from "@pages/Users"
 
@@ -38,6 +39,14 @@ function App() {
                             <Route element={<DashboardLayout />}>
                                 <Route path="/" element={<Dashboard />} />
                                 <Route path="/dashboard" element={<Dashboard />} />
+                                <Route
+                                    path="/parametros"
+                                    element={
+                                        <ProposalProvider>
+                                            <Parameters />
+                                        </ProposalProvider>
+                                    }
+                                />
                                 <Route
                                     path="/consultas"
                                     element={

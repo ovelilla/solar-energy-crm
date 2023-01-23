@@ -7,6 +7,7 @@ import { shadows } from "@styles/shadows";
 export const Container = styled.div`
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     position: relative;
     height: 64px;
     background-color: ${white};
