@@ -106,7 +106,7 @@ export const options = {
                     button: {
                         width: "40px",
                         height: "40px",
-                    }
+                    },
                 },
                 iconSeparator: {
                     color: slate[300],
@@ -133,6 +133,36 @@ export const options = {
                         backgroundColor: slate[100],
                         "&:hover": {
                             backgroundColor: slate[200],
+                        },
+                    },
+                },
+                footerContainer: {
+                    ".MuiTablePagination-selectLabel": {
+                        fontSize: "14px",
+                    },
+                    ".MuiTablePagination-displayedRows": {
+                        fontSize: "14px",
+                    },
+
+                    ".MuiTablePagination-select": {
+                        fontSize: "14px",
+                    },
+
+                    ".MuiSelect-select": {
+                        display: "flex",
+                        alignItems: "center",
+                    },
+
+                    ".MuiSelect-icon": {
+                        top: "4px",
+                    },
+
+                    button: {
+                        width: "48px",
+                        height: "48px",
+                        svg: {
+                            width: "24px",
+                            height: "24px",
                         },
                     },
                 },

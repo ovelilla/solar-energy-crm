@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import { DataGrid, GridFooterContainer, GridFooter, esES } from "@mui/x-data-grid";
+import { DataGrid, esES } from "@mui/x-data-grid";
 
 import useProposal from "@features/dashboard/proposal/hooks/useProposal";
 
 const Inquiries = () => {
+    const [pageSize, setPageSize] = useState(10);
     const { proposals, readProposals } = useProposal();
 
     useEffect(() => {
@@ -21,11 +22,14 @@ const Inquiries = () => {
             rows={proposals}
             columns={columns}
             getRowId={(row) => row._id}
-            localeText={esES.components.MuiDataGrid.localeText}
+            localeText={esES.components.MuiDataGrid.defaultProps.localeText}
             checkboxSelection
             disableColumnMenu
             headerHeight={64}
             rowHeight={56}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[10, 20, 50]}
         />
     );
 };
