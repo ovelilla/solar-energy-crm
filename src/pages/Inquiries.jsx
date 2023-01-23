@@ -31,7 +31,7 @@ const Inquiries = () => {
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
             rowsPerPageOptions={[10, 20, 50]}
-            loading={true}
+            loading={loading}
         />
     );
 };
