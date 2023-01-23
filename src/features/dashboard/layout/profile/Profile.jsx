@@ -15,6 +15,7 @@ const Profile = ({ anchorEl, open, onClose }) => {
                 component: "nav",
                 sx: {
                     padding: "0",
+                    fontSize: "14px",
                 },
             }}
             sx={{

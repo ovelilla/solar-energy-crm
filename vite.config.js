@@ -20,6 +20,7 @@ export default defineConfig({
             "@shared": path.resolve(root, "src/shared"),
             "@styles": path.resolve(root, "src/styles"),
             "@themes": path.resolve(root, "src/themes"),
+            "@utils": path.resolve(root, "src/utils"),
             "@variables": path.resolve(root, "src/variables"),
         },
     },

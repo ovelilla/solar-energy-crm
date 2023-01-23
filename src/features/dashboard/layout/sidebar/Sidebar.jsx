@@ -45,7 +45,7 @@ const Sidebar = ({
                         },
                     }}
                 >
-                    <Sidenav />
+                    <Sidenav setOpenSwipeableDrawer={setOpenSwipeableDrawer} />
                 </SwipeableDrawer>
             ) : (
                 <Drawer
@@ -63,7 +63,7 @@ const Sidebar = ({
                         },
                     }}
                 >
-                    <Sidenav />
+                    <Sidenav setOpenSwipeableDrawer={setOpenSwipeableDrawer} />
                 </Drawer>
             )}
         </>

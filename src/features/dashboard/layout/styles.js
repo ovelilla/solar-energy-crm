@@ -7,7 +7,6 @@ export const Row = styled.main`
     display: flex;
     flex: 1 1 auto;
     height: 100%;
-    font-size: 14px;
 `;
 
 export const LeftColumn = styled.div`

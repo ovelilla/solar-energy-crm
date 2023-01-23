@@ -9,19 +9,17 @@ import { AuthLayout } from "@features/auth/layout";
 import { DashboardLayout } from "@features/dashboard/layout";
 import { ProposalProvider } from "@features/dashboard/proposal/context/ProposalProvider";
 
-import {
-    Account,
-    Calendar,
-    Customers,
-    Dashboard,
-    Help,
-    Inquiries,
-    Login,
-    Logout,
-    Management,
-    Settings,
-    Users,
-} from "@pages";
+import Account from "@pages/Account"
+import Calendar from "@pages/Calendar"
+import Customers from "@pages/Customers"
+import Dashboard from "@pages/Dashboard"
+import Help from "@pages/Help"
+import Inquiries from "@pages/Inquiries"
+import Login from "@pages/Login"
+import Logout from "@pages/Logout"
+import Management from "@pages/Management"
+import Settings from "@pages/Settings"
+import Users from "@pages/Users"
 
 function App() {
     return (

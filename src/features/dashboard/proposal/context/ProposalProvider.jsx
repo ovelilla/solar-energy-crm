@@ -23,8 +23,6 @@ export const ProposalProvider = ({ children }) => {
         try {
             const { data } = await axios.get("/proposal", config);
 
-            console.log(data);
-
             setProposals(data);
         } catch (error) {
             console.log(error);

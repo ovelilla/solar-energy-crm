@@ -137,15 +137,18 @@ export const options = {
                     },
                 },
                 footerContainer: {
+                    minHeight: "64px",
+                    borderColor: slate[200],
+
                     ".MuiTablePagination-selectLabel": {
-                        fontSize: "14px",
+                        fontSize: "16px",
                     },
                     ".MuiTablePagination-displayedRows": {
-                        fontSize: "14px",
+                        fontSize: "16px",
                     },
 
                     ".MuiTablePagination-select": {
-                        fontSize: "14px",
+                        fontSize: "16px",
                     },
 
                     ".MuiSelect-select": {
@@ -161,8 +164,8 @@ export const options = {
                         width: "48px",
                         height: "48px",
                         svg: {
-                            width: "24px",
-                            height: "24px",
+                            width: "32px",
+                            height: "32px",
                         },
                     },
                 },
