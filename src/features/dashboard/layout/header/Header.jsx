@@ -5,8 +5,9 @@ import Tooltip from "@mui/material/Tooltip";
 import Hamburguer from "@features/dashboard/layout/hamburguer";
 import Profile from "@features/dashboard/layout/profile";
 import Search from "@features/dashboard/layout/search";
+import { useHeader } from "@hooks";
 import { breakpoints } from "@styles/sizes";
-import { ExpandArrowsAlt, Search as SearchIcon, UserCircle } from "@icons";
+import { ExpandArrowsAlt, Plus, Search as SearchIcon, UserCircle } from "@icons";
 
 const Sidenav = ({
     width,
@@ -19,6 +20,8 @@ const Sidenav = ({
 }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openSearch, setOpenSearch] = useState(false);
+
+    const { create, onCreate } = useHeader();
 
     const handleToggleDrawer = () => {
         setOpenHamburguer(!openHamburguer);
@@ -55,15 +58,22 @@ const Sidenav = ({
                     </IconButton>
 
                     <Items>
-                        <Tooltip title="Pantalla completa">
-                            <IconButton size="large" onClick={handleFullScreen}>
-                                <ExpandArrowsAlt />
-                            </IconButton>
-                        </Tooltip>
-
+                        {create && (
+                            <Tooltip title="Crear">
+                                <IconButton size="large" onClick={onCreate}>
+                                    <Plus />
+                                </IconButton>
+                            </Tooltip>
+                        )}
                         <Tooltip title="Buscar">
                             <IconButton size="large" onClick={() => setOpenSearch(true)}>
                                 <SearchIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Pantalla completa">
+                            <IconButton size="large" onClick={handleFullScreen}>
+                                <ExpandArrowsAlt />
                             </IconButton>
                         </Tooltip>
 

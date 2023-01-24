@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 
 import { DataGrid, esES } from "@mui/x-data-grid";
 
+import useHeader from "@hooks/useHeader";
 import useProposal from "@features/dashboard/proposal/hooks/useProposal";
 import dateTimeFormat from "@utils/dateTimeFormat";
 
 const Inquiries = () => {
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(20);
+
+    const { search } = useHeader();
     const { loading, proposals, readProposals } = useProposal();
 
     useEffect(() => {
@@ -15,12 +18,21 @@ const Inquiries = () => {
 
     const columns = [
         { field: "address", headerName: "Dirección", flex: 1 },
-        { field: "createdAt", headerName: "Fecha de consulta", flex: 1, valueFormatter: (params) => dateTimeFormat(params.value) },
+        {
+            field: "createdAt",
+            headerName: "Fecha de consulta",
+            flex: 1,
+            valueFormatter: (params) => dateTimeFormat(params.value),
+        },
     ];
+
+    const filteredProposals = proposals.filter((proposal) =>
+        proposal.address.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <DataGrid
-            rows={proposals}
+            rows={filteredProposals}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}
@@ -30,7 +42,7 @@ const Inquiries = () => {
             rowHeight={56}
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[10, 20, 50]}
+            rowsPerPageOptions={[20, 50, 100]}
             loading={loading}
         />
     );

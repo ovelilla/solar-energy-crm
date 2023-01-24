@@ -197,5 +197,15 @@ export const options = {
                 },
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    svg: {
+                        width: "24px",
+                        height: "24px",
+                    },
+                },
+            },
+        },
     },
 };

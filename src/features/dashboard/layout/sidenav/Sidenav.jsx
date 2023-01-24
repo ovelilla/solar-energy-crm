@@ -30,8 +30,10 @@ import {
     QuestionCircle,
     Setting,
     Sliders,
+    SolarPanel,
     UserCircle,
     UsersAlt,
+    Wallet,
 } from "@icons";
 
 const Sidenav = ({ onClick }) => {
@@ -60,7 +62,7 @@ const Sidenav = ({ onClick }) => {
 
                         <Subbody>
                             <ItemLink to="/" onClick={onClick}>
-                                <Sliders />
+                                <Comparison />
                                 <Text>
                                     <Primary>Dashboard</Primary>
                                 </Text>
@@ -73,7 +75,7 @@ const Sidenav = ({ onClick }) => {
                                 >
                                     <Calculator />
                                     <Text>
-                                        <Primary>Propuesta</Primary>
+                                        <Primary>Propuestas</Primary>
                                     </Text>
                                     <AngleRight />
                                 </ItemButton>
@@ -84,10 +86,6 @@ const Sidenav = ({ onClick }) => {
                                     unmountOnExit
                                 >
                                     <Submenu>
-                                        <ItemLink to="/parametros" onClick={onClick}>
-                                            <Text>Parámetros</Text>
-                                        </ItemLink>
-
                                         <ItemLink to="/consultas" onClick={onClick}>
                                             <Text>Consultas web</Text>
                                         </ItemLink>
@@ -107,6 +105,72 @@ const Sidenav = ({ onClick }) => {
                                 </Collapse>
                             </div>
 
+                            <div>
+                                <ItemButton
+                                    onClick={() => setSelected(selected === 2 ? 0 : 2)}
+                                    open={selected === 2 ? true : false}
+                                >
+                                    <SolarPanel />
+                                    <Text>
+                                        <Primary>Productos</Primary>
+                                    </Text>
+                                    <AngleRight />
+                                </ItemButton>
+
+                                <Collapse
+                                    in={selected === 2 ? true : false}
+                                    timeout="auto"
+                                    unmountOnExit
+                                >
+                                    <Submenu>
+                                        <ItemLink to="/paneles-solares" onClick={onClick}>
+                                            <Text>Paneles solares</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/baterias" onClick={onClick}>
+                                            <Text>Baterías</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/inversores" onClick={onClick}>
+                                            <Text>Inversores</Text>
+                                        </ItemLink>
+                                    </Submenu>
+                                </Collapse>
+                            </div>
+
+                            <div>
+                                <ItemButton
+                                    onClick={() => setSelected(selected === 3 ? 0 : 3)}
+                                    open={selected === 3 ? true : false}
+                                >
+                                    <Sliders />
+                                    <Text>
+                                        <Primary>Parámetros</Primary>
+                                    </Text>
+                                    <AngleRight />
+                                </ItemButton>
+
+                                <Collapse
+                                    in={selected === 3 ? true : false}
+                                    timeout="auto"
+                                    unmountOnExit
+                                >
+                                    <Submenu>
+                                        <ItemLink to="/predefinidos" onClick={onClick}>
+                                            <Text>Predefinidos</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/orientacion" onClick={onClick}>
+                                            <Text>Orientación</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/habitos-consumo" onClick={onClick}>
+                                            <Text>Habitos consumo</Text>
+                                        </ItemLink>
+                                    </Submenu>
+                                </Collapse>
+                            </div>
+
                             <ItemLink to="/calendario" onClick={onClick}>
                                 <Calendar />
                                 <Text>
@@ -117,8 +181,8 @@ const Sidenav = ({ onClick }) => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => setSelected(selected === 2 ? 0 : 2)}
-                                    open={selected === 2 ? true : false}
+                                    onClick={() => setSelected(selected === 4 ? 0 : 4)}
+                                    open={selected === 4 ? true : false}
                                 >
                                     <UsersAlt />
                                     <Text>
@@ -128,7 +192,7 @@ const Sidenav = ({ onClick }) => {
                                 </ItemButton>
 
                                 <Collapse
-                                    in={selected === 2 ? true : false}
+                                    in={selected === 4 ? true : false}
                                     timeout="auto"
                                     unmountOnExit
                                 >
@@ -145,7 +209,7 @@ const Sidenav = ({ onClick }) => {
                             </div>
 
                             <ItemLink to="/administracion" onClick={onClick}>
-                                <Comparison />
+                                <Wallet />
                                 <Text>
                                     <Primary>Administración</Primary>
                                 </Text>

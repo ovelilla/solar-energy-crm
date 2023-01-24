@@ -3,7 +3,7 @@ import Header from "@features/dashboard/proposal/parameters/header";
 import Body from "@features/dashboard/proposal/parameters/body";
 import Tabs from "@features/dashboard/proposal/parameters/tabs";
 
-const Parameters = () => {
+const Predefined = () => {
     return (
         <Wrapper>
             <Header />
@@ -15,4 +15,4 @@ const Parameters = () => {
     );
 };
 
-export default Parameters;
+export default Predefined;
