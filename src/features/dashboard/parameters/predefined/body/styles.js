@@ -10,6 +10,5 @@ export const BodyStyled = styled.div`
 `;
 
 export const Container = styled.div`
-    max-width: 1600px;
     width: 100%;
 `;

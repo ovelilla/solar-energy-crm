@@ -1,7 +1,7 @@
-import Wrapper from "@features/dashboard/proposal/parameters/wrapper";
-import Header from "@features/dashboard/proposal/parameters/header";
-import Body from "@features/dashboard/proposal/parameters/body";
-import Tabs from "@features/dashboard/proposal/parameters/tabs";
+import Wrapper from "@features/dashboard/parameters/predefined/wrapper";
+import Header from "@features/dashboard/parameters/predefined/header";
+import Body from "@features/dashboard/parameters/predefined/body";
+import Tabs from "@features/dashboard/parameters/predefined/tabs";
 
 import useWindowSize from "@hooks/useWindowSize";
 

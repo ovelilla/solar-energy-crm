@@ -4,7 +4,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { TabContainer } from "./styles";
-import { Consumption, Requirements, Installation } from "@features/dashboard/proposal/parameters/form";
+import { Consumption, Requirements, Installation } from "@features/dashboard/parameters/predefined/form";
 
 const Tabs = () => {
     const [value, setValue] = useState("1");

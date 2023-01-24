@@ -7,11 +7,10 @@ export const HeaderStyled = styled.div`
     display: flex;
     justify-content: center;
     background-color: ${white};
-    border-bottom: 1px solid ${slate[100]}; 
+    border-bottom: 1px solid ${slate[100]};
 `;
 
 export const Container = styled.div`
-    max-width: 1600px;
     width: 100%;
 `;
 
