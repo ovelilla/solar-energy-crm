@@ -39,14 +39,10 @@ import {
 const Sidenav = ({ onClick }) => {
     const [selected, setSelected] = useState(0);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
-
     return (
         <Container>
             <Header>
-                <Logo>
+                <Logo to="/" onClick={onClick}>
                     <Cloud />
                     <span>LibergyCRM</span>
                 </Logo>

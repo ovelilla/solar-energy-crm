@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import { breakpoints, media } from "@styles/sizes";
@@ -16,7 +16,7 @@ export const Header = styled.div`
     flex-direction: column;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
