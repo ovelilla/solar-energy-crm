@@ -17,11 +17,12 @@ const Inquiries = () => {
     }, []);
 
     const columns = [
-        { field: "address", headerName: "Dirección", flex: 1 },
+        { field: "address", headerName: "Dirección", flex: 1, minWidth: 260 },
         {
             field: "createdAt",
             headerName: "Fecha de consulta",
             flex: 1,
+            minWidth: 180,
             valueFormatter: (params) => dateTimeFormat(params.value),
         },
     ];
