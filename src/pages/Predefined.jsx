@@ -3,10 +3,14 @@ import Header from "@features/dashboard/proposal/parameters/header";
 import Body from "@features/dashboard/proposal/parameters/body";
 import Tabs from "@features/dashboard/proposal/parameters/tabs";
 
+import useWindowSize from "@hooks/useWindowSize";
+
 const Predefined = () => {
+    const { width } = useWindowSize();
+
     return (
         <Wrapper>
-            <Header />
+            {width > 468 && <Header />}
 
             <Body>
                 <Tabs />
