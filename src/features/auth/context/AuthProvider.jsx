@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
         const { data } = await axios.post("/user/logout", null, {
             withCredentials: true,
         });
-        console.log(data);
         setAuth(null);
         navigate("/login");
     };

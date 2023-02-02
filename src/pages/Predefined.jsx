@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+
+import usePredefined from "@features/dashboard/parameters/predefined/hooks/usePredefined";
+
 import Wrapper from "@features/dashboard/parameters/predefined/wrapper";
 import Header from "@features/dashboard/parameters/predefined/header";
 import Body from "@features/dashboard/parameters/predefined/body";
@@ -7,6 +11,11 @@ import useWindowSize from "@hooks/useWindowSize";
 
 const Predefined = () => {
     const { width } = useWindowSize();
+    const { readPredefined } = usePredefined();
+
+    useEffect(() => {
+        readPredefined();
+    }, []);
 
     return (
         <Wrapper>

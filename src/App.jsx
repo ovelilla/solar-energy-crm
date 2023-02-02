@@ -11,6 +11,7 @@ import { AuthProvider } from "@features/auth/context/AuthProvider";
 import { AuthLayout } from "@features/auth/layout";
 import { DashboardLayout } from "@features/dashboard/layout";
 import { ProposalProvider } from "@features/dashboard/proposal/context/ProposalProvider";
+import { PredefinedProvider } from "@features/dashboard/parameters/predefined/context/PredefinedProvider";
 import { OrientationProvider } from "@features/dashboard/parameters/orientation/context/OrientationProvider";
 import { HabitProvider } from "@features/dashboard/parameters/habit/context/HabitProvider";
 
@@ -59,9 +60,9 @@ function App() {
                                         <Route
                                             path="/predefinidos"
                                             element={
-                                                <ProposalProvider>
+                                                <PredefinedProvider>
                                                     <Predefined />
-                                                </ProposalProvider>
+                                                </PredefinedProvider>
                                             }
                                         />
                                         <Route
