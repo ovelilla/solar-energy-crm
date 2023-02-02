@@ -22,8 +22,10 @@ const PrivateRoute = () => {
                 const { data } = await axios.get("/user/auth", {
                     withCredentials: true,
                 });
+                console.log(data);
                 setAuth(data);
             } catch (error) {
+                console.log(error);
                 setAuth(null);
             } finally {
                 setLoading(false);
