@@ -1,12 +1,12 @@
 import { useTimeout } from "@hooks";
-import { useAuth } from "@features/auth/hooks";
+import useAuth from "@features/auth/hooks/useAuth";
 
 import { Container, Icon, StyledLogout, Text, Title } from "./styles";
 
 const Logout = () => {
-    const { logout } = useAuth();
+    const { handleLogout } = useAuth();
 
-    useTimeout(logout, 3000);
+    useTimeout(handleLogout, 3000);
 
     return (
         <StyledLogout>

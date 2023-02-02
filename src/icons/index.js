@@ -10,6 +10,7 @@ import EllipsisVertical from "./EllipsisVertical";
 import ExpandArrowsAlt from "./ExpandArrowsAlt";
 import Lock from "./Lock";
 import Multiply from "./Multiply";
+import PenToSquare from "./PenToSquare";
 import Plus from "./Plus";
 import QuestionCircle from "./QuestionCircle";
 import Search from "./Search";
@@ -17,6 +18,7 @@ import Setting from "./Setting";
 import Signout from "./Signout";
 import Sliders from "./Sliders";
 import SolarPanel from "./SolarPanel";
+import TrashCan from "./TrashCan";
 import User from "./User";
 import UserCircle from "./UserCircle";
 import UsersAlt from "./UsersAlt";
@@ -35,6 +37,7 @@ export {
     ExpandArrowsAlt,
     Lock,
     Multiply,
+    PenToSquare,
     Plus,
     QuestionCircle,
     Search,
@@ -42,6 +45,7 @@ export {
     Signout,
     Sliders,
     SolarPanel,
+    TrashCan,
     User,
     UserCircle,
     UsersAlt,

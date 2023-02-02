@@ -1,32 +1,59 @@
-import { useNavigate } from "react-router-dom";
 import { useState, createContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "@hooks";
+import axios from "@config/axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [auth, setAuth] = useState(null);
+
+    const { values, errors, handleChange, setFormErrors, reset } = useForm({
+        email: "",
+        password: "",
+    });
 
     const navigate = useNavigate();
 
-    const login = () => {
-        setAuth(true);
-        localStorage.setItem("auth", true);
-        navigate("/");
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+        try {
+            const { data } = await axios.post("/user/login", values, {
+                withCredentials: true,
+            });
+
+            reset();
+            setAuth(data);
+            navigate("/");
+        } catch (error) {
+            setFormErrors(error.response.data.errors);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const logout = () => {
-        setAuth(false);
-        localStorage.setItem("auth", false);
+    const handleLogout = async () => {
+        await axios.get("/user/logout", { withCredentials: true });
+        setAuth(null);
         navigate("/login");
     };
 
     return (
         <AuthContext.Provider
             value={{
+                loading,
+                setLoading,
                 auth,
                 setAuth,
-                login,
-                logout,
+                values,
+                errors,
+                handleChange,
+                handleLogin,
+                handleLogout,
             }}
         >
             {children}

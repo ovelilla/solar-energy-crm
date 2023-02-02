@@ -9,7 +9,7 @@ import dateTimeFormat from "@utils/dateTimeFormat";
 const Inquiries = () => {
     const [pageSize, setPageSize] = useState(20);
 
-    const { search } = useHeader();
+    const { searchText } = useHeader();
     const { loading, proposals, readProposals } = useProposal();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Inquiries = () => {
     ];
 
     const filteredProposals = proposals.filter((proposal) =>
-        proposal.address.toLowerCase().includes(search.toLowerCase())
+        proposal.address.toLowerCase().includes(searchText.toLowerCase())
     );
 
     return (

@@ -3,17 +3,8 @@ import { Container, Adornment, Input } from "./styles";
 import { Close, Search as SearchIcon } from "@icons";
 import { useHeader } from "@hooks";
 
-const Search = ({ setOpenSearch }) => {
-    const { search, setSearch } = useHeader();
-
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    };
-
-    const handleClick = () => {
-        setOpenSearch(false);
-        setSearch("");
-    };
+const Search = () => {
+    const { searchText, handleChangeSearchText, handleCloseSearch } = useHeader();
 
     return (
         <Container>
@@ -25,11 +16,11 @@ const Search = ({ setOpenSearch }) => {
                 type="text"
                 placeholder="Buscar"
                 autoFocus
-                value={search}
-                onChange={handleChange}
+                value={searchText}
+                onChange={handleChangeSearchText}
             />
 
-            <IconButton size="large" onClick={handleClick}>
+            <IconButton size="large" onClick={handleCloseSearch}>
                 <Close />
             </IconButton>
         </Container>

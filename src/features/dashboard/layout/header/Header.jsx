@@ -1,54 +1,29 @@
-import { useState } from "react";
-import { Container, Nav, Items } from "./styles";
+import useHeader from "@hooks/useHeader";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Hamburguer from "@features/dashboard/layout/hamburguer";
 import Profile from "@features/dashboard/layout/profile";
 import Search from "@features/dashboard/layout/search";
-import { useHeader } from "@hooks";
+import { Container, Nav, Items } from "./styles";
 import { breakpoints } from "@styles/sizes";
 import { ExpandArrowsAlt, Plus, Search as SearchIcon, UserCircle } from "@icons";
 
-const Sidenav = ({
-    width,
-    openHamburguer,
-    setOpenHamburguer,
-    openDrawer,
-    setOpenDrawer,
-    openSwipeableDrawer,
-    setOpenSwipeableDrawer,
-}) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [openSearch, setOpenSearch] = useState(false);
-
-    const { create, onCreate } = useHeader();
-
-    const handleToggleDrawer = () => {
-        setOpenHamburguer(!openHamburguer);
-        setOpenDrawer(!openDrawer);
-        setOpenSwipeableDrawer(!openSwipeableDrawer);
-    };
-
-    const handleFullScreen = () => {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            document.documentElement.requestFullscreen();
-        }
-    };
-
-    const handleOpenProfile = (e) => {
-        setAnchorEl(e.currentTarget);
-    };
-
-    const handleCloseProfile = () => {
-        setAnchorEl(null);
-    };
+const Sidenav = () => {
+    const {
+        width,
+        openHamburguer,
+        handleToggleDrawer,
+        setAnchorProfile,
+        openSearch,
+        handleOpenSearch,
+        handleCreate,
+        handleFullScreen,
+    } = useHeader();
 
     return (
         <Container>
             {openSearch ? (
-                <Search setOpenSearch={setOpenSearch} />
+                <Search />
             ) : (
                 <Nav>
                     <IconButton size="large" onClick={handleToggleDrawer}>
@@ -58,15 +33,16 @@ const Sidenav = ({
                     </IconButton>
 
                     <Items>
-                        {create && (
+                        {handleCreate && (
                             <Tooltip title="Crear">
-                                <IconButton size="large" onClick={onCreate}>
+                                <IconButton size="large" onClick={handleCreate}>
                                     <Plus />
                                 </IconButton>
                             </Tooltip>
                         )}
+
                         <Tooltip title="Buscar">
-                            <IconButton size="large" onClick={() => setOpenSearch(true)}>
+                            <IconButton size="large" onClick={handleOpenSearch}>
                                 <SearchIcon />
                             </IconButton>
                         </Tooltip>
@@ -83,17 +59,13 @@ const Sidenav = ({
                                 aria-controls={open ? "profile-menu" : undefined}
                                 aria-haspopup="true"
                                 aria-expanded={open ? "true" : undefined}
-                                onClick={handleOpenProfile}
+                                onClick={(e) => setAnchorProfile(e.currentTarget)}
                             >
                                 <UserCircle />
                             </IconButton>
                         </Tooltip>
 
-                        <Profile
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleCloseProfile}
-                        />
+                        <Profile />
                     </Items>
                 </Nav>
             )}

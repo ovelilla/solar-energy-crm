@@ -1,50 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "@hooks";
-import { useAuth } from "@features/auth/hooks";
 import {
     TextField,
     FormControlLabel,
     Checkbox,
-    Button,
     InputAdornment,
     IconButton,
     Typography,
 } from "@mui/material";
-import { Header, Icon, Title, Body, Form } from "./styles";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import useAuth from "@features/auth/hooks/useAuth";
+import { Header, Icon, Title, Body, Form } from "./styles";
 
 const AuthLayout = () => {
     const [showPassword, setShowPassword] = useState(false);
 
-    const navigate = useNavigate();
-    const { values, errors, setValues, setErrors, handleChange } = useForm({
-        email: "",
-        password: "",
-    });
-    const { login } = useAuth();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const errors = {};
-
-        if (!values.email) {
-            errors.email = "El email es obligatorio";
-        }
-
-        if (!values.password) {
-            errors.password = "La contraseña es obligatoria";
-        }
-
-        if (Object.keys(errors).length > 0) {
-            setErrors(errors);
-            return;
-        }
-
-        login();
-        navigate("/");
-    };
+    const { loading, values, errors, handleChange, handleLogin } = useAuth();
 
     return (
         <>
@@ -56,7 +27,7 @@ const AuthLayout = () => {
             </Header>
 
             <Body>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleLogin} noValidate>
                     <TextField
                         name="email"
                         label="Email"
@@ -104,16 +75,17 @@ const AuthLayout = () => {
                         label={<Typography sx={{ fontSize: 16 }}>Recordarme</Typography>}
                     />
 
-                    <Button
+                    <LoadingButton
                         type="submit"
                         variant="contained"
                         size="large"
                         color="primary"
                         fullWidth
                         sx={{ mt: 1 }}
+                        loading={loading}
                     >
                         Iniciar sesión
-                    </Button>
+                    </LoadingButton>
                 </Form>
             </Body>
         </>

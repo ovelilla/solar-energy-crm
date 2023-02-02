@@ -1,16 +1,18 @@
 import Menu from "@mui/material/Menu";
-
+import useHeader from "@hooks/useHeader";
 import { Header, Avatar, Body, Footer, StyledLink } from "./styles";
 import { Signout, User, UserCircle, Setting } from "@icons";
 
-const Profile = ({ anchorEl, open, onClose }) => {
+const Profile = () => {
+    const { anchorProfile, setAnchorProfile } = useHeader();
+
     return (
         <Menu
-            anchorEl={anchorEl}
+            anchorEl={anchorProfile}
             id="profile-menu"
-            open={open}
-            onClose={onClose}
-            onClick={onClose}
+            open={Boolean(anchorProfile)}
+            onClose={() => setAnchorProfile(null)}
+            onClick={() => setAnchorProfile(null)}
             MenuListProps={{
                 component: "nav",
                 sx: {

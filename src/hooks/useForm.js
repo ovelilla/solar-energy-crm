@@ -11,8 +11,17 @@ const useForm = (state = {}) => {
         setErrors({ ...errors, [name]: "" });
     };
 
+    const setFormValues = (newValues) => {
+        setValues({ ...values, ...newValues });
+    };
+
+    const setFormErrors = (newErrors) => {
+        setErrors({ ...errors, ...newErrors });
+    };
+
     const reset = () => {
         setValues(state);
+        setErrors(state);
     };
 
     return {
@@ -21,6 +30,8 @@ const useForm = (state = {}) => {
         errors,
         setErrors,
         handleChange,
+        setFormValues,
+        setFormErrors,
         reset,
     };
 };

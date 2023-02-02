@@ -1,56 +1,19 @@
-import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-
-import useWindowSize from "@hooks/useWindowSize";
-import { breakpoints } from "@styles/sizes";
-
+import useHeader from "@hooks/useHeader";
 import Sidebar from "@features/dashboard/layout/sidebar";
 import Header from "@features/dashboard/layout/header";
-
 import { Row, LeftColumn, RightColumn, Main } from "./styles";
 
 const DashboardLayout = () => {
-    const [openHamburguer, setOpenHamburguer] = useState(true);
-    const [openDrawer, setOpenDrawer] = useState(true);
-    const [openSwipeableDrawe, setOpenSwipeableDrawer] = useState(false);
-
-    const { width } = useWindowSize();
-
-    useEffect(() => {
-        if (width < breakpoints.xl) {
-            setOpenHamburguer(false);
-            setOpenDrawer(true);
-            setOpenSwipeableDrawer(false);
-        } else {
-            setOpenHamburguer(true);
-            setOpenDrawer(true);
-            setOpenSwipeableDrawer(false);
-        }
-    }, [width]);
+    const { openDrawer } = useHeader();
 
     return (
         <Row>
             <LeftColumn open={openDrawer}>
-                <Sidebar
-                    width={width}
-                    openHamburguer={openHamburguer}
-                    setOpenHamburguer={setOpenHamburguer}
-                    openDrawer={openDrawer}
-                    setOpenDrawer={setOpenDrawer}
-                    openSwipeableDrawer={openSwipeableDrawe}
-                    setOpenSwipeableDrawer={setOpenSwipeableDrawer}
-                />
+                <Sidebar />
             </LeftColumn>
             <RightColumn>
-                <Header
-                    width={width}
-                    openHamburguer={openHamburguer}
-                    setOpenHamburguer={setOpenHamburguer}
-                    openDrawer={openDrawer}
-                    setOpenDrawer={setOpenDrawer}
-                    openSwipeableDrawer={openSwipeableDrawe}
-                    setOpenSwipeableDrawer={setOpenSwipeableDrawer}
-                />
+                <Header />
                 <Main>
                     <Outlet />
                 </Main>

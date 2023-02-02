@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import useHeader from "@hooks/useHeader";
+import Collapse from "@mui/material/Collapse";
 import {
     Container,
     Header,
@@ -18,9 +18,6 @@ import {
     Secondary,
     Submenu,
 } from "./styles";
-
-import Collapse from "@mui/material/Collapse";
-
 import {
     AngleRight,
     Calculator,
@@ -36,13 +33,13 @@ import {
     Wallet,
 } from "@icons";
 
-const Sidenav = ({ onClick }) => {
-    const [selected, setSelected] = useState(0);
+const Sidenav = () => {
+    const { handleCloseSwipeableDrawer, selectedMenu, handleSelectedMenu } = useHeader();
 
     return (
         <Container>
             <Header>
-                <Logo to="/" onClick={onClick}>
+                <Logo to="/" onClick={handleCloseSwipeableDrawer}>
                     <Cloud />
                     <span>LibergyCRM</span>
                 </Logo>
@@ -57,7 +54,7 @@ const Sidenav = ({ onClick }) => {
                         </Subheader>
 
                         <Subbody>
-                            <ItemLink to="/" onClick={onClick}>
+                            <ItemLink to="/" onClick={handleCloseSwipeableDrawer}>
                                 <Comparison />
                                 <Text>
                                     <Primary>Dashboard</Primary>
@@ -66,8 +63,8 @@ const Sidenav = ({ onClick }) => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => setSelected(selected === 1 ? 0 : 1)}
-                                    open={selected === 1 ? true : false}
+                                    onClick={() => handleSelectedMenu(1)}
+                                    open={selectedMenu === 1}
                                 >
                                     <Calculator />
                                     <Text>
@@ -76,25 +73,30 @@ const Sidenav = ({ onClick }) => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse
-                                    in={selected === 1 ? true : false}
-                                    timeout="auto"
-                                    unmountOnExit
-                                >
+                                <Collapse in={selectedMenu === 1} timeout="auto" unmountOnExit>
                                     <Submenu>
-                                        <ItemLink to="/consultas" onClick={onClick}>
+                                        <ItemLink
+                                            to="/consultas"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Consultas web</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/leads" onClick={onClick}>
+                                        <ItemLink to="/leads" onClick={handleCloseSwipeableDrawer}>
                                             <Text>Leads</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/solicitud-diseño" onClick={onClick}>
+                                        <ItemLink
+                                            to="/solicitud-diseño"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Solicitud diseño</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/aceptadas" onClick={onClick}>
+                                        <ItemLink
+                                            to="/aceptadas"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Aceptadas</Text>
                                         </ItemLink>
                                     </Submenu>
@@ -103,8 +105,8 @@ const Sidenav = ({ onClick }) => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => setSelected(selected === 2 ? 0 : 2)}
-                                    open={selected === 2 ? true : false}
+                                    onClick={() => handleSelectedMenu(2)}
+                                    open={selectedMenu === 2}
                                 >
                                     <SolarPanel />
                                     <Text>
@@ -113,21 +115,26 @@ const Sidenav = ({ onClick }) => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse
-                                    in={selected === 2 ? true : false}
-                                    timeout="auto"
-                                    unmountOnExit
-                                >
+                                <Collapse in={selectedMenu === 2} timeout="auto" unmountOnExit>
                                     <Submenu>
-                                        <ItemLink to="/paneles-solares" onClick={onClick}>
+                                        <ItemLink
+                                            to="/paneles-solares"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Paneles solares</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/baterias" onClick={onClick}>
+                                        <ItemLink
+                                            to="/baterias"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Baterías</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/inversores" onClick={onClick}>
+                                        <ItemLink
+                                            to="/inversores"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Inversores</Text>
                                         </ItemLink>
                                     </Submenu>
@@ -136,8 +143,8 @@ const Sidenav = ({ onClick }) => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => setSelected(selected === 3 ? 0 : 3)}
-                                    open={selected === 3 ? true : false}
+                                    onClick={() => handleSelectedMenu(3)}
+                                    open={selectedMenu === 3}
                                 >
                                     <Sliders />
                                     <Text>
@@ -146,28 +153,33 @@ const Sidenav = ({ onClick }) => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse
-                                    in={selected === 3 ? true : false}
-                                    timeout="auto"
-                                    unmountOnExit
-                                >
+                                <Collapse in={selectedMenu === 3} timeout="auto" unmountOnExit>
                                     <Submenu>
-                                        <ItemLink to="/predefinidos" onClick={onClick}>
+                                        <ItemLink
+                                            to="/predefinidos"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Predefinidos</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/orientacion" onClick={onClick}>
+                                        <ItemLink
+                                            to="/orientacion"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Orientación</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/habitos-consumo" onClick={onClick}>
+                                        <ItemLink
+                                            to="/habitos-consumo"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Habitos consumo</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>
                             </div>
 
-                            <ItemLink to="/calendario" onClick={onClick}>
+                            <ItemLink to="/calendario" onClick={handleCloseSwipeableDrawer}>
                                 <Calendar />
                                 <Text>
                                     <Primary>Calendario</Primary>
@@ -177,8 +189,8 @@ const Sidenav = ({ onClick }) => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => setSelected(selected === 4 ? 0 : 4)}
-                                    open={selected === 4 ? true : false}
+                                    onClick={() => handleSelectedMenu(4)}
+                                    open={selectedMenu === 4}
                                 >
                                     <UsersAlt />
                                     <Text>
@@ -187,24 +199,26 @@ const Sidenav = ({ onClick }) => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse
-                                    in={selected === 4 ? true : false}
-                                    timeout="auto"
-                                    unmountOnExit
-                                >
+                                <Collapse in={selectedMenu === 4} timeout="auto" unmountOnExit>
                                     <Submenu>
-                                        <ItemLink to="/clientes" onClick={onClick}>
+                                        <ItemLink
+                                            to="/clientes"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Clientes</Text>
                                         </ItemLink>
 
-                                        <ItemLink to="/usuarios" onClick={onClick}>
+                                        <ItemLink
+                                            to="/usuarios"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
                                             <Text>Usuarios</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>
                             </div>
 
-                            <ItemLink to="/administracion" onClick={onClick}>
+                            <ItemLink to="/administracion" onClick={handleCloseSwipeableDrawer}>
                                 <Wallet />
                                 <Text>
                                     <Primary>Administración</Primary>
@@ -220,21 +234,21 @@ const Sidenav = ({ onClick }) => {
                         </Subheader>
 
                         <Subbody>
-                            <ItemLink to="/cuenta" onClick={onClick}>
+                            <ItemLink to="/cuenta" onClick={handleCloseSwipeableDrawer}>
                                 <UserCircle />
                                 <Text>
                                     <Primary>Cuenta</Primary>
                                 </Text>
                             </ItemLink>
 
-                            <ItemLink to="/ajustes" onClick={onClick}>
+                            <ItemLink to="/ajustes" onClick={handleCloseSwipeableDrawer}>
                                 <Setting />
                                 <Text>
                                     <Primary>Ajustes</Primary>
                                 </Text>
                             </ItemLink>
 
-                            <ItemLink to="/ayuda" onClick={onClick}>
+                            <ItemLink to="/ayuda" onClick={handleCloseSwipeableDrawer}>
                                 <QuestionCircle />
                                 <Text>
                                     <Primary>Ayuda</Primary>

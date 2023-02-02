@@ -21,10 +21,18 @@ export const options = {
                     textTransform: "none",
                     borderRadius: "48px",
                     height: "48px",
+                    padding: "0 24px",
                     fontWeight: "500",
                     boxShadow: "none",
                     "&:hover, &:focus": {
                         boxShadow: "none",
+                    },
+                },
+                outlined: {
+                    borderWidth: "2px",
+                    "&:hover, &:focus": {
+                        borderWidth: "2px",
+                        backgroundColor: "transparent",
                     },
                 },
             },
@@ -70,11 +78,41 @@ export const options = {
                 },
             },
         },
+        MuiPopover: {
+            styleOverrides: {
+                paper: {
+                    borderRadius: "8px",
+                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    height: "48px",
+                    padding: "0 20px",
+
+                    "&:hover": {
+                        backgroundColor: slate[50],
+                    },
+                    "&.Mui-selected": {
+                        backgroundColor: slate[100],
+                    },
+                    "&.Mui-selected:hover": {
+                        backgroundColor: slate[200],
+                    },
+                },
+            },
+        },
         MuiTooltip: {
             styleOverrides: {
                 tooltip: {
-                    fontSize: "14px",
+                    fontSize: "16px",
                     fontWeight: "400",
+                    color: "white",
+                    padding: "8px 16px",
+                    backgroundColor: "rgba(0, 0, 0, 0.75)",
+                    borderRadius: "8px",
                 },
             },
         },
@@ -143,6 +181,12 @@ export const options = {
                     ".MuiTablePagination-selectLabel": {
                         fontSize: "16px",
                     },
+
+                    ".MuiDataGrid-selectedRowCount": {
+                        margin: "0",
+                        fontSize: "16px",
+                    },
+
                     ".MuiTablePagination-displayedRows": {
                         fontSize: "16px",
                     },
@@ -160,13 +204,16 @@ export const options = {
                         top: "4px",
                     },
 
-                    button: {
-                        width: "48px",
-                        height: "48px",
+                    ".MuiTablePagination-actions": {
                         svg: {
                             width: "32px",
                             height: "32px",
                         },
+                    },
+
+                    button: {
+                        width: "48px",
+                        height: "48px",
                     },
                 },
             },

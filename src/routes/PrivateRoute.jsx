@@ -1,18 +1,45 @@
-import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { useAuth } from "@features/auth/hooks";
-import { Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "@features/auth/hooks/useAuth";
+import axios from "@config/axios";
+import styled from "@emotion/styled";
+
+const Loading = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+`;
 
 const PrivateRoute = () => {
-    // const { auth, setAuth } = useAuth();
+    const [loading, setLoading] = useState(true);
+    const { auth, setAuth } = useAuth();
 
-    // useEffect(() => {
-    //     const isAuth = localStorage.getItem("auth") === "true";
+    const navigate = useNavigate();
 
-    //     setAuth(isAuth);
-    // }, []);
+    useEffect(() => {
+        const getAuth = async () => {
+            try {
+                const { data } = await axios.get("/user/auth", {
+                    withCredentials: true,
+                });
+                setAuth(data);
+            } catch (error) {
+                setAuth(null);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // return !auth ? <Navigate to="/login" /> : <Outlet />;
+        getAuth();
+    }, [navigate]);
+
+    if (loading) {
+        return <Loading></Loading>;
+    }
+
+    if (!auth) {
+        return <Navigate to="/login" />;
+    }
 
     return <Outlet />;
 };
