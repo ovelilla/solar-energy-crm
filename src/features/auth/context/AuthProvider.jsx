@@ -37,7 +37,8 @@ export const AuthProvider = ({ children }) => {
     };
 
     const handleLogout = async () => {
-        await axios.get("/user/logout", { withCredentials: true });
+        const { data } = await axios.post("/user/logout", { withCredentials: true });
+        console.log(data);
         setAuth(null);
         navigate("/login");
     };
