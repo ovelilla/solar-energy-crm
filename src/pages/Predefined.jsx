@@ -11,11 +11,15 @@ import useWindowSize from "@hooks/useWindowSize";
 
 const Predefined = () => {
     const { width } = useWindowSize();
-    const { readPredefined } = usePredefined();
+    const { values, readPredefined, checkChanges } = usePredefined();
 
     useEffect(() => {
         readPredefined();
     }, []);
+
+    useEffect(() => {
+        checkChanges();
+    }, [values]);
 
     return (
         <Wrapper>

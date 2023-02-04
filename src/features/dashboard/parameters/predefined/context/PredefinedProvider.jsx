@@ -6,14 +6,15 @@ import useForm from "@hooks/useForm";
 const PredefinedContext = createContext();
 
 export const PredefinedProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [disabled, setDisabled] = useState(true);
     const [predefined, setPredefined] = useState(null);
 
     const { question, alert } = useUI();
     const { values, errors, handleChange, setFormValues, setFormErrors, reset } = useForm({
         lastInvoiceEnergyCost: "",
         kWhConsumedLastBill: "",
-        MonthlyEnergyConsumption: "",
+        monthlyEnergyConsumption: "",
         contractedPowerInKW: "",
         avgPriceKWContractedPowerAnnual: "",
         ivaRate: "",
@@ -42,7 +43,7 @@ export const PredefinedProvider = ({ children }) => {
     };
 
     const createPredefined = async () => {
-        setStateCreate((prev) => ({ ...prev, loading: true }));
+        setLoading(true);
 
         try {
             const { data } = await axios.post("/predefined", values, {
@@ -54,39 +55,36 @@ export const PredefinedProvider = ({ children }) => {
                 type: "success",
                 timeout: 3000,
             });
-            setPredefined([...predefineds, data.predefined]);
-            setStateCreate({ open: false, fullscreen: false, loading: false });
-            reset();
+            setPredefined(data.predefined);
+            setFormValues(data.predefined);
         } catch (error) {
             setFormErrors(error.response.data.errors);
         } finally {
-            setStateCreate((prev) => ({ ...prev, loading: false }));
+            setLoading(false);
         }
     };
 
     const updatePredefined = async () => {
-        setStateUpdate((prev) => ({ ...prev, loading: true }));
+        setLoading(true);
 
         try {
             const { data } = await axios.put(`/predefined/${predefined._id}`, values, {
                 withCredentials: true,
             });
+            console.log(data);
             await alert({
                 title: "¡Orientación actualizada!",
                 message: "Se ha actualizado la orientación correctamente.",
                 type: "success",
                 timeout: 3000,
             });
-            setPredefined([
-                ...predefineds.map((o) => (o._id === data.predefined._id ? data.predefined : o)),
-            ]);
-            setPredefined(null);
-            setStateUpdate({ open: false, fullscreen: false, loading: false });
-            reset();
+            setPredefined(data.predefined);
+            setFormValues(data.predefined);
         } catch (error) {
+            console.log(error);
             setFormErrors(error.response.data.errors);
         } finally {
-            setStateUpdate((prev) => ({ ...prev, loading: false }));
+            setLoading(false);
         }
     };
 
@@ -113,13 +111,31 @@ export const PredefinedProvider = ({ children }) => {
                 type: "success",
                 timeout: 3000,
             });
-            setPredefined([...predefineds.filter((o) => o._id !== predefined._id)]);
-        } catch (error) {
-            console.log(error);
-        } finally {
             setPredefined(null);
             reset();
+        } catch (error) {
+            console.log(error);
         }
+    };
+
+    const checkChanges = () => {
+        if (!predefined) {
+            return;
+        }
+
+        const isDifferent = Object.keys(values).some((key) => {
+            let value = values[key];
+            let predef = predefined[key];
+
+            if (!isNaN(value) && !isNaN(predef)) {
+                value = Number(value);
+                predef = Number(predef);
+            }
+
+            return value !== predef;
+        });
+
+        setDisabled(!isDifferent);
     };
 
     return (
@@ -127,6 +143,8 @@ export const PredefinedProvider = ({ children }) => {
             value={{
                 loading,
                 setLoading,
+                disabled,
+                setDisabled,
                 predefined,
                 setPredefined,
                 values,
@@ -136,6 +154,7 @@ export const PredefinedProvider = ({ children }) => {
                 createPredefined,
                 updatePredefined,
                 deletePredefined,
+                checkChanges,
             }}
         >
             {children}
