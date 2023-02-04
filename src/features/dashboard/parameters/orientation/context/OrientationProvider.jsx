@@ -57,7 +57,9 @@ export const OrientationProvider = ({ children }) => {
         setStateUpdate({ ...stateUpdate, open: true });
     };
 
-    const handleCloseDialog = async () => {
+    const handleCloseDialog = async (e) => {
+        e.stopPropagation();
+        
         const confirm = await question({
             title: "¿Cerrar ventana?",
             message:
@@ -75,7 +77,9 @@ export const OrientationProvider = ({ children }) => {
         }
     };
 
-    const handleFullscreenDialog = () => {
+    const handleFullscreenDialog = (e) => {
+        e.stopPropagation();
+
         setStateCreate({ ...stateCreate, fullscreen: !stateCreate.fullscreen });
         setStateUpdate({ ...stateUpdate, fullscreen: !stateUpdate.fullscreen });
     };
