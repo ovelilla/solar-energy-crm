@@ -1,11 +1,12 @@
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 import axios from "@config/axios";
 import useUI from "@hooks/useUI";
 import useForm from "@hooks/useForm";
 
 const PredefinedContext = createContext();
 
-export const PredefinedProvider = ({ children }) => {
+export const PredefinedProvider = () => {
     const [loading, setLoading] = useState(true);
     const [disabled, setDisabled] = useState(true);
     const [predefined, setPredefined] = useState(null);
@@ -71,7 +72,6 @@ export const PredefinedProvider = ({ children }) => {
             const { data } = await axios.put(`/predefined/${predefined._id}`, values, {
                 withCredentials: true,
             });
-            console.log(data);
             await alert({
                 title: "¡Orientación actualizada!",
                 message: "Se ha actualizado la orientación correctamente.",
@@ -157,7 +157,7 @@ export const PredefinedProvider = ({ children }) => {
                 checkChanges,
             }}
         >
-            {children}
+            <Outlet />
         </PredefinedContext.Provider>
     );
 };

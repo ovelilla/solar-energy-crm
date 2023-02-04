@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-
+import { Outlet } from "react-router-dom";
 import axios from "@config/axios";
 
 const ProposalContext = createContext();
 
-export const ProposalProvider = ({ children }) => {
+export const ProposalProvider = () => {
     const [loading, setLoading] = useState(false);
     const [proposal, setProposal] = useState({});
     const [proposals, setProposals] = useState([]);
@@ -43,7 +43,7 @@ export const ProposalProvider = ({ children }) => {
                 readProposals,
             }}
         >
-            {children}
+            <Outlet />
         </ProposalContext.Provider>
     );
 };

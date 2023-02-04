@@ -1,8 +1,9 @@
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 
 const UIContext = createContext();
 
-export const UIProvider = ({ children }) => {
+export const UIProvider = () => {
     const [stateConfirm, setStateConfirm] = useState({
         open: false,
         title: "",
@@ -74,7 +75,7 @@ export const UIProvider = ({ children }) => {
                 alert,
             }}
         >
-            {children}
+            <Outlet />
         </UIContext.Provider>
     );
 };

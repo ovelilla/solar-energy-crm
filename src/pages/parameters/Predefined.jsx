@@ -6,6 +6,8 @@ import Wrapper from "@features/dashboard/parameters/predefined/wrapper";
 import Header from "@features/dashboard/parameters/predefined/header";
 import Body from "@features/dashboard/parameters/predefined/body";
 import Tabs from "@features/dashboard/parameters/predefined/tabs";
+import Alert from "@features/ui/alert";
+import Confirm from "@features/ui/confirm";
 
 import useWindowSize from "@hooks/useWindowSize";
 
@@ -22,13 +24,17 @@ const Predefined = () => {
     }, [values]);
 
     return (
-        <Wrapper>
-            {width > 468 && <Header />}
+        <>
+            <Alert />
+            <Confirm />
+            <Wrapper>
+                {width > 468 && <Header />}
 
-            <Body>
-                <Tabs />
-            </Body>
-        </Wrapper>
+                <Body>
+                    <Tabs />
+                </Body>
+            </Wrapper>
+        </>
     );
 };
 

@@ -34,7 +34,7 @@ const PrivateRoute = () => {
     }, [navigate]);
 
     if (loading) {
-        return <Loading></Loading>;
+        return <Loading />;
     }
 
     if (!auth) {

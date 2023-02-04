@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import useWindowSize from "@hooks/useWindowSize";
 import { breakpoints } from "@styles/sizes";
 

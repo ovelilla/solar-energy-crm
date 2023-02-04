@@ -1,11 +1,11 @@
 import { useState, createContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { useForm } from "@hooks";
 import axios from "@config/axios";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = () => {
     const [loading, setLoading] = useState(false);
     const [auth, setAuth] = useState(null);
 
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
                 handleLogout,
             }}
         >
-            {children}
+            <Outlet />
         </AuthContext.Provider>
     );
 };

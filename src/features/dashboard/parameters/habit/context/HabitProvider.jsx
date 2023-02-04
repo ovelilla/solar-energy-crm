@@ -1,11 +1,12 @@
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 import axios from "@config/axios";
 import useUI from "@hooks/useUI";
 import useForm from "@hooks/useForm";
 
 const HabitContext = createContext();
 
-export const HabitProvider = ({ children }) => {
+export const HabitProvider = () => {
     const [pageSize, setPageSize] = useState(20);
     const [selected, setSelected] = useState([]);
     const [stateMenu, setStateMenu] = useState({ open: false, anchor: null });
@@ -192,9 +193,13 @@ export const HabitProvider = ({ children }) => {
         }
 
         try {
-            await axios.delete(`/habit`, { data: { ids: selected } }, {
-                withCredentials: true,
-            });
+            await axios.delete(
+                `/habit`,
+                { data: { ids: selected } },
+                {
+                    withCredentials: true,
+                }
+            );
             await alert({
                 title: `¡Habito${selected.length > 1 ? "s" : ""} eliminado${
                     selected.length > 1 ? "s" : ""
@@ -246,7 +251,7 @@ export const HabitProvider = ({ children }) => {
                 handleChange,
             }}
         >
-            {children}
+            <Outlet />
         </HabitContext.Provider>
     );
 };

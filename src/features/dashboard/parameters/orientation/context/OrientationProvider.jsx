@@ -1,11 +1,12 @@
 import { createContext, useState } from "react";
+import { Outlet } from "react-router-dom";
 import axios from "@config/axios";
 import useUI from "@hooks/useUI";
 import useForm from "@hooks/useForm";
 
 const OrientationContext = createContext();
 
-export const OrientationProvider = ({ children }) => {
+export const OrientationProvider = () => {
     const [pageSize, setPageSize] = useState(20);
     const [selected, setSelected] = useState([]);
     const [stateMenu, setStateMenu] = useState({ open: false, anchor: null });
@@ -146,7 +147,7 @@ export const OrientationProvider = ({ children }) => {
 
     const deleteOrientation = async (id) => {
         const confirm = await question({
-            title: "¿Eliminar orientacion?",
+            title: "¿Eliminar orientación?",
             message:
                 "¿Estás seguro de que deseas eliminar la orientación? Los datos no podrán ser recuperados.",
             confirm: "Eliminar",
@@ -249,7 +250,7 @@ export const OrientationProvider = ({ children }) => {
                 handleChange,
             }}
         >
-            {children}
+            <Outlet />
         </OrientationContext.Provider>
     );
 };
