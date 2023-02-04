@@ -15,7 +15,7 @@ const PaperComponent = (props) => {
     if (stateCreate.fullscreen) {
         return <Paper {...props} />;
     }
-    
+
     return (
         <Draggable handle="#draggable-dialog-title" cancel={'[class*="MuiDialogContent-root"]'}>
             <Paper {...props} />
@@ -38,13 +38,21 @@ const Create = () => {
                 <Title>Crear orientación</Title>
                 <Actions>
                     <Tooltip title="Pantalla completa">
-                        <IconButton size="large" onClick={handleFullscreenDialog}>
+                        <IconButton
+                            size="large"
+                            onClick={handleFullscreenDialog}
+                            onTouchStart={handleFullscreenDialog}
+                        >
                             <ExpandArrowsAlt />
                         </IconButton>
                     </Tooltip>
 
                     <Tooltip title="Cerrar">
-                        <IconButton size="large" onClick={handleCloseDialog}>
+                        <IconButton
+                            size="large"
+                            onClick={handleCloseDialog}
+                            onTouchStart={handleCloseDialog}
+                        >
                             <Close />
                         </IconButton>
                     </Tooltip>
