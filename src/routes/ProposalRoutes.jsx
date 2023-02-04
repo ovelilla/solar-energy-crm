@@ -1,6 +1,6 @@
 import { ProposalProvider } from "@features/dashboard/proposal/context/ProposalProvider";
 
-import Inquiries from "@pages/proposal/Inquiries ";
+import Inquiries from "@pages/proposal/Inquiries";
 
 const ProposalRoutes = [
     {
