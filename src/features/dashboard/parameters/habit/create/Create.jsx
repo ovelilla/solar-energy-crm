@@ -15,17 +15,19 @@ const PaperComponent = (props) => {
     if (stateCreate.fullscreen) {
         return <Paper {...props} />;
     }
-    
+
     return (
-        <Draggable handle="#draggable-dialog-title" cancel={'[class*="MuiDialogContent-root"]'}>
+        <Draggable
+            handle="#draggable-dialog-title"
+            cancel={'[class*="MuiDialogContent-root"], .button'}
+        >
             <Paper {...props} />
         </Draggable>
     );
 };
 
 const Create = () => {
-    const { stateCreate, handleCloseDialog, handleFullscreenDialog, createHabit } =
-        useHabit();
+    const { stateCreate, handleCloseDialog, handleFullscreenDialog, createHabit } = useHabit();
 
     return (
         <StyledDialog
@@ -38,13 +40,17 @@ const Create = () => {
                 <Title>Crear hábito</Title>
                 <Actions>
                     <Tooltip title="Pantalla completa">
-                        <IconButton size="large" onClick={handleFullscreenDialog}>
+                        <IconButton
+                            size="large"
+                            className="button"
+                            onClick={handleFullscreenDialog}
+                        >
                             <ExpandArrowsAlt />
                         </IconButton>
                     </Tooltip>
 
                     <Tooltip title="Cerrar">
-                        <IconButton size="large" onClick={handleCloseDialog}>
+                        <IconButton size="large" className="button" onClick={handleCloseDialog}>
                             <Close />
                         </IconButton>
                     </Tooltip>

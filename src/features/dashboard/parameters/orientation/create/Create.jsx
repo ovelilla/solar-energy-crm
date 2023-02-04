@@ -17,7 +17,10 @@ const PaperComponent = (props) => {
     }
 
     return (
-        <Draggable handle="#draggable-dialog-title" cancel={'[class*="MuiDialogContent-root"]'}>
+        <Draggable
+            handle="#draggable-dialog-title"
+            cancel={'[class*="MuiDialogContent-root"], .button'}
+        >
             <Paper {...props} />
         </Draggable>
     );
@@ -40,19 +43,15 @@ const Create = () => {
                     <Tooltip title="Pantalla completa">
                         <IconButton
                             size="large"
+                            className="button"
                             onClick={handleFullscreenDialog}
-                            onTouchStart={handleFullscreenDialog}
                         >
                             <ExpandArrowsAlt />
                         </IconButton>
                     </Tooltip>
 
                     <Tooltip title="Cerrar">
-                        <IconButton
-                            size="large"
-                            onClick={handleCloseDialog}
-                            onTouchStart={handleCloseDialog}
-                        >
+                        <IconButton size="large" className="button" onClick={handleCloseDialog}>
                             <Close />
                         </IconButton>
                     </Tooltip>
