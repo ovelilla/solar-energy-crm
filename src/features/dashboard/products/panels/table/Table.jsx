@@ -4,18 +4,56 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import useHeader from "@hooks/useHeader";
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
-import Footer from "@features/dashboard/parameters/orientation/table/Footer";
+import usePanels from "@features/dashboard/products/panels/hooks/usePanels";
+import Footer from "@features/dashboard/products/panels/table/Footer";
 
 const Table = () => {
     const { searchText } = useHeader();
-    const { pageSize, setPageSize, setSelected, openMenu, loading, orientations, handleOpenMenu } =
-        useOrientation();
+    const { pageSize, setPageSize, setSelected, openMenu, loading, panels, handleOpenMenu } =
+        usePanels();
 
     const columns = [
-        { field: "orientation", headerName: "Orientación", flex: 1, minWidth: 130 },
-        { field: "type", headerName: "Tipo", flex: 1, minWidth: 130 },
-        { field: "performance", headerName: "Rendimeinto", flex: 1, minWidth: 130 },
+        { field: "description", headerName: "Descripción", flex: 2, minWidth: 280 },
+        { field: "power", headerName: "Potencia W", flex: 1, minWidth: 120 },
+        { field: "warranty", headerName: "Garantía", flex: 1, minWidth: 100 },
+        { field: "efficiency", headerName: "Eficiencia", flex: 1, minWidth: 100 },
+        { field: "price", headerName: "PVP neto", flex: 1, minWidth: 100 },
+        {
+            field: "priceIVA",
+            headerName: "PVP IVA",
+            flex: 1,
+            minWidth: 100,
+            valueGetter: (params) => {
+                const price = parseFloat(params.row.price);
+                return (price + price * 0.21).toFixed(2);
+            },
+            renderCell: (params) => {
+                const price = parseFloat(params.row.price);
+                const priceIVA = (price + price * 0.21).toFixed(2);
+                return (
+                    <div title={priceIVA} className="MuiDataGrid-cellContent">
+                        {priceIVA}
+                    </div>
+                );
+            },
+        },
+        {
+            field: "pricePerWatt",
+            headerName: "€/W",
+            flex: 1,
+            minWidth: 100,
+            valueGetter: (params) => {
+                return (params.row.price / params.row.power).toFixed(2);
+            },
+            renderCell: (params) => {
+                const pricePerWatt = (params.row.price / params.row.power).toFixed(2);
+                return (
+                    <div title={pricePerWatt} className="MuiDataGrid-cellContent">
+                        {pricePerWatt}
+                    </div>
+                );
+            },
+        },
         {
             field: "actions",
             headerName: "Acciones",
@@ -44,7 +82,7 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = orientations.filter((orientation) => {
+    const filteredOrientations = panels.filter((orientation) => {
         return Object.values(orientation).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );

@@ -38,7 +38,7 @@ const Update = () => {
             PaperComponent={PaperComponent}
         >
             <Header id="draggable-dialog-title" fullScreen={stateUpdate.fullscreen}>
-                <Title>Actualizar orientación</Title>
+                <Title>Actualizar batería</Title>
                 <Actions>
                     <Tooltip title="Pantalla completa">
                         <IconButton

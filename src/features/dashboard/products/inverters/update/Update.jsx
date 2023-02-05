@@ -4,13 +4,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import LoadingButton from "@mui/lab/LoadingButton";
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
-import Form from "@features/dashboard/parameters/orientation/form";
+import useInverters from "@features/dashboard/products/inverters/hooks/useInverters";
+import Form from "@features/dashboard/products/inverters/form";
 import { Close, ExpandArrowsAlt } from "@icons";
 import { StyledDialog, Header, Title, Actions, Body, Footer } from "./styles";
 
 const PaperComponent = (props) => {
-    const { stateCreate } = useOrientation();
+    const { stateCreate } = useInverters();
 
     if (stateCreate.fullscreen) {
         return <Paper {...props} />;
@@ -27,8 +27,8 @@ const PaperComponent = (props) => {
 };
 
 const Update = () => {
-    const { stateUpdate, handleCloseDialog, handleFullscreenDialog, updateOrientation } =
-        useOrientation();
+    const { stateUpdate, handleCloseDialog, handleFullscreenDialog, updateInverter } =
+        useInverters();
 
     return (
         <StyledDialog
@@ -38,7 +38,7 @@ const Update = () => {
             PaperComponent={PaperComponent}
         >
             <Header id="draggable-dialog-title" fullScreen={stateUpdate.fullscreen}>
-                <Title>Actualizar orientación</Title>
+                <Title>Actualizar inversor</Title>
                 <Actions>
                     <Tooltip title="Pantalla completa">
                         <IconButton
@@ -69,7 +69,7 @@ const Update = () => {
 
                 <LoadingButton
                     variant="contained"
-                    onClick={updateOrientation}
+                    onClick={updateInverter}
                     loading={stateUpdate.loading}
                 >
                     Actualizar

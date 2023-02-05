@@ -1,6 +1,6 @@
 import { PenToSquare, TrashCan } from "@icons";
 
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
+import usePanels from "@features/dashboard/products/panels/hooks/usePanels";
 import { MenuStyled, Item } from "./styles";
 
 const Menu = () => {
@@ -9,8 +9,8 @@ const Menu = () => {
         handleCloseMenu,
         handleClickMenu,
         handleOpenUpdate,
-        deleteOrientation,
-    } = useOrientation();
+        deletePanel,
+    } = usePanels();
 
     return (
         <MenuStyled
@@ -28,7 +28,7 @@ const Menu = () => {
                 <span>Actualizar</span>
             </Item>
 
-            <Item type="button" aria-label="eliminar" onClick={deleteOrientation}>
+            <Item type="button" aria-label="eliminar" onClick={deletePanel}>
                 <TrashCan />
                 <span>Eliminar</span>
             </Item>

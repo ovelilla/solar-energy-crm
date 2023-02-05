@@ -160,7 +160,7 @@ export const BatteriesProvider = () => {
         }
 
         try {
-            await axios.delete(`/battery/${battery._id}`, values, {
+            await axios.delete(`/battery/${battery._id}`, {
                 withCredentials: true,
             });
             await alert({

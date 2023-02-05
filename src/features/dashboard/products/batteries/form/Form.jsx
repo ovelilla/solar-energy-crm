@@ -9,7 +9,6 @@ const Form = () => {
     return (
         <FormStyled>
             <TextField
-                id="description"
                 label="Descripción"
                 name="description"
                 type="text"
@@ -20,7 +19,6 @@ const Form = () => {
             />
 
             <TextField
-                id="capacity"
                 label="Capacidad"
                 name="capacity"
                 type="text"
@@ -34,7 +32,6 @@ const Form = () => {
             />
 
             <TextField
-                id="modules"
                 label="Módulos"
                 name="modules"
                 type="text"
@@ -45,7 +42,6 @@ const Form = () => {
             />
 
             <TextField
-                id="price"
                 label="Precio"
                 name="price"
                 type="text"

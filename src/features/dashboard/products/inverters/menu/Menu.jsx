@@ -1,6 +1,6 @@
 import { PenToSquare, TrashCan } from "@icons";
 
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
+import useInverters from "@features/dashboard/products/inverters/hooks/useInverters";
 import { MenuStyled, Item } from "./styles";
 
 const Menu = () => {
@@ -9,8 +9,8 @@ const Menu = () => {
         handleCloseMenu,
         handleClickMenu,
         handleOpenUpdate,
-        deleteOrientation,
-    } = useOrientation();
+        deleteInverter,
+    } = useInverters();
 
     return (
         <MenuStyled
@@ -28,7 +28,7 @@ const Menu = () => {
                 <span>Actualizar</span>
             </Item>
 
-            <Item type="button" aria-label="eliminar" onClick={deleteOrientation}>
+            <Item type="button" aria-label="eliminar" onClick={deleteInverter}>
                 <TrashCan />
                 <span>Eliminar</span>
             </Item>

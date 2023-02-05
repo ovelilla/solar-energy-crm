@@ -1,21 +1,21 @@
-// import { PanelsProvider } from "@features/dashboard/products/habit/context/PanelsProvider";
+import { PanelsProvider } from "@features/dashboard/products/panels/context/PanelsProvider";
 import { BatteriesProvider } from "@features/dashboard/products/batteries/context/BatteriesProvider";
-// import { InvertersProvider } from "@features/dashboard/products/orientation/context/InvertersProvider";
+import { InvertersProvider } from "@features/dashboard/products/inverters/context/InvertersProvider";
 
-// import Panels from "@pages/products/Panels";
+import Panels from "@pages/products/Panels";
 import Batteries from "@pages/products/Batteries";
-// import Inverters from "@pages/products/Inverters";
+import Inverters from "@pages/products/Inverters";
 
 const ProductsRoutes = [
-    // {
-    //     element: <PanelsProvider />,
-    //     children: [
-    //         {
-    //             path: "/paneles-solares",
-    //             element: <Panels />,
-    //         },
-    //     ],
-    // },
+    {
+        element: <PanelsProvider />,
+        children: [
+            {
+                path: "/paneles-solares",
+                element: <Panels />,
+            },
+        ],
+    },
     {
         element: <BatteriesProvider />,
         children: [
@@ -25,15 +25,15 @@ const ProductsRoutes = [
             },
         ],
     },
-    // {
-    //     element: <InvertersProvider />,
-    //     children: [
-    //         {
-    //             path: "/inversores",
-    //             element: <Inverters />,
-    //         },
-    //     ],
-    // },
+    {
+        element: <InvertersProvider />,
+        children: [
+            {
+                path: "/inversores",
+                element: <Inverters />,
+            },
+        ],
+    },
 ];
 
 export default ProductsRoutes;

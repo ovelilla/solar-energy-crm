@@ -22,6 +22,10 @@ const Table = () => {
             headerName: "PVP IVA",
             flex: 1,
             minWidth: 100,
+            valueGetter: (params) => {
+                const price = parseFloat(params.row.price);
+                return (price + price * 0.21).toFixed(2);
+            },
             renderCell: (params) => {
                 const price = parseFloat(params.row.price);
                 const priceIVA = (price + price * 0.21).toFixed(2);
@@ -34,9 +38,12 @@ const Table = () => {
         },
         {
             field: "pricePerWatt",
-            headerName: "€/W",
+            headerName: "€/Wp",
             flex: 1,
             minWidth: 100,
+            valueGetter: (params) => {
+                return (params.row.price / (params.row.capacity * 1000)).toFixed(2);
+            },
             renderCell: (params) => {
                 const pricePerWatt = (params.row.price / (params.row.capacity * 1000)).toFixed(2);
                 return (

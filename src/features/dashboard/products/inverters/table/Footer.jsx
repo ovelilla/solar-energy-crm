@@ -1,13 +1,13 @@
 import { GridFooterContainer, GridFooter } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
+import useInverters from "@features/dashboard/products/inverters/hooks/useInverters";
 import styled from "@emotion/styled";
 import { breakpoints, media } from "@styles/sizes";
 import { TrashCan } from "@icons";
 
 const Footer = () => {
-    const { selected, deleteOrientations } = useOrientation();
+    const { selected, deleteInverters } = useInverters();
 
     const FooterContainer = styled(GridFooterContainer)`
         display: flex;
@@ -63,7 +63,7 @@ const Footer = () => {
             {selected.length > 0 && (
                 <Icon>
                     <Tooltip title="Eliminar">
-                        <IconButton aria-label="actions" onClick={deleteOrientations}>
+                        <IconButton aria-label="actions" onClick={deleteInverters}>
                             <TrashCan />
                         </IconButton>
                     </Tooltip>

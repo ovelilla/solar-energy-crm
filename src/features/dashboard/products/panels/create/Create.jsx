@@ -4,13 +4,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import LoadingButton from "@mui/lab/LoadingButton";
-import useOrientation from "@features/dashboard/parameters/orientation/hooks/useOrientation";
-import Form from "@features/dashboard/parameters/orientation/form";
+import usePanels from "@features/dashboard/products/panels/hooks/usePanels";
+import Form from "@features/dashboard/products/panels/form";
 import { Close, ExpandArrowsAlt } from "@icons";
 import { StyledDialog, Header, Title, Actions, Body, Footer } from "./styles";
 
 const PaperComponent = (props) => {
-    const { stateCreate } = useOrientation();
+    const { stateCreate } = usePanels();
 
     if (stateCreate.fullscreen) {
         return <Paper {...props} />;
@@ -27,8 +27,8 @@ const PaperComponent = (props) => {
 };
 
 const Create = () => {
-    const { stateCreate, handleCloseDialog, handleFullscreenDialog, createOrientation } =
-        useOrientation();
+    const { stateCreate, handleCloseDialog, handleFullscreenDialog, createPanel } =
+        usePanels();
 
     return (
         <StyledDialog
@@ -38,7 +38,7 @@ const Create = () => {
             PaperComponent={PaperComponent}
         >
             <Header id="draggable-dialog-title" fullScreen={stateCreate.fullscreen}>
-                <Title>Crear orientación</Title>
+                <Title>Crear panel</Title>
                 <Actions>
                     <Tooltip title="Pantalla completa">
                         <IconButton
@@ -69,7 +69,7 @@ const Create = () => {
 
                 <LoadingButton
                     variant="contained"
-                    onClick={createOrientation}
+                    onClick={createPanel}
                     loading={stateCreate.loading}
                 >
                     Crear
