@@ -28,6 +28,8 @@ export const InvertersProvider = () => {
     const { values, errors, handleChange, setFormValues, setFormErrors, reset } = useForm({
         description: "",
         power: "",
+        minCC: "",
+        maxCC: "",
         warranty: "",
         type: "",
         price: "",

@@ -35,6 +35,21 @@ const Installation = () => {
                 </Field>
 
                 <Field>
+                    <Label>Inclinación</Label>
+                    <TextField
+                        name="slope"
+                        value={values.slope}
+                        onChange={handleChange}
+                        placeholder="Inclinación"
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">º</InputAdornment>,
+                        }}
+                        error={errors.slope.length > 0}
+                        helperText={errors.slope}
+                    />
+                </Field>
+
+                <Field>
                     <Label>Tipología instalación</Label>
                     <FormControl error={errors.installationType.length > 0}>
                         <Select

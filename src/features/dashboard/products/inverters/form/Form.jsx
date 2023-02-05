@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
 import useInverters from "@features/dashboard/products/inverters/hooks/useInverters";
-import { FormStyled } from "./styles";
+import { FormStyled, Row } from "./styles";
 
 const Form = () => {
     const { values, errors, handleChange } = useInverters();
@@ -35,6 +35,34 @@ const Form = () => {
                     endAdornment: <InputAdornment position="end">W</InputAdornment>,
                 }}
             />
+
+            <Row>
+                <TextField
+                    label="CC Mínima"
+                    name="minCC"
+                    type="text"
+                    value={values.minCC}
+                    error={errors.minCC.length > 0}
+                    helperText={errors.minCC}
+                    onChange={handleChange}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">Wp</InputAdornment>,
+                    }}
+                />
+
+                <TextField
+                    label="CC Máxima"
+                    name="maxCC"
+                    type="text"
+                    value={values.maxCC}
+                    error={errors.maxCC.length > 0}
+                    helperText={errors.maxCC}
+                    onChange={handleChange}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">Wp</InputAdornment>,
+                    }}
+                />
+            </Row>
 
             <TextField
                 label="Garantía"

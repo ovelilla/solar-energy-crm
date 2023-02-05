@@ -21,6 +21,7 @@ export const PredefinedProvider = () => {
         ivaRate: "",
         estimatedCoverage: "",
         roofOrientation: "",
+        slope: "",
         installationType: "",
         potentialRadiationPerkWYear: "",
         consumptionHabit: "",
