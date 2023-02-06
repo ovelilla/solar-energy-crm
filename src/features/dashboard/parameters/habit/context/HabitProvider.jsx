@@ -145,7 +145,7 @@ export const HabitProvider = () => {
         }
     };
 
-    const deleteHabit = async (id) => {
+    const deleteHabit = async () => {
         const confirm = await question({
             title: "¿Eliminar hábito de consumo?",
             message:
@@ -159,9 +159,7 @@ export const HabitProvider = () => {
         }
 
         try {
-            await axios.delete(`/habit/${habit._id}`, values, {
-                withCredentials: true,
-            });
+            await axios.delete(`/habit/${habit._id}`, { withCredentials: true });
 
             await alert({
                 title: "¡Hábito de consumo eliminado!",
@@ -193,13 +191,7 @@ export const HabitProvider = () => {
         }
 
         try {
-            await axios.delete(
-                `/habit`,
-                { data: { ids: selected } },
-                {
-                    withCredentials: true,
-                }
-            );
+            await axios.delete(`/habit`, { data: { ids: selected }, withCredentials: true });
             await alert({
                 title: `¡Habito${selected.length > 1 ? "s" : ""} eliminado${
                     selected.length > 1 ? "s" : ""

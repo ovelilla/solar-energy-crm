@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 import { breakpoints, media } from "@styles/sizes";
-import { white } from "@styles/colors";
 
 export const Form = styled.form`
     display: flex;
@@ -21,8 +20,12 @@ export const Group = styled.div`
 `;
 
 export const Title = styled.h2`
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
+
+    ${media(breakpoints.md)} {
+        font-size: 24px;
+    }
 `;
 
 export const Field = styled.div`

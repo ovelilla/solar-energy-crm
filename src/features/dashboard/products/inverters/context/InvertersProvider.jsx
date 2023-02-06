@@ -31,6 +31,7 @@ export const InvertersProvider = () => {
         minCC: "",
         maxCC: "",
         warranty: "",
+        current: "",
         type: "",
         price: "",
     });
@@ -108,7 +109,7 @@ export const InvertersProvider = () => {
                 withCredentials: true,
             });
             await alert({
-                title: "Inversor creado!",
+                title: "¡Inversor creado!",
                 message: "Se ha creado el inversor correctamente.",
                 type: "success",
                 timeout: 3000,
@@ -131,7 +132,7 @@ export const InvertersProvider = () => {
                 withCredentials: true,
             });
             await alert({
-                title: "Inversor actualizado!",
+                title: "¡Inversor actualizado!",
                 message: "Se ha actualizado el inversor correctamente.",
                 type: "success",
                 timeout: 3000,
@@ -149,7 +150,7 @@ export const InvertersProvider = () => {
         }
     };
 
-    const deleteInverter = async (id) => {
+    const deleteInverter = async () => {
         const confirm = await question({
             title: "¿Eliminar inversor?",
             message:
@@ -167,7 +168,7 @@ export const InvertersProvider = () => {
                 withCredentials: true,
             });
             await alert({
-                title: "Inversor eliminado!",
+                title: "¡Inversor eliminado!",
                 message: "Se ha eliminado el inversor correctamente.",
                 type: "success",
                 timeout: 3000,
@@ -196,13 +197,7 @@ export const InvertersProvider = () => {
         }
 
         try {
-            await axios.delete(
-                `/inverter`,
-                { data: { ids: selected } },
-                {
-                    withCredentials: true,
-                }
-            );
+            await axios.delete(`/inverter`, { data: { ids: selected }, withCredentials: true });
             await alert({
                 title: `¡Inversor${selected.length > 1 ? "es" : ""} eliminado${
                     selected.length > 1 ? "s" : ""

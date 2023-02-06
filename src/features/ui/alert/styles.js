@@ -24,10 +24,10 @@ export const StyledAlert = styled(Dialog)`
 `;
 
 export const Header = styled.div`
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
+    flex-shrink: 0; */
     position: relative;
     padding: 24px;
 

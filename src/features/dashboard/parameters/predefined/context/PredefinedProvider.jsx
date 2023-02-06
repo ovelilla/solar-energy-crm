@@ -24,6 +24,7 @@ export const PredefinedProvider = () => {
         slope: "",
         installationType: "",
         potentialRadiationPerkWYear: "",
+        systemLoss: "",
         consumptionHabit: "",
         battery: "",
     });
@@ -52,8 +53,8 @@ export const PredefinedProvider = () => {
                 withCredentials: true,
             });
             await alert({
-                title: "¡Orientación creada!",
-                message: "Se ha creado la orientación correctamente.",
+                title: "Parámetros predefinidos creados!",
+                message: "Se han creado los parámetros predefinidos correctamente.",
                 type: "success",
                 timeout: 3000,
             });
@@ -74,8 +75,8 @@ export const PredefinedProvider = () => {
                 withCredentials: true,
             });
             await alert({
-                title: "¡Orientación actualizada!",
-                message: "Se ha actualizado la orientación correctamente.",
+                title: "Parámetros predefinidos actualizados!",
+                message: "Se han actualizado los parámetros predefinidos correctamente.",
                 type: "success",
                 timeout: 3000,
             });
@@ -89,11 +90,11 @@ export const PredefinedProvider = () => {
         }
     };
 
-    const deletePredefined = async (id) => {
+    const deletePredefined = async () => {
         const confirm = await question({
-            title: "¿Eliminar orientacion?",
+            title: "¿Eliminar parámetros predefinidos?",
             message:
-                "¿Estás seguro de que deseas eliminar la orientación? Los datos no podrán ser recuperados.",
+                "¿Estás seguro de que deseas eliminar los parámetros predefinidos? Los datos no podrán ser recuperados.",
             confirm: "Eliminar",
             cancel: "Cancelar",
         });
@@ -103,12 +104,10 @@ export const PredefinedProvider = () => {
         }
 
         try {
-            await axios.delete(`/predefined/${predefined._id}`, values, {
-                withCredentials: true,
-            });
+            await axios.delete(`/predefined/${predefined._id}`, { withCredentials: true });
             await alert({
-                title: "¡Orientación eliminada!",
-                message: "Se ha eliminado la orientación correctamente.",
+                title: "Parámetros predefinidos eliminados!",
+                message: "Se han eliminado los parámetros predefinidos correctamente.",
                 type: "success",
                 timeout: 3000,
             });

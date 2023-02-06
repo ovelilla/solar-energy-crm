@@ -1,4 +1,5 @@
 import AnimatedSuccess from "@icons/AnimatedSuccess";
+import AnimatedError from "@icons/AnimatedError";
 import { StyledAlert, Header, Body, Title, Message } from "./styles";
 import useUI from "@hooks/useUI";
 
@@ -8,7 +9,8 @@ const Alert = () => {
     return (
         <StyledAlert onClose={() => {}} open={stateAlert.open}>
             <Header>
-                <AnimatedSuccess />
+                {stateAlert.type === "success" && <AnimatedSuccess />}
+                {stateAlert.type === "error" && <AnimatedError />}
             </Header>
 
             <Body>

@@ -31,6 +31,7 @@ export const PanelsProvider = () => {
         warranty: "",
         efficiency: "",
         price: "",
+        active: false,
     });
 
     const handleOpenMenu = (e, params) => {
@@ -134,9 +135,7 @@ export const PanelsProvider = () => {
                 type: "success",
                 timeout: 3000,
             });
-            setPanels([
-                ...panels.map((o) => (o._id === data.panel._id ? data.panel : o)),
-            ]);
+            setPanels([...panels.map((o) => (o._id === data.panel._id ? data.panel : o))]);
             setPanel(null);
             setStateUpdate({ open: false, fullscreen: false, loading: false });
             reset();
@@ -147,7 +146,28 @@ export const PanelsProvider = () => {
         }
     };
 
-    const deletePanel = async (id) => {
+    const updateActive = async (id) => {
+        const panel = panels.find((panel) => panel._id === id);
+
+        if (panel.active) {
+            await alert({
+                title: "¡Error!",
+                message: "No se puede desactivar un panel. Activa otro en su lugar.",
+                type: "error",
+                timeout: 3000,
+            });
+            return;
+        }
+
+        try {
+            const { data } = await axios.put(`/panel/${id}/active`, {}, { withCredentials: true });
+            setPanels(data.panels);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const deletePanel = async () => {
         const confirm = await question({
             title: "¿Eliminar panel?",
             message:
@@ -160,10 +180,18 @@ export const PanelsProvider = () => {
             return;
         }
 
-        try {
-            await axios.delete(`/panel/${panel._id}`, {
-                withCredentials: true,
+        if (panel.active) {
+            await alert({
+                title: "¡Error!",
+                message: "No se puede eliminar un panel activo. Desactiva antes el panel.",
+                type: "error",
+                timeout: 3000,
             });
+            return;
+        }
+
+        try {
+            await axios.delete(`/panel/${panel._id}`, { withCredentials: true });
             await alert({
                 title: "¡Panel eliminado!",
                 message: "Se ha eliminado el panel correctamente.",
@@ -193,14 +221,20 @@ export const PanelsProvider = () => {
             return;
         }
 
+        const active = panels.some((panel) => selected.includes(panel._id) && panel.active);
+
+        if (active) {
+            await alert({
+                title: "¡Error!",
+                message: "Alguno de los paneles seleccionados está activo. Desactivalo antes.",
+                type: "error",
+                timeout: 3000,
+            });
+            return;
+        }
+
         try {
-            await axios.delete(
-                `/panel`,
-                { data: { ids: selected } },
-                {
-                    withCredentials: true,
-                }
-            );
+            await axios.delete(`/panel`, { data: { ids: selected }, withCredentials: true });
             await alert({
                 title: `¡Panel${selected.length > 1 ? "es" : ""} eliminado${
                     selected.length > 1 ? "s" : ""
@@ -245,6 +279,7 @@ export const PanelsProvider = () => {
                 readPanels,
                 createPanel,
                 updatePanel,
+                updateActive,
                 deletePanel,
                 deletePanels,
                 values,

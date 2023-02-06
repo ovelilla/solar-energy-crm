@@ -13,12 +13,13 @@ const Table = () => {
         useInverters();
 
     const columns = [
-        { field: "description", headerName: "Descripción", flex: 2, minWidth: 160 },
+        { field: "description", headerName: "Descripción", flex: 2, minWidth: 320 },
         { field: "power", headerName: "Potencia W", flex: 1, minWidth: 120 },
         { field: "minCC", headerName: "CC Mínima Wp", flex: 1, minWidth: 150 },
         { field: "maxCC", headerName: "CC Máxima Wp", flex: 1, minWidth: 150 },
         { field: "warranty", headerName: "Garantía", flex: 1, minWidth: 100 },
-        { field: "type", headerName: "Tipo", flex: 1, minWidth: 100 },
+        { field: "current", headerName: "Corriente", flex: 1, minWidth: 120 },
+        { field: "type", headerName: "Tipo", flex: 1, minWidth: 140 },
         {
             field: "price",
             headerName: "PVP neto",

@@ -137,6 +137,13 @@ const Sidenav = () => {
                                         >
                                             <Text>Inversores</Text>
                                         </ItemLink>
+
+                                        <ItemLink
+                                            to="/meters"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Meters</Text>
+                                        </ItemLink>
                                     </Submenu>
                                 </Collapse>
                             </div>

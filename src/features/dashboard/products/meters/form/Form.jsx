@@ -5,11 +5,11 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
-import useInverters from "@features/dashboard/products/inverters/hooks/useInverters";
+import useMeters from "@features/dashboard/products/meters/hooks/useMeters";
 import { FormStyled, Row } from "./styles";
 
 const Form = () => {
-    const { values, errors, handleChange } = useInverters();
+    const { values, errors, handleChange } = useMeters();
 
     return (
         <FormStyled>
@@ -23,59 +23,27 @@ const Form = () => {
                 onChange={handleChange}
             />
 
-            <TextField
-                label="Potencia"
-                name="power"
-                type="text"
-                value={values.power}
-                error={errors.power.length > 0}
-                helperText={errors.power}
-                onChange={handleChange}
-                InputProps={{
-                    endAdornment: <InputAdornment position="end">W</InputAdornment>,
-                }}
-            />
-
             <Row>
                 <TextField
-                    label="CC Mínima"
-                    name="minCC"
+                    label="Paneles mínimos"
+                    name="minPanels"
                     type="text"
-                    value={values.minCC}
-                    error={errors.minCC.length > 0}
-                    helperText={errors.minCC}
+                    value={values.minPanels}
+                    error={errors.minPanels.length > 0}
+                    helperText={errors.minPanels}
                     onChange={handleChange}
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end">Wp</InputAdornment>,
-                    }}
                 />
 
                 <TextField
-                    label="CC Máxima"
-                    name="maxCC"
+                    label="Paneles máximos"
+                    name="maxPanels"
                     type="text"
-                    value={values.maxCC}
-                    error={errors.maxCC.length > 0}
-                    helperText={errors.maxCC}
+                    value={values.maxPanels}
+                    error={errors.maxPanels.length > 0}
+                    helperText={errors.maxPanels}
                     onChange={handleChange}
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end">Wp</InputAdornment>,
-                    }}
                 />
             </Row>
-
-            <TextField
-                label="Garantía"
-                name="warranty"
-                type="text"
-                value={values.warranty}
-                error={errors.warranty.length > 0}
-                helperText={errors.warranty}
-                onChange={handleChange}
-                InputProps={{
-                    endAdornment: <InputAdornment position="end">años</InputAdornment>,
-                }}
-            />
 
             <FormControl error={errors.current.length > 0}>
                 <InputLabel id="current">Corriente</InputLabel>

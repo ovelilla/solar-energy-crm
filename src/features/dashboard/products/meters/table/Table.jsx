@@ -2,30 +2,29 @@ import { DataGrid, esES } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Switch from "@mui/material/Switch";
+
 import useHeader from "@hooks/useHeader";
-import usePanels from "@features/dashboard/products/panels/hooks/usePanels";
-import Footer from "@features/dashboard/products/panels/table/Footer";
+import useMeters from "@features/dashboard/products/meters/hooks/useMeters";
+import Footer from "@features/dashboard/products/meters/table/Footer";
 
 const Table = () => {
     const { searchText } = useHeader();
-    const {
-        pageSize,
-        setPageSize,
-        setSelected,
-        openMenu,
-        loading,
-        panels,
-        handleOpenMenu,
-        updateActive,
-    } = usePanels();
+    const { pageSize, setPageSize, setSelected, openMenu, loading, meters, handleOpenMenu } =
+        useMeters();
 
     const columns = [
-        { field: "description", headerName: "Descripción", flex: 2, minWidth: 280 },
-        { field: "power", headerName: "Potencia W", flex: 1, minWidth: 120 },
-        { field: "warranty", headerName: "Garantía", flex: 1, minWidth: 100 },
-        { field: "efficiency", headerName: "Eficiencia", flex: 1, minWidth: 100 },
-        { field: "price", headerName: "PVP neto", flex: 1, minWidth: 100 },
+        { field: "description", headerName: "Descripción", flex: 2, minWidth: 320 },
+        { field: "minPanels", headerName: "Paneles min.", flex: 1, minWidth: 140 },
+        { field: "maxPanels", headerName: "Paneles max.", flex: 1, minWidth: 140 },
+        { field: "current", headerName: "Corriente", flex: 1, minWidth: 120 },
+        { field: "type", headerName: "Tipo", flex: 1, minWidth: 140 },
+        {
+            field: "price",
+            headerName: "PVP neto",
+            flex: 1,
+            minWidth: 100,
+            valueFormatter: (params) => parseFloat(params.value).toFixed(2),
+        },
         {
             field: "priceIVA",
             headerName: "PVP IVA",
@@ -46,50 +45,13 @@ const Table = () => {
             },
         },
         {
-            field: "pricePerWatt",
-            headerName: "€/W",
-            flex: 1,
-            minWidth: 100,
-            valueGetter: (params) => {
-                return (params.row.price / params.row.power).toFixed(2);
-            },
-            renderCell: (params) => {
-                const pricePerWatt = (params.row.price / params.row.power).toFixed(2);
-                return (
-                    <div title={pricePerWatt} className="MuiDataGrid-cellContent">
-                        {pricePerWatt}
-                    </div>
-                );
-            },
-        },
-        {
-            field: "active",
-            headerName: "Activo",
-            flex: 1,
-            minWidth: 100,
-            onClick: (e) => {
-                e.stopPropagation();
-            },
-            renderCell: (params) => {
-                return (
-                    <Switch
-                        checked={params.row.active}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                        onChange={() => updateActive(params.row._id)}
-                        inputProps={{ "aria-label": "controlled" }}
-                    />
-                );
-            },
-        },
-        {
             field: "actions",
             headerName: "Acciones",
             flex: 1,
             minWidth: 100,
             maxWidth: 160,
             align: "center",
+            sortable: false,
             renderCell: (params) => {
                 return (
                     <Tooltip title="Abrir menú">
@@ -110,7 +72,7 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = panels.filter((orientation) => {
+    const filteredOrientations = meters.filter((orientation) => {
         return Object.values(orientation).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );

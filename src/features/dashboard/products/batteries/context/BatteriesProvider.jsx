@@ -86,9 +86,7 @@ export const BatteriesProvider = () => {
         setLoading(true);
 
         try {
-            const { data } = await axios.get("/battery", {
-                withCredentials: true,
-            });
+            const { data } = await axios.get("/battery", { withCredentials: true });
             setBatteries(data);
         } catch (error) {
             console.log(error);
@@ -146,7 +144,7 @@ export const BatteriesProvider = () => {
         }
     };
 
-    const deleteBattery = async (id) => {
+    const deleteBattery = async () => {
         const confirm = await question({
             title: "¿Eliminar batería?",
             message:
@@ -160,9 +158,7 @@ export const BatteriesProvider = () => {
         }
 
         try {
-            await axios.delete(`/battery/${battery._id}`, {
-                withCredentials: true,
-            });
+            await axios.delete(`/battery/${battery._id}`, { withCredentials: true });
             await alert({
                 title: "¡Batería eliminada!",
                 message: "Se ha eliminado la batería correctamente.",
@@ -193,13 +189,7 @@ export const BatteriesProvider = () => {
         }
 
         try {
-            await axios.delete(
-                `/battery`,
-                { data: { ids: selected } },
-                {
-                    withCredentials: true,
-                }
-            );
+            await axios.delete(`/battery`, { data: { ids: selected }, withCredentials: true });
             await alert({
                 title: `¡Batería${selected.length > 1 ? "es" : ""} eliminada${
                     selected.length > 1 ? "s" : ""

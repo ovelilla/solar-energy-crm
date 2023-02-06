@@ -4,9 +4,9 @@ import axios from "@config/axios";
 import useUI from "@hooks/useUI";
 import useForm from "@hooks/useForm";
 
-const OrientationContext = createContext();
+const MetersContext = createContext();
 
-export const OrientationProvider = () => {
+export const MetersProvider = () => {
     const [pageSize, setPageSize] = useState(20);
     const [selected, setSelected] = useState([]);
     const [stateMenu, setStateMenu] = useState({ open: false, anchor: null });
@@ -21,26 +21,29 @@ export const OrientationProvider = () => {
         loading: false,
     });
     const [loading, setLoading] = useState(false);
-    const [orientation, setOrientation] = useState(null);
-    const [orientations, setOrientations] = useState([]);
+    const [meter, setMeter] = useState(null);
+    const [meters, setMeters] = useState([]);
 
     const { question, alert } = useUI();
     const { values, errors, handleChange, setFormValues, setFormErrors, reset } = useForm({
-        orientation: "",
+        description: "",
+        minPanels: "",
+        maxPanels: "",
+        current: "",
         type: "",
-        performance: "",
+        price: "",
     });
 
     const handleOpenMenu = (e, params) => {
         e.stopPropagation();
         setStateMenu({ open: true, anchor: e.currentTarget });
-        setOrientation(params.row);
+        setMeter(params.row);
         setFormValues(params.row);
     };
 
     const handleCloseMenu = () => {
         setStateMenu({ open: false, anchor: null });
-        setOrientation(null);
+        setMeter(null);
         reset();
     };
 
@@ -49,7 +52,7 @@ export const OrientationProvider = () => {
     };
 
     const handleOpenCreate = () => {
-        setOrientation(null);
+        setMeter(null);
         reset();
         setStateCreate({ ...stateCreate, open: true });
     };
@@ -71,7 +74,7 @@ export const OrientationProvider = () => {
         if (confirm) {
             setStateCreate({ open: false, fullscreen: false, loading: false });
             setStateUpdate({ open: false, fullscreen: false, loading: false });
-            setOrientation(null);
+            setMeter(null);
             reset();
         }
     };
@@ -81,14 +84,14 @@ export const OrientationProvider = () => {
         setStateUpdate({ ...stateUpdate, fullscreen: !stateUpdate.fullscreen });
     };
 
-    const readOrientations = async () => {
+    const readMeters = async () => {
         setLoading(true);
 
         try {
-            const { data } = await axios.get("/orientation", {
+            const { data } = await axios.get("/meter", {
                 withCredentials: true,
             });
-            setOrientations(data);
+            setMeters(data);
         } catch (error) {
             console.log(error);
         } finally {
@@ -96,20 +99,20 @@ export const OrientationProvider = () => {
         }
     };
 
-    const createOrientation = async () => {
+    const createMeter = async () => {
         setStateCreate((prev) => ({ ...prev, loading: true }));
 
         try {
-            const { data } = await axios.post("/orientation", values, {
+            const { data } = await axios.post("/meter", values, {
                 withCredentials: true,
             });
             await alert({
-                title: "¡Orientación creada!",
-                message: "Se ha creado la orientación correctamente.",
+                title: "¡Meter creado!",
+                message: "Se ha creado el meter correctamente.",
                 type: "success",
                 timeout: 3000,
             });
-            setOrientations([...orientations, data.orientation]);
+            setMeters([...meters, data.meter]);
             setStateCreate({ open: false, fullscreen: false, loading: false });
             reset();
         } catch (error) {
@@ -119,23 +122,23 @@ export const OrientationProvider = () => {
         }
     };
 
-    const updateOrientation = async () => {
+    const updateMeter = async () => {
         setStateUpdate((prev) => ({ ...prev, loading: true }));
 
         try {
-            const { data } = await axios.put(`/orientation/${orientation._id}`, values, {
+            const { data } = await axios.put(`/meter/${meter._id}`, values, {
                 withCredentials: true,
             });
             await alert({
-                title: "¡Orientación actualizada!",
-                message: "Se ha actualizado la orientación correctamente.",
+                title: "¡Meter actualizado!",
+                message: "Se ha actualizado el meter correctamente.",
                 type: "success",
                 timeout: 3000,
             });
-            setOrientations([
-                ...orientations.map((o) => (o._id === data.orientation._id ? data.orientation : o)),
+            setMeters([
+                ...meters.map((o) => (o._id === data.meter._id ? data.meter : o)),
             ]);
-            setOrientation(null);
+            setMeter(null);
             setStateUpdate({ open: false, fullscreen: false, loading: false });
             reset();
         } catch (error) {
@@ -145,11 +148,11 @@ export const OrientationProvider = () => {
         }
     };
 
-    const deleteOrientation = async () => {
+    const deleteMeter = async () => {
         const confirm = await question({
-            title: "¿Eliminar orientación?",
+            title: "¿Eliminar meter?",
             message:
-                "¿Estás seguro de que deseas eliminar la orientación? Los datos no podrán ser recuperados.",
+                "¿Estás seguro de que deseas eliminar el meter? Los datos no podrán ser recuperados.",
             confirm: "Eliminar",
             cancel: "Cancelar",
         });
@@ -159,27 +162,29 @@ export const OrientationProvider = () => {
         }
 
         try {
-            await axios.delete(`/orientation/${orientation._id}`, { withCredentials: true });
+            await axios.delete(`/meter/${meter._id}`, {
+                withCredentials: true,
+            });
             await alert({
-                title: "¡Orientación eliminada!",
-                message: "Se ha eliminado la orientación correctamente.",
+                title: "¡Meter eliminado!",
+                message: "Se ha eliminado el meter correctamente.",
                 type: "success",
                 timeout: 3000,
             });
-            setOrientations([...orientations.filter((o) => o._id !== orientation._id)]);
+            setMeters([...meters.filter((o) => o._id !== meter._id)]);
         } catch (error) {
             console.log(error);
         } finally {
-            setOrientation(null);
+            setMeter(null);
             reset();
         }
     };
 
-    const deleteOrientations = async () => {
+    const deleteMeters = async () => {
         const confirm = await question({
-            title: `¿Eliminar ${selected.length > 1 ? "orientaciones" : "orientación"}?`,
+            title: `¿Eliminar ${selected.length > 1 ? "meters" : "meter"}?`,
             message: `¿Estás seguro de que deseas eliminar ${
-                selected.length > 1 ? "las orientaciones" : "la orientación"
+                selected.length > 1 ? "los meters" : "el meter"
             }? Los datos no podrán ser recuperados.`,
             confirm: "Eliminar",
             cancel: "Cancelar",
@@ -190,18 +195,18 @@ export const OrientationProvider = () => {
         }
 
         try {
-            await axios.delete(`/orientation`, { data: { ids: selected }, withCredentials: true });
+            await axios.delete(`/meter`, { data: { ids: selected }, withCredentials: true });
             await alert({
-                title: `¡Orientación${selected.length > 1 ? "es" : ""} eliminada${
+                title: `¡Meter${selected.length > 1 ? "es" : ""} eliminado${
                     selected.length > 1 ? "s" : ""
                 }!`,
-                message: `Se ha${selected.length > 1 ? "n" : ""} eliminado la${
+                message: `Se ha${selected.length > 1 ? "n" : ""} eliminado lo${
                     selected.length > 1 ? "s" : ""
-                } orientación${selected.length > 1 ? "es" : ""} correctamente.`,
+                } meter${selected.length > 1 ? "es" : ""} correctamente.`,
                 type: "success",
                 timeout: 3000,
             });
-            setOrientations([...orientations.filter((o) => !selected.includes(o._id))]);
+            setMeters([...meters.filter((o) => !selected.includes(o._id))]);
         } catch (error) {
             console.log(error);
         } finally {
@@ -210,7 +215,7 @@ export const OrientationProvider = () => {
     };
 
     return (
-        <OrientationContext.Provider
+        <MetersContext.Provider
             value={{
                 pageSize,
                 setPageSize,
@@ -228,23 +233,23 @@ export const OrientationProvider = () => {
                 handleFullscreenDialog,
                 loading,
                 setLoading,
-                orientation,
-                setOrientation,
-                orientations,
-                setOrientations,
-                readOrientations,
-                createOrientation,
-                updateOrientation,
-                deleteOrientation,
-                deleteOrientations,
+                meter,
+                setMeter,
+                meters,
+                setMeters,
+                readMeters,
+                createMeter,
+                updateMeter,
+                deleteMeter,
+                deleteMeters,
                 values,
                 errors,
                 handleChange,
             }}
         >
             <Outlet />
-        </OrientationContext.Provider>
+        </MetersContext.Provider>
     );
 };
 
-export default OrientationContext;
+export default MetersContext;

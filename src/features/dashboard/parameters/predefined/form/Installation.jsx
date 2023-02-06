@@ -81,6 +81,21 @@ const Installation = () => {
                 </Field>
 
                 <Field>
+                    <Label>Pérdidas del sistema</Label>
+                    <TextField
+                        name="systemLoss"
+                        value={values.systemLoss}
+                        onChange={handleChange}
+                        placeholder="Pérdidas del sistema"
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
+                        error={errors.systemLoss.length > 0}
+                        helperText={errors.systemLoss}
+                    />
+                </Field>
+
+                <Field>
                     <Label>Hábitos de consumo</Label>
                     <FormControl error={errors.consumptionHabit.length > 0}>
                         <Select
