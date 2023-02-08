@@ -11,11 +11,10 @@ import usePriceSimulator from "@features/dashboard/management/price-simulator/ho
 
 const PriceSimulator = () => {
     const { width } = useWindowSize();
-    const { readPanels, readInverters } = usePriceSimulator();
+    const { readData } = usePriceSimulator();
 
     useEffect(() => {
-        readPanels();
-        readInverters();
+        readData();
     }, []);
 
     return (

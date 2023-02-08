@@ -13,22 +13,82 @@ import usePriceSimulator from "@features/dashboard/management/price-simulator/ho
 import { Form, Group } from "./styles";
 
 const FixedCosts = () => {
-    const { loading, disabled, values, setValue, errors, handleChange, panels, inverters } =
-        usePriceSimulator();
+    const {
+        loading,
+        disabled,
+        values,
+        setValue,
+        errors,
+        handleChange,
+        panels,
+        inverters,
+        meters,
+        structures,
+        lines,
+        protections,
+        fixedCosts,
+    } = usePriceSimulator();
 
-    const string = values.modules > 11 ? 2 : 1;
+    const strings = values.modules > 11 ? 2 : 1;
     const panel = panels.find((panel) => panel._id === values.panel) || {};
-    const totalPower = values.modules * panel.power;
+    const panelsPower = values.modules * panel.power;
+    const panelsPrice = values.modules * panel.price;
     const inverter =
         inverters.find((inverter) => {
             return (
-                inverter.minCC <= totalPower &&
-                inverter.maxCC >= totalPower &&
-                inverter.type === values.rate &&
+                inverter.minCC <= panelsPower &&
+                inverter.maxCC >= panelsPower &&
                 inverter.current === values.current
             );
         }) || {};
-    console.log(inverter);
+    const inverterPrice = inverter.price;
+    const meter =
+        meters.find((meter) => {
+            return (
+                meter.minPanels <= values.modules &&
+                meter.maxPanels >= values.modules &&
+                meter.type === values.rate &&
+                meter.current === values.current
+            );
+        }) || {};
+    const meterPrice = meter.price;
+    const structure = structures.find((structure) => structure.type === values.structure) || {};
+    const structurePrice = panelsPower * structure.price;
+    const equipmentPrice = panelsPrice + inverterPrice + meterPrice + structurePrice;
+    const line =
+        lines.find((line) => {
+            return line.minPower <= panelsPower && line.maxPower >= panelsPower;
+        }) || {};
+    const linePrice = line.price;
+    const installationPrice = linePrice * panelsPower;
+    const protectionsArray = protections.filter((protection) => {
+        return protection.current === values.current && protection.type === values.rate;
+    });
+
+    console.log(fixedCosts);
+    const propsToSum = [
+        "PMCost",
+        "transports",
+        "legalization",
+        "fees",
+        "technicalVisit",
+        "acquisitionCosts",
+        "operatingCosts",
+        "maintenanceCost",
+        "index",
+        "netPrice",
+        "ivaRate",
+    ];
+
+    const sum =
+        Object.entries(fixedCosts).reduce((acc, [key, value]) => {
+            if (propsToSum.includes(key)) {
+                acc += value;
+            }
+            return acc;
+        }, 0) || 0;
+
+    console.log(sum);
 
     return (
         <Form>
@@ -59,7 +119,7 @@ const FixedCosts = () => {
                 </FormControl>
 
                 {values.rate === "String" && (
-                    <TextField name="string" label="String" value={string} disabled />
+                    <TextField name="strings" label="Strings" value={strings} disabled />
                 )}
 
                 <FormControl error={errors.current.length > 0}>

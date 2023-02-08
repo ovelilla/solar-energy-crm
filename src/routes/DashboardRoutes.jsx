@@ -5,6 +5,7 @@ import PrivateRoute from "@routes/PrivateRoute";
 import ProposalRoutes from "@routes/ProposalRoutes";
 import ParametersRoutes from "@routes/ParametersRoutes";
 import ProductsRoutes from "@routes/ProductsRoutes";
+import InstallationRoutes from "@routes/InstallationRoutes";
 import ManagementRoutes from "@routes/ManagementRoutes";
 
 import Account from "@pages/Account";
@@ -61,6 +62,7 @@ const DashboardRoutes = [
                             ...ProposalRoutes,
                             ...ProductsRoutes,
                             ...ParametersRoutes,
+                            ...InstallationRoutes,
                             ...ManagementRoutes,
                         ],
                     },

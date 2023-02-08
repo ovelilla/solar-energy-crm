@@ -2,29 +2,22 @@ import { DataGrid, esES } from "@mui/x-data-grid";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Switch from "@mui/material/Switch";
+
 import useHeader from "@hooks/useHeader";
-import usePeripherals from "@features/dashboard/products/peripherals/hooks/usePeripherals";
-import Footer from "@features/dashboard/products/peripherals/table/Footer";
+import useProtections from "@features/dashboard/installation/protections/hooks/useProtections";
+import Footer from "@features/dashboard/installation/protections/table/Footer";
 
 const Table = () => {
     const { searchText } = useHeader();
-    const {
-        pageSize,
-        setPageSize,
-        setSelected,
-        openMenu,
-        loading,
-        peripherals,
-        handleOpenMenu,
-        updateActive,
-    } = usePeripherals();
+    const { pageSize, setPageSize, setSelected, openMenu, loading, protections, handleOpenMenu } =
+        useProtections();
 
     const columns = [
-        { field: "description", headerName: "Descripción", flex: 2, minWidth: 480 },
-        { field: "type", headerName: "Tipo", flex: 1, minWidth: 140 },
-        { field: "current", headerName: "Corriente", flex: 1, minWidth: 120 },
-        { field: "price", headerName: "PVP neto", flex: 1, minWidth: 120 },
+        { field: "description", headerName: "Descripción", flex: 1, minWidth: 240 },
+        { field: "protectionType", headerName: "Tipo protección", flex: 1, minWidth: 160 },
+        { field: "installationType", headerName: "Tipo instalación", flex: 1, minWidth: 160 },
+        { field: "current", headerName: "Corriente", flex: 1, minWidth: 160 },
+        { field: "price", headerName: "PVP neto", flex: 1, minWidth: 100 },
         {
             field: "priceIVA",
             headerName: "PVP IVA",
@@ -45,33 +38,13 @@ const Table = () => {
             },
         },
         {
-            field: "active",
-            headerName: "Activo",
-            flex: 1,
-            minWidth: 100,
-            onClick: (e) => {
-                e.stopPropagation();
-            },
-            renderCell: (params) => {
-                return (
-                    <Switch
-                        checked={params.row.active}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                        onChange={() => updateActive(params.row._id)}
-                        inputProps={{ "aria-label": "controlled" }}
-                    />
-                );
-            },
-        },
-        {
             field: "actions",
             headerName: "Acciones",
             flex: 1,
             minWidth: 100,
             maxWidth: 160,
             align: "center",
+            sortable: false,
             renderCell: (params) => {
                 return (
                     <Tooltip title="Abrir menú">
@@ -92,15 +65,15 @@ const Table = () => {
         },
     ];
 
-    const filteredPeripherals = peripherals.filter((peripheral) => {
-        return Object.values(peripheral).some((val) =>
+    const filteredProtections = protections.filter((protection) => {
+        return Object.values(protection).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );
     });
 
     return (
         <DataGrid
-            rows={filteredPeripherals}
+            rows={filteredProtections}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

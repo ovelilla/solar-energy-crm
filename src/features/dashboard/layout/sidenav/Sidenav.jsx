@@ -220,10 +220,10 @@ const Sidenav = () => {
                                 <Collapse in={selectedMenu === 4} timeout="auto" unmountOnExit>
                                     <Submenu>
                                         <ItemLink
-                                            to="/partidas-instalacion"
+                                            to="/partidas"
                                             onClick={handleCloseSwipeableDrawer}
                                         >
-                                            <Text>Partidas instalación</Text>
+                                            <Text>Partidas</Text>
                                         </ItemLink>
 
                                         <ItemLink
