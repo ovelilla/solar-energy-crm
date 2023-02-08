@@ -13,7 +13,7 @@ const Table = () => {
         useMeters();
 
     const columns = [
-        { field: "description", headerName: "Descripción", flex: 2, minWidth: 320 },
+        { field: "description", headerName: "Descripción", flex: 2, minWidth: 480 },
         { field: "minPanels", headerName: "Paneles min.", flex: 1, minWidth: 140 },
         { field: "maxPanels", headerName: "Paneles max.", flex: 1, minWidth: 140 },
         { field: "current", headerName: "Corriente", flex: 1, minWidth: 120 },
@@ -72,15 +72,15 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = meters.filter((orientation) => {
-        return Object.values(orientation).some((val) =>
+    const filteredMeters = meters.filter((meter) => {
+        return Object.values(meter).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );
     });
 
     return (
         <DataGrid
-            rows={filteredOrientations}
+            rows={filteredMeters}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

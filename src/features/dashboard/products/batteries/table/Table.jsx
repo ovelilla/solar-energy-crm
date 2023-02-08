@@ -81,15 +81,15 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = batteries.filter((orientation) => {
-        return Object.values(orientation).some((val) =>
+    const filteredBatteries = batteries.filter((battery) => {
+        return Object.values(battery).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );
     });
 
     return (
         <DataGrid
-            rows={filteredOrientations}
+            rows={filteredBatteries}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

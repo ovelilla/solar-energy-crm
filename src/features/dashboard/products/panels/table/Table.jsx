@@ -21,7 +21,7 @@ const Table = () => {
     } = usePanels();
 
     const columns = [
-        { field: "description", headerName: "Descripción", flex: 2, minWidth: 280 },
+        { field: "description", headerName: "Descripción", flex: 2, minWidth: 460 },
         { field: "power", headerName: "Potencia W", flex: 1, minWidth: 120 },
         { field: "warranty", headerName: "Garantía", flex: 1, minWidth: 100 },
         { field: "efficiency", headerName: "Eficiencia", flex: 1, minWidth: 100 },
@@ -110,15 +110,15 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = panels.filter((orientation) => {
-        return Object.values(orientation).some((val) =>
+    const filteredPanels = panels.filter((panel) => {
+        return Object.values(panel).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );
     });
 
     return (
         <DataGrid
-            rows={filteredOrientations}
+            rows={filteredPanels}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

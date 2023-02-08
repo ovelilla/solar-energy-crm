@@ -32,7 +32,6 @@ export const InvertersProvider = () => {
         maxCC: "",
         warranty: "",
         current: "",
-        type: "",
         price: "",
     });
 

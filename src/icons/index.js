@@ -11,6 +11,7 @@ import ExpandArrowsAlt from "./ExpandArrowsAlt";
 import Lock from "./Lock";
 import Multiply from "./Multiply";
 import PenToSquare from "./PenToSquare";
+import Plug from "./Plug";
 import Plus from "./Plus";
 import QuestionCircle from "./QuestionCircle";
 import Search from "./Search";
@@ -38,6 +39,7 @@ export {
     Lock,
     Multiply,
     PenToSquare,
+    Plug,
     Plus,
     QuestionCircle,
     Search,

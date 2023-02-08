@@ -19,7 +19,6 @@ const Table = () => {
         { field: "maxCC", headerName: "CC Máxima Wp", flex: 1, minWidth: 150 },
         { field: "warranty", headerName: "Garantía", flex: 1, minWidth: 100 },
         { field: "current", headerName: "Corriente", flex: 1, minWidth: 120 },
-        { field: "type", headerName: "Tipo", flex: 1, minWidth: 140 },
         {
             field: "price",
             headerName: "PVP neto",
@@ -74,15 +73,15 @@ const Table = () => {
         },
     ];
 
-    const filteredOrientations = inverters.filter((orientation) => {
-        return Object.values(orientation).some((val) =>
+    const filteredInverters = inverters.filter((inverter) => {
+        return Object.values(inverter).some((val) =>
             val.toString().toLowerCase().includes(searchText.toLowerCase())
         );
     });
 
     return (
         <DataGrid
-            rows={filteredOrientations}
+            rows={filteredInverters}
             columns={columns}
             getRowId={(row) => row._id}
             localeText={esES.components.MuiDataGrid.defaultProps.localeText}

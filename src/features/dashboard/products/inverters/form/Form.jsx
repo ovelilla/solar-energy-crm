@@ -93,22 +93,6 @@ const Form = () => {
                 <FormHelperText>{errors.current}</FormHelperText>
             </FormControl>
 
-            <FormControl error={errors.type.length > 0}>
-                <InputLabel id="type">Tipo de instalación</InputLabel>
-                <Select
-                    labelId="type"
-                    label="Tipo de instalación"
-                    id="type"
-                    name="type"
-                    value={values.type}
-                    onChange={handleChange}
-                >
-                    <MenuItem value={"String"}>String</MenuItem>
-                    <MenuItem value={"Microinversor"}>Microinversor</MenuItem>
-                </Select>
-                <FormHelperText>{errors.tytypepe}</FormHelperText>
-            </FormControl>
-
             <TextField
                 label="Precio"
                 name="price"

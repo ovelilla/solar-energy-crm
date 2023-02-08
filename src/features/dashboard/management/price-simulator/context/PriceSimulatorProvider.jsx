@@ -26,11 +26,9 @@ export const PriceSimulatorProvider = () => {
     } = useForm({
         modules: "",
         rate: "",
-        string: "",
         current: "",
         structure: "",
         panel: "",
-        inverter: "",
     });
 
     const readPanels = async () => {

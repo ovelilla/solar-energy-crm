@@ -24,6 +24,7 @@ import {
     Calendar,
     Cloud,
     Comparison,
+    Plug,
     QuestionCircle,
     Setting,
     Sliders,
@@ -108,6 +109,44 @@ const Sidenav = () => {
                                     onClick={() => handleSelectedMenu(2)}
                                     open={selectedMenu === 2}
                                 >
+                                    <Sliders />
+                                    <Text>
+                                        <Primary>Parámetros</Primary>
+                                    </Text>
+                                    <AngleRight />
+                                </ItemButton>
+
+                                <Collapse in={selectedMenu === 2} timeout="auto" unmountOnExit>
+                                    <Submenu>
+                                        <ItemLink
+                                            to="/predefinidos"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Predefinidos</Text>
+                                        </ItemLink>
+
+                                        <ItemLink
+                                            to="/orientaciones"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Orientaciones</Text>
+                                        </ItemLink>
+
+                                        <ItemLink
+                                            to="/habitos-consumo"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Habitos consumo</Text>
+                                        </ItemLink>
+                                    </Submenu>
+                                </Collapse>
+                            </div>
+
+                            <div>
+                                <ItemButton
+                                    onClick={() => handleSelectedMenu(3)}
+                                    open={selectedMenu === 3}
+                                >
                                     <SolarPanel />
                                     <Text>
                                         <Primary>Productos</Primary>
@@ -115,7 +154,7 @@ const Sidenav = () => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse in={selectedMenu === 2} timeout="auto" unmountOnExit>
+                                <Collapse in={selectedMenu === 3} timeout="auto" unmountOnExit>
                                     <Submenu>
                                         <ItemLink
                                             to="/paneles-solares"
@@ -139,48 +178,28 @@ const Sidenav = () => {
                                         </ItemLink>
 
                                         <ItemLink
-                                            to="/meters"
+                                            to="/microinversores"
                                             onClick={handleCloseSwipeableDrawer}
                                         >
+                                            <Text>Microinversores</Text>
+                                        </ItemLink>
+
+                                        <ItemLink to="/meters" onClick={handleCloseSwipeableDrawer}>
                                             <Text>Meters</Text>
                                         </ItemLink>
-                                    </Submenu>
-                                </Collapse>
-                            </div>
 
-                            <div>
-                                <ItemButton
-                                    onClick={() => handleSelectedMenu(3)}
-                                    open={selectedMenu === 3}
-                                >
-                                    <Sliders />
-                                    <Text>
-                                        <Primary>Parámetros</Primary>
-                                    </Text>
-                                    <AngleRight />
-                                </ItemButton>
-
-                                <Collapse in={selectedMenu === 3} timeout="auto" unmountOnExit>
-                                    <Submenu>
                                         <ItemLink
-                                            to="/predefinidos"
+                                            to="/estructuras"
                                             onClick={handleCloseSwipeableDrawer}
                                         >
-                                            <Text>Predefinidos</Text>
+                                            <Text>Estructuras</Text>
                                         </ItemLink>
 
                                         <ItemLink
-                                            to="/orientacion"
+                                            to="/perifericos"
                                             onClick={handleCloseSwipeableDrawer}
                                         >
-                                            <Text>Orientación</Text>
-                                        </ItemLink>
-
-                                        <ItemLink
-                                            to="/habitos-consumo"
-                                            onClick={handleCloseSwipeableDrawer}
-                                        >
-                                            <Text>Habitos consumo</Text>
+                                            <Text>Periféricos</Text>
                                         </ItemLink>
                                     </Submenu>
                                 </Collapse>
@@ -191,6 +210,37 @@ const Sidenav = () => {
                                     onClick={() => handleSelectedMenu(4)}
                                     open={selectedMenu === 4}
                                 >
+                                    <Plug />
+                                    <Text>
+                                        <Primary>Instalación</Primary>
+                                    </Text>
+                                    <AngleRight />
+                                </ItemButton>
+
+                                <Collapse in={selectedMenu === 4} timeout="auto" unmountOnExit>
+                                    <Submenu>
+                                        <ItemLink
+                                            to="/partidas-instalacion"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Partidas instalación</Text>
+                                        </ItemLink>
+
+                                        <ItemLink
+                                            to="/protecciones"
+                                            onClick={handleCloseSwipeableDrawer}
+                                        >
+                                            <Text>Protecciones</Text>
+                                        </ItemLink>
+                                    </Submenu>
+                                </Collapse>
+                            </div>
+
+                            <div>
+                                <ItemButton
+                                    onClick={() => handleSelectedMenu(5)}
+                                    open={selectedMenu === 5}
+                                >
                                     <Wallet />
                                     <Text>
                                         <Primary>Administración</Primary>
@@ -198,7 +248,7 @@ const Sidenav = () => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse in={selectedMenu === 4} timeout="auto" unmountOnExit>
+                                <Collapse in={selectedMenu === 5} timeout="auto" unmountOnExit>
                                     <Submenu>
                                         <ItemLink
                                             to="/gastos-fijos"
@@ -227,8 +277,8 @@ const Sidenav = () => {
 
                             <div>
                                 <ItemButton
-                                    onClick={() => handleSelectedMenu(5)}
-                                    open={selectedMenu === 5}
+                                    onClick={() => handleSelectedMenu(6)}
+                                    open={selectedMenu === 6}
                                 >
                                     <UsersAlt />
                                     <Text>
@@ -237,7 +287,7 @@ const Sidenav = () => {
                                     <AngleRight />
                                 </ItemButton>
 
-                                <Collapse in={selectedMenu === 5} timeout="auto" unmountOnExit>
+                                <Collapse in={selectedMenu === 6} timeout="auto" unmountOnExit>
                                     <Submenu>
                                         <ItemLink
                                             to="/clientes"
