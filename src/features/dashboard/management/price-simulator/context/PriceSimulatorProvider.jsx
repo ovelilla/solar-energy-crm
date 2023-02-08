@@ -41,7 +41,6 @@ export const PriceSimulatorProvider = () => {
             const { data } = await axios.get("/panel", {
                 withCredentials: true,
             });
-            console.log(data);
             setPanels(data);
         } catch (error) {
             console.log(error);
@@ -75,7 +74,7 @@ export const PriceSimulatorProvider = () => {
             const { data } = await axios.get("/structure", {
                 withCredentials: true,
             });
-            setMeters(data);
+            setStructures(data);
         } catch (error) {
             console.log(error);
         }

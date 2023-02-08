@@ -10,7 +10,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import usePriceSimulator from "@features/dashboard/management/price-simulator/hooks/usePriceSimulator";
-import { Form, Group } from "./styles";
+import { Form, Group, Row } from "./styles";
 
 const FixedCosts = () => {
     const {
@@ -31,8 +31,8 @@ const FixedCosts = () => {
 
     const strings = values.modules > 11 ? 2 : 1;
     const panel = panels.find((panel) => panel._id === values.panel) || {};
-    const panelsPower = values.modules * panel.power;
-    const panelsPrice = values.modules * panel.price;
+    const panelsPower = parseInt(values.modules) * panel.power;
+    const panelsPrice = parseInt(values.modules) * panel.price;
     const inverter =
         inverters.find((inverter) => {
             return (
@@ -61,34 +61,45 @@ const FixedCosts = () => {
         }) || {};
     const linePrice = line.price;
     const installationPrice = linePrice * panelsPower;
-    const protectionsArray = protections.filter((protection) => {
-        return protection.current === values.current && protection.type === values.rate;
-    });
-
-    console.log(fixedCosts);
-    const propsToSum = [
-        "PMCost",
-        "transports",
-        "legalization",
-        "fees",
-        "technicalVisit",
-        "acquisitionCosts",
-        "operatingCosts",
-        "maintenanceCost",
-        "index",
-        "netPrice",
-        "ivaRate",
-    ];
-
-    const sum =
-        Object.entries(fixedCosts).reduce((acc, [key, value]) => {
-            if (propsToSum.includes(key)) {
-                acc += value;
-            }
-            return acc;
-        }, 0) || 0;
-
-    console.log(sum);
+    console.log(installationPrice);
+    const ACProtection =
+        protections.find((protection) => {
+            return protection.protectionType === "AC" && protection.current === values.current;
+        }) || {};
+    const ACProtectionPrice = ACProtection.price;
+    console.log(ACProtectionPrice);
+    const DCProtection = protections.find((protection) => protection.protectionType === "DC") || {};
+    const DCProtectionPrice = values.rate === "String" ? DCProtection.price * strings : 0;
+    console.log(DCProtectionPrice);
+    const protectionsPrice = ACProtectionPrice + DCProtectionPrice;
+    const additionalString =
+        values.rate === "String" && values.modules > 11 ? fixedCosts.additionalString : 0;
+    const PMCost = fixedCosts.PMCost * values.modules;
+    const transportCost = fixedCosts.transports * values.modules;
+    const legalizationCost = fixedCosts.legalization;
+    const feesCost = fixedCosts.fees;
+    const technicalVisitCost = fixedCosts.technicalVisit;
+    const acquisitionCosts = fixedCosts.acquisitionCosts;
+    const operatingCosts = fixedCosts.operatingCosts;
+    const maintenanceCost = fixedCosts.maintenanceCost;
+    const totalCosts =
+        equipmentPrice +
+        installationPrice +
+        protectionsPrice +
+        additionalString +
+        PMCost +
+        transportCost +
+        legalizationCost +
+        feesCost +
+        technicalVisitCost +
+        acquisitionCosts +
+        operatingCosts +
+        maintenanceCost;
+    const index = equipmentPrice / fixedCosts.index;
+    const netPrice = totalCosts / fixedCosts.netPrice;
+    const supplementAdjustment = netPrice - index;
+    const pvp = netPrice + (netPrice * fixedCosts.ivaRate) / 100;
+    const profit = netPrice - totalCosts;
 
     return (
         <Form>
@@ -102,25 +113,33 @@ const FixedCosts = () => {
                     helperText={errors.modules}
                 />
 
-                <FormControl error={errors.rate.length > 0}>
-                    <InputLabel id="rate-label">Tarifa</InputLabel>
-                    <Select
-                        labelId="rate-label"
-                        id="rate"
-                        value={values.rate}
-                        name="rate"
-                        label="Tarifa"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value={"String"}>String</MenuItem>
-                        <MenuItem value={"Microinversor"}>Microinversor</MenuItem>
-                    </Select>
-                    <FormHelperText>{errors.rate}</FormHelperText>
-                </FormControl>
+                <Row>
+                    <FormControl error={errors.rate.length > 0} sx={{ flex: "1 1 50%" }}>
+                        <InputLabel id="rate-label">Tarifa</InputLabel>
+                        <Select
+                            labelId="rate-label"
+                            id="rate"
+                            value={values.rate}
+                            name="rate"
+                            label="Tarifa"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"String"}>String</MenuItem>
+                            <MenuItem value={"Microinversor"}>Microinversor</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.rate}</FormHelperText>
+                    </FormControl>
 
-                {values.rate === "String" && (
-                    <TextField name="strings" label="Strings" value={strings} disabled />
-                )}
+                    {values.rate === "String" && (
+                        <TextField
+                            name="strings"
+                            label="Strings"
+                            value={strings}
+                            disabled
+                            sx={{ flex: "1 1 50%" }}
+                        />
+                    )}
+                </Row>
 
                 <FormControl error={errors.current.length > 0}>
                     <InputLabel id="current-label">Corriente</InputLabel>
@@ -180,125 +199,14 @@ const FixedCosts = () => {
                     disabled
                 />
 
-                {/* 
-                <Field>
-                    <Label>Transportes</Label>
-                    <TextField
-                        name="transports"
-                        placeholder="Transportes"
-                        value={values.transports}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.transports.length > 0}
-                        helperText={errors.transports}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Legalización</Label>
-                    <TextField
-                        name="legalization"
-                        placeholder="Legalización"
-                        value={values.legalization}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.legalization.length > 0}
-                        helperText={errors.legalization}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Tasas</Label>
-                    <TextField
-                        name="fees"
-                        placeholder="Tasas"
-                        value={values.fees}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.fees.length > 0}
-                        helperText={errors.fees}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Visita técnica</Label>
-                    <TextField
-                        name="technicalVisit"
-                        placeholder="Visita técnica"
-                        value={values.technicalVisit}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.technicalVisit.length > 0}
-                        helperText={errors.technicalVisit}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Costes captación</Label>
-                    <TextField
-                        name="acquisitionCosts"
-                        placeholder="Costes captación"
-                        value={values.acquisitionCosts}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.acquisitionCosts.length > 0}
-                        helperText={errors.acquisitionCosts}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Costes operaciones</Label>
-                    <TextField
-                        name="operatingCosts"
-                        placeholder="Costes operaciones"
-                        value={values.operatingCosts}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.operatingCosts.length > 0}
-                        helperText={errors.operatingCosts}
-                    />
-                </Field>
-
-                <Field>
-                    <Label>Coste mantenimiento</Label>
-                    <TextField
-                        name="maintenanceCost"
-                        placeholder="Coste mantenimiento"
-                        value={values.maintenanceCost}
-                        onChange={handleChange}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">€</InputAdornment>,
-                        }}
-                        error={errors.maintenanceCost.length > 0}
-                        helperText={errors.maintenanceCost}
-                    />
-                </Field> */}
+                <div>
+                    <span>{totalCosts || 0}</span>
+                    <br />
+                    <span>{pvp || 0}</span>
+                    <br />
+                    <span>{profit || 0}</span>
+                </div>
             </Group>
-
-            {/* <LoadingButton
-                variant="contained"
-                type="button"
-                disabled={disabled}
-                loading={loading}
-                onClick={updateFixedCosts}
-                sx={{
-                    alignSelf: "flex-end",
-                }}
-            >
-                Guardar
-            </LoadingButton> */}
         </Form>
     );
 };

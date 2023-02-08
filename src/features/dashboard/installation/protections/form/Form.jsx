@@ -34,7 +34,7 @@ const Form = () => {
                     onChange={handleChange}
                 >
                     <MenuItem value={"AC"}>AC</MenuItem>
-                    <MenuItem value={"DC2"}>DC2</MenuItem>
+                    <MenuItem value={"DC"}>DC</MenuItem>
                 </Select>
                 <FormHelperText>{errors.protectionType}</FormHelperText>
             </FormControl>

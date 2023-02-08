@@ -13,6 +13,7 @@ export const FixedCostsProvider = () => {
 
     const { question, alert } = useUI();
     const { values, errors, handleChange, setFormValues, setFormErrors, reset } = useForm({
+        additionalString: "",
         PMCost: "",
         transports: "",
         legalization: "",

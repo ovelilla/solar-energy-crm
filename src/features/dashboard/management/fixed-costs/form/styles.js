@@ -19,6 +19,17 @@ export const Group = styled.div`
     }
 `;
 
+export const Row = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    ${media(breakpoints.md)} {
+        flex-direction: row;
+        gap: 24px;
+    }
+`;
+
 export const Title = styled.h2`
     font-size: 20px;
     font-weight: 500;
@@ -31,6 +42,7 @@ export const Title = styled.h2`
 export const Field = styled.div`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 4px;
 `;
 

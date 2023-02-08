@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { breakpoints, media } from "@styles/sizes";
-import { white, slate, gray } from "@styles/colors";
-import { shadows } from "@styles/shadows";
+import { white } from "@styles/colors";
 
 export const Row = styled.div`
     display: flex;
     flex: 1 1 auto;
+    width: 100%;
     height: 100%;
 `;
 
