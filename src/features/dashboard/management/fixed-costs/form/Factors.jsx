@@ -24,14 +24,14 @@ const Factors = () => {
                 </Field>
 
                 <Field>
-                    <Label>Precio neto</Label>
+                    <Label>Rentabilidad</Label>
                     <TextField
-                        name="netPrice"
-                        value={values.netPrice}
+                        name="profitability"
+                        value={values.profitability}
                         onChange={handleChange}
                         placeholder="Precio neto"
-                        error={errors.netPrice.length > 0}
-                        helperText={errors.netPrice}
+                        error={errors.profitability.length > 0}
+                        helperText={errors.profitability}
                     />
                 </Field>
             </Group>

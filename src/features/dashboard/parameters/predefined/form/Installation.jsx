@@ -17,7 +17,7 @@ const Installation = () => {
                 <Title>Parametros de la instalalción</Title>
 
                 <Field>
-                    <Label>Orientación cubierta</Label>
+                    <Label>Orientación de la cubierta</Label>
                     <FormControl error={errors.roofOrientation.length > 0}>
                         <Select
                             name="roofOrientation"
@@ -35,18 +35,34 @@ const Installation = () => {
                 </Field>
 
                 <Field>
-                    <Label>Inclinación</Label>
+                    <Label>Ángulo de inclinación del panel</Label>
                     <TextField
-                        name="slope"
-                        value={values.slope}
+                        name="panelSlope"
+                        value={values.panelSlope}
                         onChange={handleChange}
-                        placeholder="Inclinación"
+                        placeholder="Ángulo inclinación panel"
                         InputProps={{
                             endAdornment: <InputAdornment position="end">º</InputAdornment>,
                         }}
-                        error={errors.slope.length > 0}
-                        helperText={errors.slope}
+                        error={errors.panelSlope.length > 0}
+                        helperText={errors.panelSlope}
                     />
+                </Field>
+
+                <Field>
+                    <Label>Tipo de estructura</Label>
+                    <FormControl error={errors.structureType.length > 0}>
+                        <Select
+                            name="structureType"
+                            placeholder="Tipo de estructura"
+                            value={values.structureType}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"Coplanar"}>Coplanar</MenuItem>
+                            <MenuItem value={"Inclinada"}>Inclinada</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.structureType}</FormHelperText>
+                    </FormControl>
                 </Field>
 
                 <Field>
@@ -62,6 +78,22 @@ const Installation = () => {
                             <MenuItem value={"Microinversor"}>Microinversor</MenuItem>
                         </Select>
                         <FormHelperText>{errors.installationType}</FormHelperText>
+                    </FormControl>
+                </Field>
+
+                <Field>
+                    <Label>Corriente</Label>
+                    <FormControl error={errors.current.length > 0}>
+                        <Select
+                            name="current"
+                            placeholder="Corriente"
+                            value={values.current}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"Monofásico"}>Monofásico</MenuItem>
+                            <MenuItem value={"Trifásico"}>Trifásico</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.current}</FormHelperText>
                     </FormControl>
                 </Field>
 

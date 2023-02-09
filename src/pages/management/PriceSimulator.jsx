@@ -8,10 +8,10 @@ import Confirm from "@features/ui/confirm";
 import usePriceSimulator from "@features/dashboard/management/price-simulator/hooks/usePriceSimulator";
 
 const PriceSimulator = () => {
-    const { readData } = usePriceSimulator();
+    const { readPanels } = usePriceSimulator();
 
     useEffect(() => {
-        readData();
+        readPanels();
     }, []);
 
     return (

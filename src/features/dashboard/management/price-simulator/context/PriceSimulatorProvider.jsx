@@ -8,35 +8,33 @@ const PriceSimulatorContext = createContext();
 
 export const PriceSimulatorProvider = () => {
     const [loading, setLoading] = useState(true);
-    const [disabled, setDisabled] = useState(true);
-
     const [panels, setPanels] = useState([]);
-    const [inverters, setInverters] = useState([]);
-    const [microinverters, setMicroinverters] = useState([]);
-    const [meters, setMeters] = useState([]);
-    const [structures, setStructures] = useState([]);
-    const [peripherals, setPeripherals] = useState([]);
-    const [lines, setLines] = useState([]);
-    const [protections, setProtections] = useState([]);
-    const [fixedCosts, setFixedCosts] = useState([]);
+    const [rate, setRate] = useState(null);
 
     const { question, alert } = useUI();
-    const {
-        values,
-        setValue,
-        errors,
-        setError,
-        handleChange,
-        setFormValues,
-        setFormErrors,
-        reset,
-    } = useForm({
+    const { values, errors, setFormErrors, handleChange } = useForm({
         modules: "",
-        rate: "",
+        installationType: "",
         current: "",
-        structure: "",
-        panel: "",
+        structureType: "",
+        panelId: "",
     });
+
+    const getRate = async () => {
+        setLoading(true);
+        try {
+            const { data } = await axios.post("/rate", values, {
+                withCredentials: true,
+            });
+            console.log(data);
+            setRate(data);
+        } catch (error) {
+            setRate(null);
+            setFormErrors(error.response.data.errors);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const readPanels = async () => {
         try {
@@ -49,153 +47,18 @@ export const PriceSimulatorProvider = () => {
         }
     };
 
-    const readInverters = async () => {
-        try {
-            const { data } = await axios.get("/inverter", {
-                withCredentials: true,
-            });
-            setInverters(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readMicroinverters = async () => {
-        try {
-            const { data } = await axios.get("/microinverter", {
-                withCredentials: true,
-            });
-            setMicroinverters(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readMeters = async () => {
-        try {
-            const { data } = await axios.get("/meter", {
-                withCredentials: true,
-            });
-            setMeters(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readStructures = async () => {
-        try {
-            const { data } = await axios.get("/structure", {
-                withCredentials: true,
-            });
-            setStructures(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readPeripherals = async () => {
-        try {
-            const { data } = await axios.get("/peripheral ", {
-                withCredentials: true,
-            });
-            console.log(data);
-            setPeripherals(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readLines = async () => {
-        try {
-            const { data } = await axios.get("/line", {
-                withCredentials: true,
-            });
-            setLines(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readProtections = async () => {
-        try {
-            const { data } = await axios.get("/protection", {
-                withCredentials: true,
-            });
-            setProtections(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readFixedCosts = async () => {
-        try {
-            const { data } = await axios.get("/fixed-costs", {
-                withCredentials: true,
-            });
-            setFixedCosts(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const readData = async () => {
-        setLoading(true);
-        await Promise.all([
-            readPanels(),
-            readInverters(),
-            readMicroinverters(),
-            readMeters(),
-            readStructures(),
-            readPeripherals(),
-            readLines(),
-            readProtections(),
-            readFixedCosts(),
-        ]);
-        setLoading(false);
-    };
-
-    const checkChanges = () => {
-        if (!predefined) {
-            return;
-        }
-
-        const isDifferent = Object.keys(values).some((key) => {
-            let value = values[key];
-            let predef = predefined[key];
-
-            if (!isNaN(value) && !isNaN(predef)) {
-                value = Number(value);
-                predef = Number(predef);
-            }
-
-            return value !== predef;
-        });
-
-        setDisabled(!isDifferent);
-    };
-
     return (
         <PriceSimulatorContext.Provider
             value={{
                 loading,
                 setLoading,
-                disabled,
-                setDisabled,
                 values,
-                setValue,
                 errors,
                 handleChange,
                 panels,
-                inverters,
-                microinverters,
-                meters,
-                structures,
-                peripherals,
-                lines,
-                protections,
-                fixedCosts,
-                readData,
-                checkChanges,
+                readPanels,
+                rate,
+                getRate,
             }}
         >
             <Outlet />

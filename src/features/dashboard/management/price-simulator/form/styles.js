@@ -2,6 +2,12 @@ import styled from "@emotion/styled";
 
 import { breakpoints, media } from "@styles/sizes";
 
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+`;
+
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -17,42 +23,42 @@ export const Group = styled.div`
     ${media(breakpoints.md)} {
         gap: 24px;
     }
-
-    ul {
-        margin: revert;
-        padding: revert;
-    }
-
-    li {
-        margin: revert;
-        padding: revert;
-    }
 `;
 
-export const Row = styled.div`
+export const Summary = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+`;
+
+export const Section = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
-
-    ${media(breakpoints.md)} {
-        flex-direction: row;
-        gap: 24px;
-    }
 `;
 
-export const Title = styled.h2`
-    font-size: 20px;
+export const Title = styled.div`
     font-weight: 500;
-
-    ${media(breakpoints.md)} {
-        font-size: 24px;
-    }
+    text-transform: uppercase;
 `;
 
-export const Field = styled.div`
+export const UlPrimary = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
+    margin: 0;
+    padding: revert;
 `;
 
-export const Label = styled.div``;
+export const Ul = styled.ul`
+    margin: 0;
+    padding: revert;
+`;
+
+export const Li = styled.li``;
+
+export const LiBold = styled.li`
+    margin: revert;
+    padding: revert;
+    font-weight: 600;
+`;

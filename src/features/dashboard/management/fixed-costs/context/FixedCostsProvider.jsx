@@ -23,7 +23,7 @@ export const FixedCostsProvider = () => {
         operatingCosts: "",
         maintenanceCost: "",
         index: "",
-        netPrice: "",
+        profitability: "",
         ivaRate: "",
     });
 
