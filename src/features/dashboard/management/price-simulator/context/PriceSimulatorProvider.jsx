@@ -12,8 +12,10 @@ export const PriceSimulatorProvider = () => {
 
     const [panels, setPanels] = useState([]);
     const [inverters, setInverters] = useState([]);
+    const [microinverters, setMicroinverters] = useState([]);
     const [meters, setMeters] = useState([]);
     const [structures, setStructures] = useState([]);
+    const [peripherals, setPeripherals] = useState([]);
     const [lines, setLines] = useState([]);
     const [protections, setProtections] = useState([]);
     const [fixedCosts, setFixedCosts] = useState([]);
@@ -58,6 +60,17 @@ export const PriceSimulatorProvider = () => {
         }
     };
 
+    const readMicroinverters = async () => {
+        try {
+            const { data } = await axios.get("/microinverter", {
+                withCredentials: true,
+            });
+            setMicroinverters(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const readMeters = async () => {
         try {
             const { data } = await axios.get("/meter", {
@@ -75,6 +88,18 @@ export const PriceSimulatorProvider = () => {
                 withCredentials: true,
             });
             setStructures(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const readPeripherals = async () => {
+        try {
+            const { data } = await axios.get("/peripheral ", {
+                withCredentials: true,
+            });
+            console.log(data);
+            setPeripherals(data);
         } catch (error) {
             console.log(error);
         }
@@ -118,8 +143,10 @@ export const PriceSimulatorProvider = () => {
         await Promise.all([
             readPanels(),
             readInverters(),
+            readMicroinverters(),
             readMeters(),
             readStructures(),
+            readPeripherals(),
             readLines(),
             readProtections(),
             readFixedCosts(),
@@ -160,8 +187,10 @@ export const PriceSimulatorProvider = () => {
                 handleChange,
                 panels,
                 inverters,
+                microinverters,
                 meters,
                 structures,
+                peripherals,
                 lines,
                 protections,
                 fixedCosts,

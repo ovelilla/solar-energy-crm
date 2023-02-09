@@ -88,7 +88,6 @@ export const ProtectionsProvider = () => {
 
         try {
             const { data } = await axios.get("/protection", { withCredentials: true });
-            console.log(data);
             setProtections(data);
         } catch (error) {
             console.log(error);

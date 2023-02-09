@@ -17,6 +17,16 @@ export const Group = styled.div`
     ${media(breakpoints.md)} {
         gap: 24px;
     }
+
+    ul {
+        margin: revert;
+        padding: revert;
+    }
+
+    li {
+        margin: revert;
+        padding: revert;
+    }
 `;
 
 export const Row = styled.div`
