@@ -129,6 +129,7 @@ const FixedCosts = () => {
                             <Li>Precio neto - {currencyFormat(summary.netPrice)}</Li>
                             <LiBold>PVP IVA - {currencyFormat(summary.pvp)}</LiBold>
                             <Li>Margen - {currencyFormat(summary.profit)}</Li>
+                            <Li>Porcentage margen - {summary.percentageProfit.toFixed(2)} %</Li>
                             <Li>Euros por vatio - {currencyFormat(summary.eurosPerWatt)}/W</Li>
                         </Ul>
                     </Section>
