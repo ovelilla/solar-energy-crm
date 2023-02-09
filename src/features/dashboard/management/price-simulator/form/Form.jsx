@@ -368,9 +368,9 @@ const FixedCosts = () => {
                                     <li>
                                         Rango - {line.minPower} a {line.maxPower} W
                                     </li>
-                                    <li>Coste {currencyFormat(line.price)}</li>
+                                    <li>Coste - {currencyFormat(line.price)}</li>
                                     <li>
-                                        <b>Coste instalación {currencyFormat(installationPrice)}</b>
+                                        <b>Coste instalación - {currencyFormat(installationPrice)}</b>
                                     </li>
                                 </ul>
                             </li>
@@ -383,9 +383,9 @@ const FixedCosts = () => {
                                         <li>
                                             {protectionDC.description}:
                                             <ul>
-                                                <li>Corriente {protectionDC.current}</li>
+                                                <li>Corriente - {protectionDC.current}</li>
                                                 <li>
-                                                    <b>Coste {currencyFormat(protectionDC.price)}</b>
+                                                    <b>Coste - {currencyFormat(protectionDC.price)}</b>
                                                 </li>
                                             </ul>
                                         </li>
@@ -394,9 +394,9 @@ const FixedCosts = () => {
                                         <li>
                                             {protectionAC.description}:
                                             <ul>
-                                                <li>Corriente {protectionAC.current}</li>
+                                                <li>Corriente - {protectionAC.current}</li>
                                                 <li>
-                                                    <b>Coste {currencyFormat(protectionAC.price)}</b>
+                                                    <b>Coste - {currencyFormat(protectionAC.price)}</b>
                                                 </li>
                                             </ul>
                                         </li>
@@ -406,7 +406,7 @@ const FixedCosts = () => {
                         )}
                         {additionalString !== 0 && (
                             <li>
-                                <b>String adicional: {additionalString}</b>
+                                <b>String adicional - {currencyFormat(additionalString)}</b>
                             </li>
                         )}
                         {values.modules &&
