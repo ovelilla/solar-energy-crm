@@ -9,7 +9,7 @@ const FixedCostsContext = createContext();
 export const FixedCostsProvider = () => {
     const [loading, setLoading] = useState(true);
     const [disabled, setDisabled] = useState(true);
-    const [predefined, setFixedCosts] = useState(null);
+    const [fixedCosts, setFixedCosts] = useState(null);
 
     const { question, alert } = useUI();
     const { values, errors, handleChange, setFormValues, setFormErrors, reset } = useForm({
@@ -24,7 +24,11 @@ export const FixedCostsProvider = () => {
         maintenanceCost: "",
         index: "",
         profitability: "",
-        ivaRate: "",
+        ivaInstallation: "",
+        ivaBatteries: "",
+        variousUnit: "",
+        variousPower: "",
+        variousModules: "",
     });
 
     const readFixedCosts = async () => {
@@ -56,8 +60,8 @@ export const FixedCostsProvider = () => {
                 type: "success",
                 timeout: 3000,
             });
-            setFixedCosts(data.predefined);
-            setFormValues(data.predefined);
+            setFixedCosts(data.fixedCosts);
+            setFormValues(data.fixedCosts);
         } catch (error) {
             setFormErrors(error.response.data.errors);
         } finally {
@@ -69,17 +73,18 @@ export const FixedCostsProvider = () => {
         setLoading(true);
 
         try {
-            const { data } = await axios.put(`/fixed-costs/${predefined._id}`, values, {
+            const { data } = await axios.put(`/fixed-costs/${fixedCosts._id}`, values, {
                 withCredentials: true,
             });
+            console.log(data);
             await alert({
                 title: "Costes fijos actualizados!",
                 message: "Se han actualizado los costes fijos correctamente.",
                 type: "success",
                 timeout: 3000,
             });
-            setFixedCosts(data.predefined);
-            setFormValues(data.predefined);
+            setFixedCosts(data.fixedCosts);
+            setFormValues(data.fixedCosts);
         } catch (error) {
             console.log(error);
             setFormErrors(error.response.data.errors);
@@ -102,7 +107,7 @@ export const FixedCostsProvider = () => {
         }
 
         try {
-            await axios.delete(`/fixed-costs/${predefined._id}`, { withCredentials: true });
+            await axios.delete(`/fixed-costs/${fixedCosts._id}`, { withCredentials: true });
             await alert({
                 title: "Costes fijos eliminados!",
                 message: "Se han eliminado los costes fijos correctamente.",
@@ -117,13 +122,13 @@ export const FixedCostsProvider = () => {
     };
 
     const checkChanges = () => {
-        if (!predefined) {
+        if (!fixedCosts) {
             return;
         }
 
         const isDifferent = Object.keys(values).some((key) => {
             let value = values[key];
-            let predef = predefined[key];
+            let predef = fixedCosts[key];
 
             if (!isNaN(value) && !isNaN(predef)) {
                 value = Number(value);
@@ -143,7 +148,7 @@ export const FixedCostsProvider = () => {
                 setLoading,
                 disabled,
                 setDisabled,
-                predefined,
+                fixedCosts,
                 setFixedCosts,
                 values,
                 errors,

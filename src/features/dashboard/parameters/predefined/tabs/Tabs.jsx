@@ -2,8 +2,7 @@ import { useState } from "react";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { TabContainer } from "./styles";
+import { TabContainer, StyledTabPanel } from "./styles";
 import { Consumption, Requirements, Installation } from "@features/dashboard/parameters/predefined/form";
 
 const Tabs = () => {
@@ -26,15 +25,15 @@ const Tabs = () => {
                     <Tab label="Parametros instalación" value="3" />
                 </TabList>
             </TabContainer>
-            <TabPanel value="1">
+            <StyledTabPanel value="1">
                 <Consumption />
-            </TabPanel>
-            <TabPanel value="2">
+            </StyledTabPanel>
+            <StyledTabPanel value="2">
                 <Requirements />
-            </TabPanel>
-            <TabPanel value="3">
+            </StyledTabPanel>
+            <StyledTabPanel value="3">
                 <Installation />
-            </TabPanel>
+            </StyledTabPanel>
         </TabContext>
     );
 };

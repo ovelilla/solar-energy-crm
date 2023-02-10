@@ -13,17 +13,32 @@ const Taxes = () => {
                 <Title>Necesidades del cliente</Title>
 
                 <Field>
-                    <Label>IVA</Label>
+                    <Label>IVA instalacion solar</Label>
                     <TextField
-                        name="ivaRate"
+                        name="ivaInstallation"
                         placeholder="IVA"
-                        value={values.ivaRate}
+                        value={values.ivaInstallation}
                         onChange={handleChange}
                         InputProps={{
                             endAdornment: <InputAdornment position="end">%</InputAdornment>,
                         }}
-                        error={errors.ivaRate.length > 0}
-                        helperText={errors.ivaRate}
+                        error={errors.ivaInstallation.length > 0}
+                        helperText={errors.ivaInstallation}
+                    />
+                </Field>
+
+                <Field>
+                    <Label>IVA baterías</Label>
+                    <TextField
+                        name="ivaBatteries"
+                        placeholder="IVA"
+                        value={values.ivaBatteries}
+                        onChange={handleChange}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
+                        error={errors.ivaBatteries.length > 0}
+                        helperText={errors.ivaBatteries}
                     />
                 </Field>
             </Group>

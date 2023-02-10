@@ -2,9 +2,13 @@ import { useState } from "react";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import { TabContainer } from "./styles";
-import { FixedCosts, Factors, Taxes } from "@features/dashboard/management/fixed-costs/form";
+import { TabContainer, StyledTabPanel } from "./styles";
+import {
+    FixedCosts,
+    Factors,
+    Taxes,
+    Various,
+} from "@features/dashboard/management/fixed-costs/form";
 
 const Tabs = () => {
     const [value, setValue] = useState("1");
@@ -24,17 +28,21 @@ const Tabs = () => {
                     <Tab label="Gastos fijos" value="1" />
                     <Tab label="Coeficientes" value="2" />
                     <Tab label="Impuestos" value="3" />
+                    <Tab label="Varios" value="4" />
                 </TabList>
             </TabContainer>
-            <TabPanel value="1">
+            <StyledTabPanel value="1">
                 <FixedCosts />
-            </TabPanel>
-            <TabPanel value="2">
+            </StyledTabPanel>
+            <StyledTabPanel value="2">
                 <Factors />
-            </TabPanel>
-            <TabPanel value="3">
+            </StyledTabPanel>
+            <StyledTabPanel value="3">
                 <Taxes />
-            </TabPanel>
+            </StyledTabPanel>
+            <StyledTabPanel value="4">
+                <Various />
+            </StyledTabPanel>
         </TabContext>
     );
 };

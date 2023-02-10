@@ -9,15 +9,18 @@ const PriceSimulatorContext = createContext();
 export const PriceSimulatorProvider = () => {
     const [loading, setLoading] = useState(true);
     const [panels, setPanels] = useState([]);
+    const [batteries, setBatteries] = useState([]);
     const [rate, setRate] = useState(null);
 
     const { question, alert } = useUI();
-    const { values, errors, setFormErrors, handleChange } = useForm({
+    const { values, errors, setFormErrors, setValue, handleChange } = useForm({
         modules: "",
         installationType: "",
         current: "",
         structureType: "",
         panelId: "",
+        hasBattery: false,
+        batteryId: "",
     });
 
     const getRate = async () => {
@@ -26,8 +29,11 @@ export const PriceSimulatorProvider = () => {
             const { data } = await axios.post("/rate", values, {
                 withCredentials: true,
             });
-            console.log(data);
             setRate(data);
+
+            if (values.panelId === "") {
+                setValue("panelId", data.equipment.panel.id);
+            }
         } catch (error) {
             setRate(null);
             setFormErrors(error.response.data.errors);
@@ -47,6 +53,23 @@ export const PriceSimulatorProvider = () => {
         }
     };
 
+    const readBatteries = async () => {
+        try {
+            const { data } = await axios.get("/battery", {
+                withCredentials: true,
+            });
+            setBatteries(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const readData = async () => {
+        setLoading(true);
+        await Promise.all([readPanels(), readBatteries()]);
+        setLoading(false);
+    };
+
     return (
         <PriceSimulatorContext.Provider
             value={{
@@ -56,7 +79,8 @@ export const PriceSimulatorProvider = () => {
                 errors,
                 handleChange,
                 panels,
-                readPanels,
+                batteries,
+                readData,
                 rate,
                 getRate,
             }}

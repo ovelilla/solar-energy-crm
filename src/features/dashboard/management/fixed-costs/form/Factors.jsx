@@ -1,4 +1,5 @@
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 import LoadingButton from "@mui/lab/LoadingButton";
 import useFixedCosts from "@features/dashboard/management/fixed-costs/hooks/useFixedCosts";
 import { Form, Group, Title, Field, Label } from "./styles";
@@ -32,6 +33,9 @@ const Factors = () => {
                         placeholder="Precio neto"
                         error={errors.profitability.length > 0}
                         helperText={errors.profitability}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        }}
                     />
                 </Field>
             </Group>

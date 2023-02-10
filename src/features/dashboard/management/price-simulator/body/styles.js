@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-
 import { white } from "@styles/colors";
+import { breakpoints, media } from "@styles/sizes";
 
 export const BodyStyled = styled.div`
     display: flex;
@@ -12,4 +12,8 @@ export const BodyStyled = styled.div`
 export const Container = styled.div`
     width: 100%;
     padding: 24px;
+
+    ${media(breakpoints.md)} {
+        padding: 32px;
+    }
 `;

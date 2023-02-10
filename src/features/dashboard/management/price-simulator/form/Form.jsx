@@ -22,10 +22,11 @@ import {
 import currencyFormat from "@utils/currencyFormat";
 
 const FixedCosts = () => {
-    const { loading, values, errors, handleChange, rate, getRate, panels } = usePriceSimulator();
+    const { values, errors, handleChange, rate, getRate, panels, batteries } = usePriceSimulator();
 
     const { summary, equipment, installation, general } = rate || {};
-    const { panel, inverter, microinverter, structure, meter, peripherals } = equipment || {};
+    const { panel, inverter, microinverter, structure, meter, peripherals, battery } =
+        equipment || {};
     const { fixedCosts, line, protections, strings } = installation || {};
 
     useEffect(() => {
@@ -93,13 +94,13 @@ const FixedCosts = () => {
                     </FormControl>
 
                     <FormControl>
-                        <InputLabel id="panelId-label">Panel</InputLabel>
+                        <InputLabel id="panelId-label">Modelo de panel</InputLabel>
                         <Select
                             labelId="panelId-label"
                             id="panelId"
                             value={values.panelId}
                             name="panelId"
-                            label="Panel"
+                            label="Modelo de panel"
                             onChange={handleChange}
                         >
                             {panels.map((panel) => (
@@ -110,6 +111,43 @@ const FixedCosts = () => {
                         </Select>
                         <FormHelperText>{errors.panelId}</FormHelperText>
                     </FormControl>
+
+                    <FormControl>
+                        <InputLabel id="hasBattery-label">Almacenamiento</InputLabel>
+                        <Select
+                            labelId="hasBattery-label"
+                            id="hasBattery"
+                            value={values.hasBattery}
+                            name="hasBattery"
+                            label="Almacenamiento"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={true}>Sí</MenuItem>
+                            <MenuItem value={false}>No</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.hasBattery}</FormHelperText>
+                    </FormControl>
+
+                    {values.hasBattery && (
+                        <FormControl>
+                            <InputLabel id="batteryId-label">Modelo de Batería</InputLabel>
+                            <Select
+                                labelId="batteryId-label"
+                                id="batteryId"
+                                value={values.batteryId}
+                                name="batteryId"
+                                label="Modelo de Batería"
+                                onChange={handleChange}
+                            >
+                                {batteries.map((battery) => (
+                                    <MenuItem key={battery._id} value={battery._id}>
+                                        {battery.description}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            <FormHelperText>{errors.batteryId}</FormHelperText>
+                        </FormControl>
+                    )}
                 </Group>
             </Form>
 
@@ -129,8 +167,11 @@ const FixedCosts = () => {
                             <Li>Precio neto - {currencyFormat(summary.netPrice)}</Li>
                             <LiBold>PVP IVA - {currencyFormat(summary.pvp)}</LiBold>
                             <Li>Margen - {currencyFormat(summary.profit)}</Li>
-                            <Li>Porcentage margen - {summary.percentageProfit.toFixed(2)} %</Li>
+                            <Li>Porcentaje margen - {summary.percentageProfit.toFixed(2)} %</Li>
                             <Li>Euros por vatio - {currencyFormat(summary.eurosPerWatt)}/W</Li>
+                            {battery.hasBattery && (
+                                <LiBold>PVP con batería - {currencyFormat(summary.pvpWithBattery)}</LiBold>
+                            )}
                         </Ul>
                     </Section>
 
@@ -199,7 +240,7 @@ const FixedCosts = () => {
                                     <Ul>
                                         <Li>Descripción - {meter.description}</Li>
                                         <Li>Rango - {meter.range} paneles</Li>
-                                        <LiBold>Precio - {currencyFormat(meter.price)}/W</LiBold>
+                                        <LiBold>Precio - {currencyFormat(meter.price)}</LiBold>
                                     </Ul>
                                 </Li>
                             )}
@@ -229,6 +270,20 @@ const FixedCosts = () => {
                             <LiBold>
                                 Coste total equipamiento - {currencyFormat(equipment.total)}
                             </LiBold>
+
+                            {battery.hasBattery && (
+                                <Li>
+                                    Batería:
+                                    <Ul>
+                                        <Li>Descripción - {battery.description}</Li>
+                                        <Li>Capacidad - {battery.capacity} kWh</Li>
+                                        <LiBold>Precio - {currencyFormat(battery.price)}</LiBold>
+                                        <LiBold>
+                                            Precio con IVA - {currencyFormat(battery.priceIva)}
+                                        </LiBold>
+                                    </Ul>
+                                </Li>
+                            )}
                         </UlPrimary>
                     </Section>
 
@@ -335,6 +390,18 @@ const FixedCosts = () => {
                                     <Li>
                                         Costes mantenimiento -{" "}
                                         {currencyFormat(fixedCosts.maintenanceCost)}
+                                    </Li>
+                                    <Li>
+                                        Costes varios unidad -{" "}
+                                        {currencyFormat(fixedCosts.variousUnitCost)}
+                                    </Li>
+                                    <Li>
+                                        Costes varios por potencia -{" "}
+                                        {currencyFormat(fixedCosts.variousPowerCost)}
+                                    </Li>
+                                    <Li>
+                                        Costes varios por modulos -{" "}
+                                        {currencyFormat(fixedCosts.variousModulesCost)}
                                     </Li>
                                     <LiBold>
                                         Coste total - {currencyFormat(fixedCosts.total)}
