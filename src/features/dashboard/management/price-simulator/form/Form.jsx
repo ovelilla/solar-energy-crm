@@ -169,7 +169,7 @@ const FixedCosts = () => {
                             <Li>Margen - {currencyFormat(summary.profit)}</Li>
                             <Li>Porcentaje margen - {summary.percentageProfit.toFixed(2)} %</Li>
                             <Li>Euros por vatio - {currencyFormat(summary.eurosPerWatt)}/W</Li>
-                            {battery.hasBattery && (
+                            {values.hasBattery && battery.hasBattery && (
                                 <LiBold>PVP con batería - {currencyFormat(summary.pvpWithBattery)}</LiBold>
                             )}
                         </Ul>
@@ -271,7 +271,7 @@ const FixedCosts = () => {
                                 Coste total equipamiento - {currencyFormat(equipment.total)}
                             </LiBold>
 
-                            {battery.hasBattery && (
+                            {values.hasBattery && battery.hasBattery && (
                                 <Li>
                                     Batería:
                                     <Ul>
