@@ -25,10 +25,11 @@ export const PredefinedProvider = () => {
         structureType: "",
         installationType: "",
         current: "",
+        numberPanels: "",
         potentialRadiationPerkWYear: "",
         systemLoss: "",
         consumptionHabit: "",
-        battery: "",
+        hasBattery: "",
     });
 
     const readPredefined = async () => {

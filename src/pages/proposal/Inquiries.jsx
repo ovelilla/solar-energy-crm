@@ -12,12 +12,28 @@ const Inquiries = () => {
     const { searchText } = useHeader();
     const { loading, proposals, readProposals } = useProposal();
 
+    console.log(proposals);
+
     useEffect(() => {
         readProposals();
     }, []);
 
     const columns = [
-        { field: "address", headerName: "Dirección", flex: 1, minWidth: 260 },
+        {
+            field: "address",
+            headerName: "Dirección",
+            flex: 1,
+            minWidth: 260,
+            valueGetter: ({ value }) => {
+                return value.formattedAddress;
+            },
+        },
+        {
+            field: "clientIp",
+            headerName: "IP",
+            flex: 1,
+            minWidth: 260,
+        },
         {
             field: "createdAt",
             headerName: "Fecha de consulta",
@@ -27,9 +43,10 @@ const Inquiries = () => {
         },
     ];
 
-    const filteredProposals = proposals.filter((proposal) =>
-        proposal.address.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const filteredProposals = proposals.filter((proposal) => {
+        console.log(proposal);
+        return proposal.address.formattedAddress.toLowerCase().includes(searchText.toLowerCase());
+    });
 
     return (
         <DataGrid

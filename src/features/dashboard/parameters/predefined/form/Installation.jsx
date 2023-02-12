@@ -98,6 +98,18 @@ const Installation = () => {
                 </Field>
 
                 <Field>
+                    <Label>Número de paneles</Label>
+                    <TextField
+                        name="numberPanels"
+                        value={values.numberPanels}
+                        onChange={handleChange}
+                        placeholder="Número de paneles"
+                        error={errors.numberPanels.length > 0}
+                        helperText={errors.numberPanels}
+                    />
+                </Field>
+
+                <Field>
                     <Label>Radiación potencial por kW/anual</Label>
                     <TextField
                         name="potentialRadiationPerkWYear"
@@ -146,17 +158,17 @@ const Installation = () => {
 
                 <Field>
                     <Label>Almacenamiento</Label>
-                    <FormControl error={errors.battery.length > 0}>
+                    <FormControl error={errors.hasBattery.length > 0}>
                         <Select
-                            name="battery"
+                            name="hasBattery"
                             placeholder="Almacenamiento"
-                            value={values.battery}
+                            value={values.hasBattery}
                             onChange={handleChange}
                         >
                             <MenuItem value={true}>Sí</MenuItem>
                             <MenuItem value={false}>No</MenuItem>
                         </Select>
-                        <FormHelperText>{errors.battery}</FormHelperText>
+                        <FormHelperText>{errors.hasBattery}</FormHelperText>
                     </FormControl>
                 </Field>
             </Group>
