@@ -22,8 +22,8 @@ const Inquiries = () => {
         {
             field: "address",
             headerName: "Dirección",
-            flex: 1,
-            minWidth: 260,
+            flex: 2,
+            minWidth: 400,
             valueGetter: ({ value }) => {
                 return value.formattedAddress;
             },
@@ -32,7 +32,7 @@ const Inquiries = () => {
             field: "clientIp",
             headerName: "IP",
             flex: 1,
-            minWidth: 260,
+            minWidth: 160,
         },
         {
             field: "createdAt",
