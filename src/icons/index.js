@@ -8,6 +8,8 @@ import Cloud from "./Cloud";
 import Comparison from "./Comparison";
 import EllipsisVertical from "./EllipsisVertical";
 import ExpandArrowsAlt from "./ExpandArrowsAlt";
+import Eye from "./Eye";
+import Globe from "./Globe";
 import Lock from "./Lock";
 import Multiply from "./Multiply";
 import PenToSquare from "./PenToSquare";
@@ -36,6 +38,8 @@ export {
     Comparison,
     EllipsisVertical,
     ExpandArrowsAlt,
+    Eye,
+    Globe,
     Lock,
     Multiply,
     PenToSquare,

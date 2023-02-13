@@ -1,6 +1,7 @@
 import { ProposalProvider } from "@features/dashboard/proposal/context/ProposalProvider";
 
 import Inquiries from "@pages/proposal/Inquiries";
+import Inquirie from "@pages/proposal/Inquirie";
 
 const ProposalRoutes = [
     {
@@ -9,6 +10,10 @@ const ProposalRoutes = [
             {
                 path: "/consultas",
                 element: <Inquiries />,
+            },
+            {
+                path: "/consulta/:id",
+                element: <Inquirie />,
             },
         ],
     },

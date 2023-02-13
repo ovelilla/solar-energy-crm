@@ -11,6 +11,7 @@ const Sidebar = () => {
         openSwipeableDrawer,
         handleOpenSwipeableDrawer,
         handleCloseSwipeableDrawer,
+        handleResize,
     } = useHeader();
 
     if (width < breakpoints.xl) {
@@ -20,10 +21,8 @@ const Sidebar = () => {
                 open={openSwipeableDrawer}
                 onClose={handleCloseSwipeableDrawer}
                 onOpen={handleOpenSwipeableDrawer}
-                sx={{
-                    zIndex: 100,
-                    flexShrink: 0,
-                    "& .MuiDrawer-paper": {
+                PaperProps={{
+                    sx: {
                         width: {
                             xs: "280px",
                             lg: "320px",
@@ -33,6 +32,10 @@ const Sidebar = () => {
                         boxShadow:
                             "rgb(0 0 0 / 20%) 0px 8px 10px -5px, rgb(0 0 0 / 14%) 0px 16px 24px 2px, rgb(0 0 0 / 12%) 0px 6px 30px 5px",
                     },
+                }}
+                sx={{
+                    zIndex: 100,
+                    flexShrink: 0,
                 }}
             >
                 <Sidenav />
@@ -47,7 +50,9 @@ const Sidebar = () => {
             open={openDrawer}
             sx={{
                 flexShrink: 0,
-                "& .MuiDrawer-paper": {
+            }}
+            PaperProps={{
+                sx: {
                     width: "320px",
                     backgroundColor: "#0f172a",
                     borderRight: "none",
@@ -55,6 +60,16 @@ const Sidebar = () => {
                         "rgb(0 0 0 / 20%) 0px 8px 10px -5px, rgb(0 0 0 / 14%) 0px 16px 24px 2px, rgb(0 0 0 / 12%) 0px 6px 30px 5px",
                 },
             }}
+            SlideProps={{
+                onEntered: () => {
+                    handleResize();
+                },
+
+                onExited: () => {
+                    handleResize();
+                },
+            }}
+            
         >
             <Sidenav />
         </Drawer>

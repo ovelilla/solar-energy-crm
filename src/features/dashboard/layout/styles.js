@@ -12,7 +12,18 @@ export const Row = styled.div`
 export const LeftColumn = styled.div`
     display: flex;
     flex-direction: column;
-    transition: flex-basis 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+    ${(p) => {
+        if (p.open) {
+            return `
+                transition: flex-basis 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+            `;
+        } else {
+            return `
+                transition: flex-basis 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+            `;
+        }
+    }}
 
     ${media(breakpoints.xl)} {
         flex: ${(p) => (p.open ? "0 0 320px" : "0 0 0px")};
@@ -27,7 +38,6 @@ export const RightColumn = styled.div`
 `;
 
 export const Main = styled.main`
-    display: flex;
     flex: 1 1 auto;
     background-color: ${white};
     overflow-y: auto;

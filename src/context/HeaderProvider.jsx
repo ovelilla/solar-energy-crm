@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
 import useWindowSize from "@hooks/useWindowSize";
 import { breakpoints } from "@styles/sizes";
 
@@ -8,6 +7,7 @@ const HeaderContext = createContext();
 export const HeaderProvider = ({ children }) => {
     const [openHamburguer, setOpenHamburguer] = useState(true);
     const [openDrawer, setOpenDrawer] = useState(true);
+    const [handleResize, setHandleResize] = useState(null);
     const [openSwipeableDrawer, setOpenSwipeableDrawer] = useState(false);
     const [selectedMenu, setSelectedMenu] = useState(0);
     const [handleCreate, setHandleCreate] = useState(null);
@@ -80,6 +80,8 @@ export const HeaderProvider = ({ children }) => {
                 setOpenHamburguer,
                 openDrawer,
                 setOpenDrawer,
+                handleResize,
+                setHandleResize,
                 handleToggleDrawer,
                 openSwipeableDrawer,
                 setOpenSwipeableDrawer,

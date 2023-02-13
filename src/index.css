@@ -29,3 +29,17 @@ body {
 a {
     text-decoration: none;
 }
+
+:root {
+    --fc-button-bg-color: #1e2946;
+    --fc-button-border-color: #1e2946;
+    --fc-button-hover-bg-color: #28365e;
+    --fc-button-hover-border-color: #28365e;
+    --fc-button-active-bg-color: #1e2946;
+    --fc-button-active-border-color: #1e2946;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin: 0;
+    padding: 24px;
+}

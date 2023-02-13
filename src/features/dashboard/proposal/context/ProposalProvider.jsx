@@ -1,28 +1,46 @@
 import { createContext, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import axios from "@config/axios";
 
 const ProposalContext = createContext();
 
 export const ProposalProvider = () => {
+    const [pageSize, setPageSize] = useState(20);
+    const [selected, setSelected] = useState([]);
+    const [stateMenu, setStateMenu] = useState({ open: false, anchor: null });
     const [loading, setLoading] = useState(false);
     const [proposal, setProposal] = useState({});
     const [proposals, setProposals] = useState([]);
 
+    const navigate = useNavigate();
+
+    const handleOpenMenu = (e, params) => {
+        e.stopPropagation();
+        setStateMenu({ open: true, anchor: e.currentTarget });
+        setProposal(params.row);
+    };
+
+    const handleCloseMenu = () => {
+        setStateMenu({ open: false, anchor: null });
+        setProposal(null);
+    };
+
+    const handleClickMenu = () => {
+        setStateMenu({ open: false, anchor: null });
+    };
+
+    const handleViewProposal = () => {
+        navigate(`/consulta/${proposal._id}`);
+    }
+
+    const handleConsultProposal = () => {
+        window.open(`${import.meta.env.VITE_LANDING_URL}/propuesta/${proposal.uuid}`, "_blank");
+    }
+
     const readProposals = async () => {
         setLoading(true);
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2RjMzM3NWE4MTI1NDkyMDk3MTZiZCIsImlhdCI6MTY3NDQzMDE0MiwiZXhwIjoxNjc3MDIyMTQyfQ.11EcHxUJXedVbjv_CZouAqFNkaliksh6w87OXInd_BQ",
-            },
-        };
-
         try {
-            const { data } = await axios.get("/proposal", config);
-
+            const { data } = await axios.get("/proposal", { withCredentials: true });
             setProposals(data);
         } catch (error) {
             console.log(error);
@@ -34,8 +52,19 @@ export const ProposalProvider = () => {
     return (
         <ProposalContext.Provider
             value={{
+                pageSize,
+                setPageSize,
+                selected,
+                setSelected,
+                stateMenu,
+                setStateMenu,
                 loading,
                 setLoading,
+                handleOpenMenu,
+                handleCloseMenu,
+                handleClickMenu,
+                handleViewProposal,
+                handleConsultProposal,
                 proposal,
                 setProposal,
                 proposals,
