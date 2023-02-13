@@ -30,6 +30,13 @@ const Table = () => {
             maxWidth: 190,
         },
         {
+            field: "counter",
+            headerName: "Cambios",
+            flex: 1,
+            minWidth: 110,
+            maxWidth: 150,
+        },
+        {
             field: "createdAt",
             headerName: "Fecha de consulta",
             flex: 1,

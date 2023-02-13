@@ -12,7 +12,7 @@ const ProposalRoutes = [
                 element: <Inquiries />,
             },
             {
-                path: "/consulta/:id",
+                path: "/consultas/:id",
                 element: <Inquirie />,
             },
         ],

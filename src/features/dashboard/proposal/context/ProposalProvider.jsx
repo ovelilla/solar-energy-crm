@@ -8,7 +8,7 @@ export const ProposalProvider = () => {
     const [pageSize, setPageSize] = useState(20);
     const [selected, setSelected] = useState([]);
     const [stateMenu, setStateMenu] = useState({ open: false, anchor: null });
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [proposal, setProposal] = useState({});
     const [proposals, setProposals] = useState([]);
 
@@ -30,12 +30,26 @@ export const ProposalProvider = () => {
     };
 
     const handleViewProposal = () => {
-        navigate(`/consulta/${proposal._id}`);
-    }
+        navigate(`/consultas/${proposal._id}`);
+    };
 
     const handleConsultProposal = () => {
         window.open(`${import.meta.env.VITE_LANDING_URL}/propuesta/${proposal.uuid}`, "_blank");
-    }
+    };
+
+    const readProposal = async (id) => {
+        console.log(id);
+        setLoading(true);
+        try {
+            const { data } = await axios.get("/proposal/" + id, { withCredentials: true });
+            console.log(data);
+            setProposal(data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const readProposals = async () => {
         setLoading(true);
@@ -69,6 +83,7 @@ export const ProposalProvider = () => {
                 setProposal,
                 proposals,
                 setProposals,
+                readProposal,
                 readProposals,
             }}
         >

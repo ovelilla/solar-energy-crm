@@ -1,8 +1,17 @@
-import useProposal from "@features/dashboard/proposal/hooks/useProposal";
-const Inquirie = () => {
-    const { proposal } = useProposal();
+import Wrapper from "@features/dashboard/proposal/inquirie/wrapper";
+import Header from "@features/dashboard/proposal/inquirie/header";
+import Body from "@features/dashboard/proposal/inquirie/body";
+import Summary from "@features/dashboard/proposal/inquirie/summary";
 
-    return <div>Consulta web</div>;
+const Inquirie = () => {
+    return (
+        <Wrapper>
+            <Header />
+            <Body>
+                <Summary />
+            </Body>
+        </Wrapper>
+    );
 };
 
 export default Inquirie;
