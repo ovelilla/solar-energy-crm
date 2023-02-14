@@ -62,6 +62,7 @@ export const ProposalProvider = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <ProposalContext.Provider
