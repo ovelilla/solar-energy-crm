@@ -1,67 +1,33 @@
-import { useRef, useEffect } from "react";
-import FullCalendar from "@fullcalendar/react";
-import interactionPlugin from "@fullcalendar/interaction";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import listPlugin from '@fullcalendar/list';
-import esLocale from "@fullcalendar/core/locales/es";
+import { useEffect } from "react";
 import useHeader from "@hooks/useHeader";
-
-const events = [{ title: "Evento", start: new Date() }];
+import useCalendar from "@features/dashboard/calendar/hooks/useCalendar";
+import Wrapper from "@features/dashboard/calendar/wrapper";
+import Header from "@features/dashboard/calendar/header";
+import Body from "@features/dashboard/calendar/body";
+import CalendarComponent from "@features/dashboard/calendar/calendar";
 
 const Calendar = () => {
-    const calendarRef = useRef();
-    const { setHandleResize } = useHeader();
-
-    const handleResize = () => {
-        const calendarApi = calendarRef.current.getApi();
-        calendarApi.updateSize();
-    };
+    const { setHandleResize, setHandleCreate } = useHeader();
+    const { handleResize, handleCreate } = useCalendar();
 
     useEffect(() => {
         setHandleResize(() => handleResize);
+        setHandleCreate(() => handleCreate);
 
         return () => {
             setHandleResize(null);
+            setHandleCreate(null);
         };
     }, []);
 
     return (
-        <FullCalendar
-            ref={calendarRef}
-            plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
-            initialView="dayGridMonth"
-            headerToolbar={{
-                left: "prev,next today",
-                center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            views={{
-                dayGridMonth: {
-                    titleFormat: { year: "numeric", month: "long" },
-                },
-                timeGridWeek: {
-                    titleFormat: { year: "numeric", month: "long", day: "numeric" },
-                },
-                timeGridDay: {
-                    titleFormat: { year: "numeric", month: "long", day: "numeric" },
-                },
-            }}
-            locale={esLocale}
-            height="100%"
-            events={events}
-            eventContent={renderEventContent}
-        />
+        <Wrapper>
+            <Header />
+            <Body>
+                <CalendarComponent />
+            </Body>
+        </Wrapper>
     );
 };
 
 export default Calendar;
-
-const renderEventContent = (eventInfo) => {
-    return (
-        <>
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title}</i>
-        </>
-    );
-};

@@ -2,7 +2,10 @@ import AngleRight from "./AngleRight";
 import AuthCircles from "./AuthCircles";
 import Calculator from "./Calculator";
 import Calendar from "./Calendar";
+import CalendarDay from "./CalendarDay";
 import ChartLine from "./ChartLine";
+import ChevronLeft from "./ChevronLeft";
+import ChevronRight from "./ChevronRight";
 import Close from "./Close";
 import Cloud from "./Cloud";
 import Comparison from "./Comparison";
@@ -32,7 +35,10 @@ export {
     AuthCircles,
     Calculator,
     Calendar,
+    CalendarDay,
     ChartLine,
+    ChevronLeft,
+    ChevronRight,
     Close,
     Cloud,
     Comparison,

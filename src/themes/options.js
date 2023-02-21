@@ -17,6 +17,7 @@ export const options = {
         MuiButton: {
             styleOverrides: {
                 root: {
+                    flexShrink: 0,
                     fontSize: "inherit",
                     textTransform: "none",
                     borderRadius: "48px",

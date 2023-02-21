@@ -31,15 +31,51 @@ a {
 }
 
 :root {
-    --fc-button-bg-color: #1e2946;
-    --fc-button-border-color: #1e2946;
-    --fc-button-hover-bg-color: #28365e;
-    --fc-button-hover-border-color: #28365e;
-    --fc-button-active-bg-color: #1e2946;
-    --fc-button-active-border-color: #1e2946;
+    --fc-today-bg-color: #f4f8ff;
+    --fc-highlight-color: rgba(218, 231, 255, 0.3);
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
     margin: 0;
     padding: 24px;
+}
+
+.fc .fc-dayGridMonth-view tbody tr {
+    height: calc(1/6 * 100%);
+}
+
+.fc-daygrid-dot-event {
+    gap: 4px;
+    padding: 2px;
+}
+
+.fc .fc-timegrid-axis-frame {
+    justify-content: center;
+}
+
+.fc-daygrid-event span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fc-daygrid-event {
+    line-height: 1.2;
+}
+
+.fc .fc-daygrid-day-number {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.fc-timegrid-event .fc-event-main {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    hyphens: auto;
+}
+
+.fc-timegrid-event .fc-event-main span {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

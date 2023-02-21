@@ -62,14 +62,17 @@ const Sidebar = () => {
             }}
             SlideProps={{
                 onEntered: () => {
-                    handleResize();
+                    if (handleResize) {
+                        handleResize();
+                    }
                 },
 
                 onExited: () => {
-                    handleResize();
+                    if (handleResize) {
+                        handleResize();
+                    }
                 },
             }}
-            
         >
             <Sidenav />
         </Drawer>
