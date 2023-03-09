@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { gray } from "@styles/colors";
 
 export const Container = styled.div`
     display: flex;
@@ -13,7 +14,7 @@ export const Container = styled.div`
 export const Span = styled.div`
     display: block;
     height: 3px;
-    background: #495057;
+    background: ${gray[600]};
     border-radius: 6px;
     transition: width 0.3s ease, transform 0.3s ease;
 

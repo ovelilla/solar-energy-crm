@@ -2,7 +2,8 @@ import { useState } from "react";
 
 const useForm = (state = {}) => {
     const [values, setValues] = useState(state);
-    const [errors, setErrors] = useState(state);
+    const [errors, setErrors] = useState(Object.fromEntries(Object.keys(state).map(key => [key, ""])));
+
 
     const handleChange = ({ target }) => {
         const { name, value } = target;
@@ -29,7 +30,7 @@ const useForm = (state = {}) => {
 
     const reset = () => {
         setValues(state);
-        setErrors(state);
+        setErrors(Object.fromEntries(Object.keys(state).map(key => [key, ""])));
     };
 
     return {

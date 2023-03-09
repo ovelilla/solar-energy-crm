@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 
 const useWindowSize = () => {
-    const [size, setSize] = useState({
+    const [state, setState] = useState({
         width: 0,
         height: 0,
+        isResizing: false,
     });
 
     useEffect(() => {
         const updateSize = () => {
-            setSize({
+            setState((prevState) => ({
                 width: window.innerWidth,
                 height: window.innerHeight,
-            });
+                isResizing:
+                    prevState.width !== window.innerWidth ||
+                    prevState.height !== window.innerHeight,
+            }));
         };
 
         window.addEventListener("resize", updateSize);
@@ -21,7 +25,22 @@ const useWindowSize = () => {
         return () => window.removeEventListener("resize", updateSize);
     }, []);
 
-    return size;
+    useEffect(() => {
+        let timeoutId;
+
+        if (state.isResizing) {
+            timeoutId = setTimeout(() => {
+                setState((prevState) => ({
+                    ...prevState,
+                    isResizing: false,
+                }));
+            }, 200);
+        }
+
+        return () => clearTimeout(timeoutId);
+    }, [state.width, state.height]);
+
+    return state;
 };
 
 export default useWindowSize;

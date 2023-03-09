@@ -47,4 +47,24 @@ export const Title = styled.p`
 export const Actions = styled.div`
     display: flex;
     align-items: center;
+    gap: 8px;
+`;
+
+export const Hamburguer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 24px;
+    height: 24px;
+
+    &:hover div {
+        background-color: ${gray[700]};
+    }
+`;
+
+export const Bar = styled.div`
+    height: 3px;
+    border-radius: 3px;
+    background-color: ${gray[600]};
 `;

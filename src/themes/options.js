@@ -1,4 +1,4 @@
-import { slate } from "@styles/colors";
+import { slate, gray } from "@styles/colors";
 
 export const options = {
     typography: {
@@ -58,15 +58,31 @@ export const options = {
                     "&.Mui-focused": {
                         transform: "translate(20px, -9px) scale(0.75)",
                     },
-                    "&.MuiInputLabel-shrink": {
-                        transform: "translate(20px, -9px) scale(0.75)",
-                    },
+                },
+                shrink: {
+                    transform: "translate(20px, -9px) scale(0.75)",
+                },
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {
+                select: {
+                    display: "flex",
+                    alignItems: "center",
+                },
+            },
+        },
+        MuiFormControlLabel: {
+            styleOverrides: {
+                root: {
+                    gap: "8px",
                 },
             },
         },
         MuiCheckbox: {
             styleOverrides: {
                 root: {
+                    flexShrink: 0,
                     width: "48px",
                     height: "48px",
                 },
@@ -175,46 +191,37 @@ export const options = {
                         },
                     },
                 },
+                selectedRowCount: {
+                    margin: "0",
+                    fontSize: "16px",
+                },
                 footerContainer: {
                     minHeight: "64px",
                     borderColor: slate[200],
-
-                    ".MuiTablePagination-selectLabel": {
-                        fontSize: "16px",
-                    },
-
-                    ".MuiDataGrid-selectedRowCount": {
-                        margin: "0",
-                        fontSize: "16px",
-                    },
-
-                    ".MuiTablePagination-displayedRows": {
-                        fontSize: "16px",
-                    },
-
-                    ".MuiTablePagination-select": {
-                        fontSize: "16px",
-                    },
-
-                    ".MuiSelect-select": {
-                        display: "flex",
-                        alignItems: "center",
-                    },
-
-                    ".MuiSelect-icon": {
-                        top: "4px",
-                    },
-
-                    ".MuiTablePagination-actions": {
-                        svg: {
-                            width: "32px",
-                            height: "32px",
-                        },
-                    },
-
+                },
+            },
+        },
+        MuiTablePagination: {
+            styleOverrides: {
+                selectLabel: {
+                    fontSize: "16px",
+                },
+                displayedRows: {
+                    fontSize: "16px",
+                },
+                select: {
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "16px",
+                },
+                actions: {
                     button: {
                         width: "48px",
                         height: "48px",
+                    },
+                    svg: {
+                        width: "32px",
+                        height: "32px",
                     },
                 },
             },
@@ -248,9 +255,141 @@ export const options = {
         MuiIconButton: {
             styleOverrides: {
                 root: {
+                    padding: "0",
+                    fontSize: "16px",
+                    fontFamily: "inherit",
+                    color: gray[600],
+                    "&:hover": {
+                        color: gray[700],
+                    },
                     svg: {
                         width: "24px",
                         height: "24px",
+                    },
+                },
+                sizeSmall: {
+                    width: "32px",
+                    height: "32px",
+                },
+                sizeMedium: {
+                    width: "40px",
+                    height: "40px",
+                },
+                sizeLarge: {
+                    width: "48px",
+                    height: "48px",
+                },
+            },
+        },
+        MuiCalendarOrClockPicker: {
+            styleOverrides: {
+                root: {
+                    "& > div": {
+                        width: "340px",
+                        maxHeight: "430px",
+                    },
+                },
+            },
+        },
+        MuiCalendarPicker: {
+            styleOverrides: {
+                root: {
+                    width: "340px",
+                    maxHeight: "430px",
+                },
+                viewTransitionContainer: {
+                    overflow: "hidden",
+                },
+            },
+        },
+        MuiPickersCalendarHeader: {
+            styleOverrides: {
+                root: {
+                    maxHeight: "40px",
+                    minHeight: "40px",
+                    paddingLeft: "24px",
+                    paddingRight: "8px",
+                },
+                labelContainer: {
+                    maxHeight: "40px",
+                },
+                switchViewButton: {
+                    width: "40px",
+                    height: "40px",
+                },
+            },
+        },
+        MuiPickersArrowSwitcher: {
+            styleOverrides: {
+                button: {
+                    width: "40px",
+                    height: "40px",
+                },
+            },
+        },
+        MuiDayPicker: {
+            styleOverrides: {
+                slideTransition: {
+                    minHeight: "280px",
+                },
+                weekContainer: {
+                    margin: "0",
+                },
+                weekDayLabel: {
+                    width: "40px",
+                    height: "40px",
+                    margin: "2px",
+                    fontSize: "14px",
+                },
+            },
+        },
+        MuiPickersDay: {
+            styleOverrides: {
+                root: {
+                    width: "40px",
+                    height: "40px",
+                    margin: "2px",
+                    fontSize: "14px",
+                    fontWeight: "300",
+                },
+            },
+        },
+        PrivatePickersYear: {
+            styleOverrides: {
+                button: {
+                    height: "48px",
+                    width: "72px",
+                    margin: "4px 2px",
+                    borderRadius: "48px",
+                },
+            },
+        },
+        MuiClockPicker: {
+            styleOverrides: {
+                root: {
+                    position: "relative",
+                },
+            },
+        },
+        MuiClock: {
+            styleOverrides: {
+                root: {
+                    margin: "24px",
+                    marginTop: "48px",
+                },
+            },
+        },
+        MuiDateTimePickerTabs: {
+            styleOverrides: {
+                root: {
+                    order: 0,
+                    minHeight: "56px",
+                    ".MuiTabs-indicator": {
+                        bottom: "0",
+                        top: "auto",
+                    },
+                    ".MuiTabs-flexContainer": {
+                        minHeight: "56px",
                     },
                 },
             },

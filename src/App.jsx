@@ -1,6 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { ThemeProvider } from "@context/ThemeProvider";
+import { LocalizationProvider, esES } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/es";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AuthProvider } from "@features/auth/context/AuthProvider";
 
@@ -10,8 +13,14 @@ import DashboardRoutes from "@routes/DashboardRoutes";
 function App() {
     return (
         <ThemeProvider>
-            <CssBaseline />
-            <RouterProvider router={router} />
+            <LocalizationProvider
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"es"}
+                localeText={esES.components.MuiLocalizationProvider.defaultProps.localeText}
+            >
+                <CssBaseline />
+                <RouterProvider router={router} />
+            </LocalizationProvider>
         </ThemeProvider>
     );
 }

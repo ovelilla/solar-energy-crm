@@ -40,26 +40,29 @@ a {
     padding: 24px;
 }
 
-.fc .fc-dayGridMonth-view tbody tr {
-    height: calc(1/6 * 100%);
-}
-
-.fc-daygrid-dot-event {
-    gap: 4px;
-    padding: 2px;
+.fc-theme-standard .fc-scrollgrid {
+    border-left: none;
 }
 
 .fc .fc-timegrid-axis-frame {
     justify-content: center;
 }
 
-.fc-daygrid-event span {
-    overflow: hidden;
-    text-overflow: ellipsis;
+.fc .fc-timegrid-slot-label-cushion {
+    font-size: 14px;
+}
+
+.fc .fc-dayGridMonth-view tbody tr {
+    height: calc(1 / 6 * 100%);
+}
+
+.fc .fc-daygrid-day-number {
+    min-height: 40px;
 }
 
 .fc-daygrid-event {
-    line-height: 1.2;
+    border-radius: 4px;
+    min-height: 24px;
 }
 
 .fc .fc-daygrid-day-number {
@@ -67,15 +70,20 @@ a {
     line-height: 1.2;
 }
 
-.fc-timegrid-event .fc-event-main {
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    padding: 4px;
-    hyphens: auto;
+.fc-event:focus {
+    box-shadow: none;
 }
 
-.fc-timegrid-event .fc-event-main span {
-    overflow: hidden;
-    text-overflow: ellipsis;
+.fc-event:focus:after {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+}
+
+.fc .fc-list-event-time,
+.fc-list-event-graphic {
+    vertical-align: middle;
+}
+
+.fc a[data-navlink]:hover {
+    text-decoration: none;
 }

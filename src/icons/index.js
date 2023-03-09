@@ -1,5 +1,7 @@
+import AlignLeft from "./AlignLeft";
 import AngleRight from "./AngleRight";
 import AuthCircles from "./AuthCircles";
+import Bars from "./Bars";
 import Calculator from "./Calculator";
 import Calendar from "./Calendar";
 import CalendarDay from "./CalendarDay";
@@ -15,6 +17,7 @@ import Eye from "./Eye";
 import Globe from "./Globe";
 import Lock from "./Lock";
 import Multiply from "./Multiply";
+import Palette from "./Palette";
 import PenToSquare from "./PenToSquare";
 import Plug from "./Plug";
 import Plus from "./Plus";
@@ -31,8 +34,10 @@ import UsersAlt from "./UsersAlt";
 import Wallet from "./Wallet";
 
 export {
+    AlignLeft,
     AngleRight,
     AuthCircles,
+    Bars,
     Calculator,
     Calendar,
     CalendarDay,
@@ -48,6 +53,7 @@ export {
     Globe,
     Lock,
     Multiply,
+    Palette,
     PenToSquare,
     Plug,
     Plus,

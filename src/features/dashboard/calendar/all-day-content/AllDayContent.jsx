@@ -1,17 +1,31 @@
-import { Column, Weekday, Day } from "../all-day-content/styles";
+import { Column, Weekday, Day, DayButton } from "../all-day-content/styles";
 
-const Body = (arg) => {
+const AllDayContent = (arg) => {
     const date = arg.view.calendar.getDate();
 
     const weekday = date.toLocaleString("es-ES", { weekday: "short" });
     const day = date.toLocaleString("es-ES", { day: "numeric" });
 
-    return (
-        <Column>
-            <Weekday>{weekday}</Weekday>
-            <Day>{day}</Day>
-        </Column>
-    );
+    if (arg.view.type === "timeGridDay") {
+        return (
+            <Column>
+                <Weekday>{weekday}</Weekday>
+                <DayButton
+                    size="medium"
+                    selected={arg.isToday}
+                    onClick={() => {
+                        arg.view.calendar.changeView("listWeek", arg.date);
+                    }}
+                >
+                    {day}
+                </DayButton>
+            </Column>
+        );
+    }
+
+    if (arg.view.type === "listWeek") {
+        return <>Todo el día</>;
+    }
 };
 
-export default Body;
+export default AllDayContent;

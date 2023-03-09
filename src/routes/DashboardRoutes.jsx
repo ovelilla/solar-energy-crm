@@ -9,16 +9,15 @@ import ParametersRoutes from "@routes/ParametersRoutes";
 import ProductsRoutes from "@routes/ProductsRoutes";
 import InstallationRoutes from "@routes/InstallationRoutes";
 import ManagementRoutes from "@routes/ManagementRoutes";
+import DirectoryRoutes from "@routes/DirectoryRoutes";
 
 import Account from "@pages/Account";
 import Calendar from "@pages/Calendar";
-import Customers from "@pages/Customers";
 import Dashboard from "@pages/Dashboard";
 import Error404 from "@pages/Error404";
 import Help from "@pages/Help";
 import Management from "@pages/Management";
 import Settings from "@pages/Settings";
-import Users from "@pages/Users";
 
 const DashboardRoutes = [
     {
@@ -42,6 +41,7 @@ const DashboardRoutes = [
                                 path: "/cuenta",
                                 element: <Account />,
                             },
+
                             {
                                 element: <CalendarProvider />,
                                 children: [
@@ -50,10 +50,6 @@ const DashboardRoutes = [
                                         element: <Calendar />,
                                     },
                                 ],
-                            },
-                            {
-                                path: "/clientes",
-                                element: <Customers />,
                             },
                             {
                                 path: "/ayuda",
@@ -67,15 +63,12 @@ const DashboardRoutes = [
                                 path: "/ajustes",
                                 element: <Settings />,
                             },
-                            {
-                                path: "/usuarios",
-                                element: <Users />,
-                            },
                             ...ProposalRoutes,
                             ...ProductsRoutes,
                             ...ParametersRoutes,
                             ...InstallationRoutes,
                             ...ManagementRoutes,
+                            ...DirectoryRoutes,
                         ],
                     },
                 ],

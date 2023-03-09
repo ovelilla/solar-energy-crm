@@ -10,7 +10,7 @@ export const MenuStyled = styled(Menu)`
     .MuiPaper-root {
         width: 280px;
         border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+        box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 8px;
     }
 `;
 
@@ -23,18 +23,18 @@ export const Item = styled.button`
     padding: 0 16px;
     color: ${slate[600]};
     border: none;
-    background-color: ${({ selected }) => (selected ? slate[50] : "transparent")};
+    background-color: transparent;
     font-size: inherit;
     font-family: inherit;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
-        background-color: ${({ selected }) => (selected ? slate[50] : slate[100])};
+        background-color: ${slate[50]};
     }
 
     &:active {
-        background-color: ${({ selected }) => (selected ? slate[50] : slate[200])};
+        background-color: ${slate[100]};
     }
 
     svg {

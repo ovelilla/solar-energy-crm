@@ -9,7 +9,12 @@ const Confirm = () => {
     const { stateConfirm, handleClickConfirm } = useUI();
 
     return (
-        <StyledConfirm onClose={() => handleClickConfirm(false)} open={stateConfirm.open}>
+        <StyledConfirm
+            onClose={() => {
+                handleClickConfirm(false);
+            }}
+            open={stateConfirm.open}
+        >
             <Header>
                 <Title>{stateConfirm.title}</Title>
 

@@ -11,7 +11,6 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@fontsource/poppins/900.css";
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
     // <React.StrictMode>
     <App />

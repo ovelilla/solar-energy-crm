@@ -290,10 +290,10 @@ const Sidenav = () => {
                                 <Collapse in={selectedMenu === 6} timeout="auto" unmountOnExit>
                                     <Submenu>
                                         <ItemLink
-                                            to="/clientes"
+                                            to="/contactos"
                                             onClick={handleCloseSwipeableDrawer}
                                         >
-                                            <Text>Clientes</Text>
+                                            <Text>Contactos</Text>
                                         </ItemLink>
 
                                         <ItemLink
